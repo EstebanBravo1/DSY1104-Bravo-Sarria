@@ -1,2 +1,3 @@
-# Integrantes: Esteban Bravo.
+# Integrantes: 
+               Esteban Bravo.
                Alvaro Sarria.
