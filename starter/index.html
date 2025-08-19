@@ -35,17 +35,38 @@
     </div>
   </header>
 
-  <!-- Navegación principal del sitio con etiqueta aria para accesibilidad -->
-  <nav aria-label="Navegación principal">
-    <!-- Lista no ordenada para los enlaces de navegación -->
+  <!-- Reemplaza todos los botones de tu menú así: -->
     <ul class="main-nav">
-      <!-- Elementos de lista con enlaces a diferentes secciones de la página -->
-      <li><a href="#intro">Inicio</a></li>
-      <li><a href="#temas">Temas</a></li>
-      <li><a href="#destacados">Artículos</a></li>
-      <li><a href="#contacto">Contacto</a></li>
+      <li><button onclick="mostrarSolo('intro')">Inicio</button></li>
+      <li><button onclick="mostrarSolo('temas')">Temas</button></li>
+      <li><button onclick="mostrarSolo('destacados')">Artículos</button></li>
+      <li><button onclick="mostrarSolo('contacto')">Contacto</button></li>
+      <button onclick="mostrarTodo()">Pagina Principal</button>
     </ul>
-  </nav>
+
+    <script>
+    function mostrarSolo(id) {
+      // Oculta todas las secciones y aside
+      document.querySelectorAll('main > section, main > aside').forEach(function(sec) {
+        sec.style.display = (sec.id === id) ? 'block' : 'none';
+      });
+    // Oculta header, nav y footer si quieres solo la sección
+    document.querySelector('header').style.display = 'none';
+    document.querySelector('nav').style.display = 'none';
+    document.querySelector('footer').style.display = 'none';
+}
+
+    function mostrarTodo() {
+      // Muestra todas las secciones y aside
+      document.querySelectorAll('main > section, main > aside').forEach(function(sec) {
+        sec.style.display = '';
+      });
+    // Muestra header, nav y footer
+    document.querySelector('header').style.display = '';
+    document.querySelector('nav').style.display = '';
+    document.querySelector('footer').style.display = '';
+}
+</script>
 
   <!-- Contenido principal del sitio web -->
   <main id="contenido">
