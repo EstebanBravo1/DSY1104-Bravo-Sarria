@@ -90,15 +90,40 @@
     <section id="temas">
       <!-- Encabezado de la sección -->
       <h2>Temas sugeridos</h2>
-      <!-- Lista no ordenada con opciones de temas -->
+      <!-- Lista de botones para cambiar el tema -->
       <ul>
-        <li>Marino / costero</li>
-        <li>Nocturno minimalista</li>
-        <li>Retro noventero</li>
-        <li>Fresco y natural</li>
+        <li><button onClick="cambiarTema('marino')">Marino</button>
+        <li><button onClick="cambiarTema('claro')">Claro</button>
+        <li><button onClick="cambiarTema('')">Tema por defecto</button>
       </ul>
     </section>
 
+    <!-- Función para cambiar el tema según el color seleccionado-->
+    <script>
+      function cambiarTema(tema) {
+        document.body.style.backgroundColor = "";
+        document.body.style.color = "";
+        switch(tema) {
+          case 'marino':
+            document.body.style.backgroundColor = "#0077B6";
+            document.body.style.color = "#FFFFFF";
+            break;
+          case 'claro':
+            document.body.style.backgroundColor = "#FFFFFF";
+            document.body.style.color = "#000000";
+            break;
+          case 'default':
+            document.body.style.backgroundColor = "";
+            document.body.style.color = "";
+            break
+        }
+
+        document.querySelectorAll('*').forEach(function(element){
+          element.style.color = document.body.style.color;
+        })
+      }
+
+    </script>
     
     <!-- Sección de artículos destacados -->
     <section id="destacados">
