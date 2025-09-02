@@ -1,0 +1,17 @@
+.logo-titulo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.logo{
+    height: 200px;
+    width: auto;
+}
+
+#usuarios {
+    display: none;
+}
+
+#productos {
+    display: none;
+}
