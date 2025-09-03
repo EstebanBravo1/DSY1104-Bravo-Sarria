@@ -6,55 +6,34 @@
     <title>Página principal</title> <!--El elemento title define el título del documento que aparece en la pestaña del navegador-->
     <link rel="stylesheet" href="styles.css"> <!--El elemento link se utiliza para enlazar archivos externos, como hojas de estilo CSS-->
     <link rel="stylesheet" href="Sistema.css"> <!--Enlaza una hoja de estilo CSS específica para esta página-->
+    <link href="https://fonts.google.com/specimen/Montserrat" rel="sans-serif"> <!--Enlaza una fuente externa desde Google Fonts-->
+    <link href="https://fonts.google.com/specimen/Playfair+Display" rel="serif"> <!--Enlaza otra fuente externa desde Google Fonts-->
     <script src="script.js" defer></script> <!--El elemento script se utiliza para enlazar archivos JavaScript externos. El atributo defer indica que el script debe ejecutarse después de que el documento haya sido analizado-->
 </head>
 
 <body>
     <header> <!--El elemento header representa un contenedor para contenido introductorio o un conjunto de enlaces de navegación-->
         <div class="logo-titulo"> <!-- Contenedor para el logo y el título -->
-            <img src="Imágenes/Huerto_Hogar.png" alt="Logotipo Huerto Hogar" class="logo"> <!-- Imagen del logo con texto alternativo -->
-            <h1>Huerto Hogar</h1> <!--El elemento h1 define el encabezado más importante en la página-->
+            <div class="logo-fondo"> <!-- Contenedor para el fondo del logo -->
+                <img src="Imágenes/Huerto_Hogar.png" alt="Logotipo Huerto Hogar" class="logo"> <!-- Imagen del logo con texto alternativo -->
+            </div>
+            <h1>Página principal</h1> <!--El elemento h1 define el encabezado más importante en la página-->
+            <div class="botones-superior"> <!-- Contenedor para los botones en la parte superior -->
+                <button id="mostrarUsuarios" onclick="alert('Funcionalidad en desarrollo')">Registrar Usuario</button> <!--Botón para registrar usuario-->
+                <button id="iniciarSesion" onclick="alert('Funcionalidad en desarrollo')">Iniciar Sesión</button> <!--Botón para iniciar sesión-->
+                <button id="mostrarProductos" onclick="alert('Funcionalidad en desarrollo')">Ver catálogo de Productos</button> <!--Botón para ver catálogo de productos-->
+                <button id="volverInicio" onclick="alert('Funcionalidad en desarrollo')">Volver al Inicio</button> <!--Botón para volver al inicio-->
+                <button id="gestionProductos" onclick="alert('Funcionalidad en desarrollo')">Gestión de Productos</button> <!--Botón para gestión de productos-->
         </div>
         <nav> <!--El elemento nav define un conjunto de enlaces de navegación-->
             <ul> <!--El elemento ul define una lista desordenada-->
                 <li><a href="#usuarios">Usuarios</a></li> <!--El elemento li define un ítem en una lista. El elemento a define un hipervínculo-->
                 <li><a href="#productos">Productos</a></li> <!--Otro ítem en la lista-->
-                <li><a href="#reportes">Reportes</a></li> <!--Otro ítem en la lista-->
+                <li><a href="#inicio">Inicio</a></li> <!--Otro ítem en la lista-->
+                <li><a href="#gestiónProductos">GestiónProductos</a></li> <!--Otro ítem en la lista-->
             </ul>
         </nav>
     </header>
-
-    <!--Botón para ir a la sección de Usuarios-->
-    <div style="text-align: center; margin: 20px 0;"> 
-        <button id="mostrarUsuarios" sytle="padding: 10px 20px; font-size: 16px; cursor: pointer;" onclick="alert('Funcionalidad en desarrollo')">
-            Ir a Usuarios
-        </button>
-    </div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.queryElementById('mostrarUsuarios').onClick = function() {
-            document.getElementById('usuarios').style.display = 'block';
-            document.getElementById('usuarios').scrollIntoView({ behavior: 'smooth' });
-        };
-    });
-    </script>
-
-    <!--Botón para ir a la sección de Productos-->
-    <div style="text-align: center; margin: 20px 0;"> 
-        <button id="mostrarProductos" sytle="padding: 10px 20px; font-size: 16px; cursor: pointer;" onclick="alert('Funcionalidad en desarrollo')">
-            Ir a Productos
-        </button>
-    </div>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.queryElementById('mostrarProductos').onClick = function() {
-            document.getElementById('productos').style.display = 'block';
-            document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
-        };
-    });
-    </script>
 
     <main> <!--El elemento main representa el contenido principal del documento-->
         <section id="usuarios"> <!--El elemento section define una sección en el documento. El atributo id proporciona un identificador único para la sección-->
@@ -68,12 +47,6 @@
             <p>Administra los productos disponibles en el inventario.</p> <!--Párrafo descriptivo-->
             <button onclick="alert('Funcionalidad en desarrollo')">Agregar Producto</button> <!--Botón interactivo-->
         </section> 
-
-        <section id="reportes"> <!--Otra sección con un identificador único-->
-            <h2>Generación de Reportes</h2> <!--Encabezado de segundo nivel-->
-            <p>Genera reportes detallados sobre ventas, usuarios y productos.</p> <!--Párrafo descriptivo-->
-            <button onclick="alert('Funcionalidad en desarrollo')">Generar Reporte</button> <!--Botón interactivo-->
-        </section>
     </main>
     <footer> <!--El elemento footer representa el pie de página del documento o una sección-->
         <p>&copy; 2024 Sistema de Gestión. Todos los derechos reservados.</p> <!--El símbolo &copy; representa el símbolo de copyright-->

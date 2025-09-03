@@ -1,17 +1,65 @@
 .logo-titulo {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 16px;
+}
+
+.logo-fondo {
+    border-radius: 12px;        
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .logo{
     height: 200px;
     width: auto;
 }
 
-#usuarios {
+.botones-superior {
+    display: flex;
+    gap: 140px;
+}
+
+.botones-superior button {
+    padding: 12px 28px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.15);
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+.botones-superior button:hover {
+    background-color: #218838;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(40, 167, 69, 0.25);
+}
+
+h1 {
+    font-family: serif;
+    color: #222; /* Texto oscuro */
+    font-size: 36px;
+    margin: 0;
+}
+
+body {
+    background-color: #f7f7f7; /* Fondo principal azul muy suave */
+    font-family: Arial, sans-serif; /* Fuente legible */
+    font-size: 18px;
+    color: #222; /* Texto oscuro para buen contraste */
+}
+
+#usuarios, #productos {
     display: none;
 }
 
-#productos {
+/* Oculta la lista de navegación */
+nav ul {
     display: none;
 }
