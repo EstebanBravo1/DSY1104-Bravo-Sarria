@@ -1,0 +1,82 @@
+<!DOCTYPE html> <!--Utilizamos la declaración DOCTYPE para indicar al navegador que versión de html se está utilizando-->
+<html lang="es"> <!--El atributo lang indica el idioma principal del contenido de la página-->
+<head> <!--El elemento head contiene metadatos sobre el documento-->
+    <meta charset="UTF-8"> <!--El elemento meta con el atributo charset especifica la codificación de caracteres utilizada-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--El elemento meta con el atributo name="viewport" ayuda a controlar el diseño en dispositivos móviles-->
+    <title>Página principal</title> <!--El elemento title define el título del documento que aparece en la pestaña del navegador-->
+    <link rel="stylesheet" href="styles.css"> <!--El elemento link se utiliza para enlazar archivos externos, como hojas de estilo CSS-->
+    <link rel="stylesheet" href="Sistema.css"> <!--Enlaza una hoja de estilo CSS específica para esta página-->
+    <script src="script.js" defer></script> <!--El elemento script se utiliza para enlazar archivos JavaScript externos. El atributo defer indica que el script debe ejecutarse después de que el documento haya sido analizado-->
+</head>
+
+<body>
+    <header> <!--El elemento header representa un contenedor para contenido introductorio o un conjunto de enlaces de navegación-->
+        <div class="logo-titulo"> <!-- Contenedor para el logo y el título -->
+            <img src="Imágenes/Huerto_Hogar.png" alt="Logotipo Huerto Hogar" class="logo"> <!-- Imagen del logo con texto alternativo -->
+            <h1>Huerto Hogar</h1> <!--El elemento h1 define el encabezado más importante en la página-->
+        </div>
+        <nav> <!--El elemento nav define un conjunto de enlaces de navegación-->
+            <ul> <!--El elemento ul define una lista desordenada-->
+                <li><a href="#usuarios">Usuarios</a></li> <!--El elemento li define un ítem en una lista. El elemento a define un hipervínculo-->
+                <li><a href="#productos">Productos</a></li> <!--Otro ítem en la lista-->
+                <li><a href="#reportes">Reportes</a></li> <!--Otro ítem en la lista-->
+            </ul>
+        </nav>
+    </header>
+
+    <!--Botón para ir a la sección de Usuarios-->
+    <div style="text-align: center; margin: 20px 0;"> 
+        <button id="mostrarUsuarios" sytle="padding: 10px 20px; font-size: 16px; cursor: pointer;" onclick="alert('Funcionalidad en desarrollo')">
+            Ir a Usuarios
+        </button>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.queryElementById('mostrarUsuarios').onClick = function() {
+            document.getElementById('usuarios').style.display = 'block';
+            document.getElementById('usuarios').scrollIntoView({ behavior: 'smooth' });
+        };
+    });
+    </script>
+
+    <!--Botón para ir a la sección de Productos-->
+    <div style="text-align: center; margin: 20px 0;"> 
+        <button id="mostrarProductos" sytle="padding: 10px 20px; font-size: 16px; cursor: pointer;" onclick="alert('Funcionalidad en desarrollo')">
+            Ir a Productos
+        </button>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.queryElementById('mostrarProductos').onClick = function() {
+            document.getElementById('productos').style.display = 'block';
+            document.getElementById('productos').scrollIntoView({ behavior: 'smooth' });
+        };
+    });
+    </script>
+
+    <main> <!--El elemento main representa el contenido principal del documento-->
+        <section id="usuarios"> <!--El elemento section define una sección en el documento. El atributo id proporciona un identificador único para la sección-->
+            <h2>Gestión de Usuarios</h2> <!--El elemento h2 define un encabezado de segundo nivel-->
+            <p>Administra los usuarios del sistema, incluyendo creación, edición y eliminación.</p> <!--El elemento p define un párrafo-->
+            <button onclick="alert('Funcionalidad en desarrollo')">Agregar Usuario</button> <!--El elemento button define un botón interactivo. El atributo onclick especifica una acción a realizar cuando se hace clic en el botón-->
+        </section>
+
+        <section id="productos"> <!--Otra sección con un identificador único-->
+            <h2>Gestión de Productos</h2> <!--Encabezado de segundo nivel-->
+            <p>Administra los productos disponibles en el inventario.</p> <!--Párrafo descriptivo-->
+            <button onclick="alert('Funcionalidad en desarrollo')">Agregar Producto</button> <!--Botón interactivo-->
+        </section> 
+
+        <section id="reportes"> <!--Otra sección con un identificador único-->
+            <h2>Generación de Reportes</h2> <!--Encabezado de segundo nivel-->
+            <p>Genera reportes detallados sobre ventas, usuarios y productos.</p> <!--Párrafo descriptivo-->
+            <button onclick="alert('Funcionalidad en desarrollo')">Generar Reporte</button> <!--Botón interactivo-->
+        </section>
+    </main>
+    <footer> <!--El elemento footer representa el pie de página del documento o una sección-->
+        <p>&copy; 2024 Sistema de Gestión. Todos los derechos reservados.</p> <!--El símbolo &copy; representa el símbolo de copyright-->
+    </footer>
+</body>
+</html>
