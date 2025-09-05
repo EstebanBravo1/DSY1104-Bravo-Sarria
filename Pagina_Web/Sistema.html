@@ -1,55 +1,329 @@
-<!DOCTYPE html> <!--Utilizamos la declaración DOCTYPE para indicar al navegador que versión de html se está utilizando-->
-<html lang="es"> <!--El atributo lang indica el idioma principal del contenido de la página-->
-<head> <!--El elemento head contiene metadatos sobre el documento-->
-    <meta charset="UTF-8"> <!--El elemento meta con el atributo charset especifica la codificación de caracteres utilizada-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--El elemento meta con el atributo name="viewport" ayuda a controlar el diseño en dispositivos móviles-->
-    <title>Página principal</title> <!--El elemento title define el título del documento que aparece en la pestaña del navegador-->
-    <link rel="stylesheet" href="styles.css"> <!--El elemento link se utiliza para enlazar archivos externos, como hojas de estilo CSS-->
-    <link rel="stylesheet" href="Sistema.css"> <!--Enlaza una hoja de estilo CSS específica para esta página-->
-    <link href="https://fonts.google.com/specimen/Montserrat" rel="sans-serif"> <!--Enlaza una fuente externa desde Google Fonts-->
-    <link href="https://fonts.google.com/specimen/Playfair+Display" rel="serif"> <!--Enlaza otra fuente externa desde Google Fonts-->
-    <script src="script.js" defer></script> <!--El elemento script se utiliza para enlazar archivos JavaScript externos. El atributo defer indica que el script debe ejecutarse después de que el documento haya sido analizado-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HuertoHogar - Frescura del campo a tu hogar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #F7F7F7;
+            --color-primary: #2E8B57;
+            --color-accent: #FFD700;
+            --color-brown: #8B4513;
+            --color-text-dark: #333333;
+            --color-text-medium: #666666;
+            --color-white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--color-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo-titulo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-fondo {
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+        }
+        
+        .logo {
+            height: 60px;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-brown);
+            margin-left: 15px;
+            font-size: 28px;
+        }
+        
+        .search-bar-container {
+            display: flex;
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+        
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid var(--color-primary);
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .search-btn {
+            padding: 12px 20px;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .search-btn:hover {
+            background-color: #267349;
+        }
+        
+        .botones-superior {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .botones-superior button {
+            padding: 12px 20px;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .botones-superior button:hover {
+            background-color: #267349;
+            transform: translateY(-2px);
+        }
+        
+        .imagen-presentacion {
+            position: relative;
+            margin: 30px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .presentacion {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .texto-presentacion {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            text-align: center;
+        }
+        
+        nav {
+            background-color: var(--color-primary);
+            padding: 15px 0;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        nav li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: color 0.3s;
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
+        
+        nav li a:hover {
+            color: var(--color-accent);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Main content */
+        main {
+            padding: 40px 0;
+        }
+        
+        section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-brown);
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+        }
+        
+        section p {
+            color: var(--color-text-medium);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        section button {
+            padding: 12px 25px;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        section button:hover {
+            background-color: #267349;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .search-bar-container {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .texto-presentacion {
+                font-size: 24px;
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <header> <!--El elemento header representa un contenedor para contenido introductorio o un conjunto de enlaces de navegación-->
-        <div class="logo-titulo"> <!-- Contenedor para el logo y el título -->
-            <div class="logo-fondo"> <!-- Contenedor para el fondo del logo -->
-                <img src="Imágenes/Huerto_Hogar.png" alt="Logotipo Huerto Hogar" class="logo"> <!-- Imagen del logo con texto alternativo -->
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="logo-titulo">
+                    <div class="logo-fondo">
+                        <img src="Imágenes/Huerto_Hogar.png" alt="Logotipo Huerto Hogar" class="logo">
+                    </div>
+                    <h1>Huerto<span style="color: var(--color-primary)">Hogar</span></h1>
+                </div>
+
+                <div class="search-bar-container">
+                    <input type="text" placeholder="Buscar productos..." class="search-bar">
+                    <button type="submit" class="search-btn">Buscar</button>
+                </div>
             </div>
-            <h1>Página principal</h1> <!--El elemento h1 define el encabezado más importante en la página-->
-            <div class="botones-superior"> <!-- Contenedor para los botones en la parte superior -->
-                <button id="mostrarUsuarios" onclick="alert('Funcionalidad en desarrollo')">Registrar Usuario</button> <!--Botón para registrar usuario-->
-                <button id="iniciarSesion" onclick="alert('Funcionalidad en desarrollo')">Iniciar Sesión</button> <!--Botón para iniciar sesión-->
-                <button id="mostrarProductos" onclick="alert('Funcionalidad en desarrollo')">Ver catálogo de Productos</button> <!--Botón para ver catálogo de productos-->
-                <button id="volverInicio" onclick="alert('Funcionalidad en desarrollo')">Volver al Inicio</button> <!--Botón para volver al inicio-->
-                <button id="gestionProductos" onclick="alert('Funcionalidad en desarrollo')">Gestión de Productos</button> <!--Botón para gestión de productos-->
-        </div>
-        <nav> <!--El elemento nav define un conjunto de enlaces de navegación-->
-            <ul> <!--El elemento ul define una lista desordenada-->
-                <li><a href="#usuarios">Usuarios</a></li> <!--El elemento li define un ítem en una lista. El elemento a define un hipervínculo-->
-                <li><a href="#productos">Productos</a></li> <!--Otro ítem en la lista-->
-                <li><a href="#inicio">Inicio</a></li> <!--Otro ítem en la lista-->
-                <li><a href="#gestiónProductos">GestiónProductos</a></li> <!--Otro ítem en la lista-->
-            </ul>
-        </nav>
-    </header>
 
-    <main> <!--El elemento main representa el contenido principal del documento-->
-        <section id="usuarios"> <!--El elemento section define una sección en el documento. El atributo id proporciona un identificador único para la sección-->
-            <h2>Gestión de Usuarios</h2> <!--El elemento h2 define un encabezado de segundo nivel-->
-            <p>Administra los usuarios del sistema, incluyendo creación, edición y eliminación.</p> <!--El elemento p define un párrafo-->
-            <button onclick="alert('Funcionalidad en desarrollo')">Agregar Usuario</button> <!--El elemento button define un botón interactivo. El atributo onclick especifica una acción a realizar cuando se hace clic en el botón-->
-        </section>
+            <div class="botones-superior">
+                <button id="mostrarUsuarios" onclick="alert('Funcionalidad en desarrollo')">Registrarse</button>
+                <button id="iniciarSesion" onclick="alert('Funcionalidad en desarrollo')">Iniciar Sesión</button>
+                <button id="mostrarProductos" onclick="alert('Funcionalidad en desarrollo')">Ver Catálogo</button>
+                <button id="volverInicio" onclick="alert('Funcionalidad en desarrollo')">Volver al Inicio</button>
+                <button id="gestionProductos" onclick="alert('Funcionalidad en desarrollo')">Gestión Productos</button>
+            </div>
 
-        <section id="productos"> <!--Otra sección con un identificador único-->
-            <h2>Gestión de Productos</h2> <!--Encabezado de segundo nivel-->
-            <p>Administra los productos disponibles en el inventario.</p> <!--Párrafo descriptivo-->
-            <button onclick="alert('Funcionalidad en desarrollo')">Agregar Producto</button> <!--Botón interactivo-->
-        </section> 
-    </main>
-    <footer> <!--El elemento footer representa el pie de página del documento o una sección-->
-        <p>&copy; 2024 Sistema de Gestión. Todos los derechos reservados.</p> <!--El símbolo &copy; representa el símbolo de copyright-->
-    </footer>
+            <div class="imagen-presentacion">
+                <img src="Imágenes/Imagen_Principal.png" alt="Imagen de presentación de HuertoHogar" class="presentacion">
+                <p class="texto-presentacion">Frescura del campo en tu hogar</p>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#usuarios">Usuarios</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#gestiónProductos">Gestión Productos</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section id="usuarios">
+                <h2>Gestión de Usuarios</h2>
+                <p>Administra los usuarios del sistema, incluyendo creación, edición y eliminación. Registra nuevos clientes para que puedan disfrutar de nuestros productos frescos directamente desde el campo a sus hogares.</p>
+                <button onclick="alert('Funcionalidad en desarrollo')">Agregar Usuario</button>
+            </section>
+
+            <section id="productos">
+                <h2>Gestión de Productos</h2>
+                <p>Administra los productos disponibles en el inventario. Actualiza precios, stock y descripciones de nuestras frutas frescas, verduras orgánicas y otros productos naturales.</p>
+                <button onclick="alert('Funcionalidad en desarrollo')">Agregar Producto</button>
+            </section> 
+        </main>
+        <footer>
+            <p>&copy; 2024 HuertoHogar - Frescura del campo a tu hogar. Todos los derechos reservados.</p>
+        </footer>
+    </div>
 </body>
 </html>
