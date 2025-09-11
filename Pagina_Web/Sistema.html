@@ -8,91 +8,261 @@
     <link rel="stylesheet" href="Sistema.css">
 </head>
 <body>
-    <!-- Navbar con logo y carrito según HH-010 -->
-<div class="header-top">
-    <div class="logo-titulo">
-        <div class="logo-fondo">
-            <img src="Imágenes/Huerto_Hogar.png" alt="Logotipo Huerto Hogar" class="logo">
-        </div>
-        <h1>Huerto<span>Hogar</span></h1>
+    <div class="container">
+        <header>
+            <!-- Navbar con logo y carrito según HH-010 -->
+            <div class="header-top">
+                <div class="logo-titulo">
+                    <div class="logo-fondo">
+                        <img src="Imágenes/Huerto_Hogar.png" alt="Logotipo Huerto Hogar" class="logo">
+                    </div>
+                    <h1>Huerto<span>Hogar</span></h1>
+                </div>
+
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#" class="nav-link active">Inicio</a></li>
+                        <li><a href="Alvaro/Productos.html" class="nav-link">Productos</a></li>
+                        <li><a href="#blogs" class="nav-link">Blogs</a></li>
+                        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <div class="search-bar-container">
+                        <input type="text" placeholder="Buscar productos..." class="search-bar" aria-label="Buscar productos">
+                        <button type="submit" class="search-btn">Buscar</button>
+                    </div>
+
+                    <div class="user-actions">
+                        <a href="Usuarios/Login.html" class="btn-login-header">Iniciar Sesión</a>
+                        <a href="Usuarios/Register.html" class="btn-register-header">Regístrate</a>
+                    </div>
+
+                    <div class="cart-container">
+                        <button class="cart-btn" aria-label="Carrito de compras">
+                            <span class="cart-icon">🛒</span>
+                            <span class="cart-badge" id="cart-count">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <!-- Hero section según HH-011 -->
+            <section class="hero">
+                <div class="hero-content">
+                    <h2 class="hero-title">Frescura y naturalidad</h2>
+                    <p class="hero-subtitle">Productos orgánicos directamente del campo a tu hogar</p>
+                    <a href="Alvaro/Productos.html" class="hero-cta">Ver catálogo</a>
+                </div>
+                <div class="hero-image">
+                    <img src="Imágenes/Imagen_Principal.png" alt="Imagen de presentación de HuertoHogar" class="presentacion">
+                </div>
+            </section>
+        </header>
+
+        <main>
+            <!-- Categorías destacadas según HH-012 -->
+            <section class="featured-categories">
+                <h2>Categorías destacadas</h2>
+                <div class="categories-grid">
+                    <a href="#productos?cat=frutas" class="category-tile">
+                        <div class="category-content">
+                            <h3>Frutas Frescas</h3>
+                            <p>Descubre nuestra selección de frutas de temporada</p>
+                        </div>
+                    </a>
+                    <a href="#productos?cat=verduras" class="category-tile">
+                        <div class="category-content">
+                            <h3>Verduras Orgánicas</h3>
+                            <p>Verduras cultivadas sin pesticidas</p>
+                        </div>
+                    </a>
+                    <a href="#productos?cat=organicos" class="category-tile">
+                        <div class="category-content">
+                            <h3>Productos Orgánicos</h3>
+                            <p>Alimentos 100% naturales y ecológicos</p>
+                        </div>
+                    </a>
+                    <a href="#productos?cat=lacteos" class="category-tile">
+                        <div class="category-content">
+                            <h3>Lácteos</h3>
+                            <p>Productos lácteos frescos y naturales</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Productos destacados según HH-013 -->
+            <section class="featured-products">
+                <h2>Productos destacados</h2>
+                <div class="products-grid" id="featured-products-container">
+                    <!-- Los productos se cargarán dinámicamente con JavaScript -->
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2024 HuertoHogar - Frescura del campo a tu hogar. Todos los derechos reservados.</p>
+        </footer>
     </div>
 
-    <nav class="main-nav">
-        <ul>
-            <li><a href="#" class="nav-link active">Inicio</a></li>
-            <li><a href="Alvaro/Productos.html" class="nav-link">Productos</a></li>
-            <li><a href="#blogs" class="nav-link">Blogs</a></li>
-            <li><a href="#contacto" class="nav-link">Contacto</a></li>
-        </ul>
-    </nav>
+    <script>
+        // Datos de ejemplo para productos destacados (según HH-101)
+        const featuredProducts = [
+            {
+                code: "FR001",
+                name: "Manzanas Fuji",
+                category: "Frutas Frescas",
+                price: 1990,
+                stock: 50,
+                image: "Imágenes/Manzanas_Fuji.jpg",
+                featured: true
+            },
+            {
+                code: "FR002",
+                name: "Naranjas Valencia",
+                category: "Frutas Frescas",
+                price: 1590,
+                stock: 40,
+                image: "Imágenes/Naranjas_Valencia.jpg",
+                featured: true
+            },
+            {
+                code: "FR003",
+                name: "Plátanos Cavendish",
+                category: "Frutas Frescas",
+                price: 1290,
+                stock: 60,
+                image: "Imágenes/Platanos_Cavendish.jpg",
+                featured: true
+            },
+            {
+                code: "VR001",
+                name: "Zanahorias Orgánicas",
+                category: "Verduras Orgánicas",
+                price: 990,
+                stock: 30,
+                image: "Imágenes/Zanahorias_Organicas.jpg",
+                featured: true
+            },
+            {
+                code: "VR002",
+                name: "Lechuga Romana",
+                category: "Verduras Orgánicas",
+                price: 890,
+                stock: 25,
+                image: "Imágenes/Lechuga_Romana.jpg",
+                featured: true
+            },
+            {
+                code: "OR001",
+                name: "Miel Orgánica",
+                category: "Productos Orgánicos",
+                price: 4990,
+                stock: 20,
+                image: "Imágenes/Miel_Organica.png",
+                featured: true
+            },
+            {
+                code: "LA001",
+                name: "Leche Entera",
+                category: "Lácteos",
+                price: 1190,
+                stock: 35,
+                image: "Imágenes/Leche_Entera.jpg",
+                featured: true
+            },
+            {
+                code: "LA002",
+                name: "Yogur Natural",
+                category: "Lácteos",
+                price: 990,
+                stock: 40,
+                image: "Imágenes/Yogur_Natural.jpg",
+                featured: true
+            }
+        ];
 
-    <div class="header-actions">
-        <div class="search-bar-container">
-            <input type="text" placeholder="Buscar productos..." class="search-bar" aria-label="Buscar productos">
-            <button type="submit" class="search-btn">Buscar</button>
-        </div>
+        // Función para formatear precios en CLP
+        function formatPrice(price) {
+            return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(price);
+        }
 
-        <div class="user-actions">
-            <a href="Usuarios/Login.html" class="btn-login-header">Iniciar Sesión</a>
-            <a href="Usuarios/Register.html" class="btn-register-header">Regístrate</a>
-        </div>
+        // Función para renderizar productos destacados
+        function renderFeaturedProducts() {
+            const container = document.getElementById('featured-products-container');
+            container.innerHTML = '';
+            
+            featuredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                        <span class="product-badge">${product.category}</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-code">${product.code}</p>
+                        <p class="product-price">${formatPrice(product.price)}</p>
+                        <button class="btn-add-cart" data-product='${JSON.stringify(product)}'>Añadir</button>
+                    </div>
+                `;
+                container.appendChild(productCard);
+            });
+            
+            // Agregar event listeners a los botones de añadir al carrito
+            document.querySelectorAll('.btn-add-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const product = JSON.parse(this.getAttribute('data-product'));
+                    addToCart(product);
+                });
+            });
+        }
 
-        <div class="cart-container">
-            <button class="cart-btn" aria-label="Carrito de compras">
-                <span class="cart-icon">🛒</span>
-                <span class="cart-badge" id="cart-count">0</span>
-            </button>
-        </div>
-    </div>
+        // Función para añadir productos al carrito (simulación)
+        function addToCart(product) {
+            // Simulación de añadir al carrito
+            const cartCount = document.getElementById('cart-count');
+            let count = parseInt(cartCount.textContent);
+            count++;
+            cartCount.textContent = count;
+            
+            // Mostrar feedback visual
+            const button = event.target;
+            button.textContent = '✓ Añadido';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.textContent = 'Añadir';
+                button.disabled = false;
+            }, 1500);
+            
+            console.log('Producto añadido al carrito:', product);
+        }
 
-    <button class="mobile-menu-toggle" aria-label="Abrir menú">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-
-    <!-- Hero section según HH-011 -->
-    <section class="hero">
-        <div class="hero-content">
-            <h2 class="hero-title">Frescura y naturalidad</h2>
-            <p class="hero-subtitle">Productos orgánicos directamente del campo a tu hogar</p>
-            <a href="Alvaro/Productos.html" class="hero-cta">Ver catálogo</a>
-        </div>
-        <div class="hero-image">
-            <img src="Imágenes/Imagen_Principal.png" alt="Imagen de presentación de HuertoHogar" class="presentacion">
-        </div>
-    </section>
-
-    <!-- Categorías destacadas según HH-012 -->
-    <section class="featured-categories">
-        <h2>Categorías destacadas</h2>
-        <div class="categories-grid">
-            <a href="#productos?cat=frutas" class="category-tile">
-                <div class="category-content">
-                    <h3>Frutas Frescas</h3>
-                    <p>Descubre nuestra selección de frutas de temporada</p>
-                </div>
-            </a>
-            <a href="#productos?cat=verduras" class="category-tile">
-                <div class="category-content">
-                    <h3>Verduras Orgánicas</h3>
-                    <p>Verduras cultivadas sin pesticidas</p>
-                </div>
-            </a>
-            <a href="#productos?cat=organicos" class="category-tile">
-                <div class="category-content">
-                    <h3>Productos Orgánicos</h3>
-                    <p>Alimentos 100% naturales y ecológicos</p>
-                </div>
-            </a>
-            <a href="#productos?cat=lacteos" class="category-tile">
-                <div class="category-content">
-                    <h3>Lácteos</h3>
-                    <p>Productos lácteos frescos y naturales</p>
-                </div>
-            </a>
-        </div>
-    </section>
-</div>
+        // Inicializar cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', function() {
+            renderFeaturedProducts();
+            
+            // Manejar el menú móvil
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    menuToggle.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
