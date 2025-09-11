@@ -1,0 +1,183 @@
+:root {
+    --color-primary: #4CAF50;
+    --color-secondary: #FF9800;
+    --color-background: #f9f9f9;
+    --color-text: #333;
+    --color-error: #f44336;
+    --color-success: #4CAF50;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.container-registro {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.logo-titulo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 140px;
+    height: 115px;
+}
+
+.logo-titulo h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.form-container {
+    width: 100%;
+}
+
+.form-container h2 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.form-container > p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.error-message {
+    display: block;
+    color: var(--color-error);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    min-height: 1.2rem;
+}
+
+.btn-registro {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-registro:hover {
+    background-color: #3d8b40;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.login-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para validación */
+input.invalid {
+    border-color: var(--color-error);
+}
+
+input.valid {
+    border-color: var(--color-success);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .container-registro {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .logo-titulo h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Mensajes de feedback */
+.feedback-message {
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 500;
+}
+
+.feedback-error {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--color-error);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.feedback-success {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: var(--color-success);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Animaciones para mensajes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback-message {
+    animation: fadeIn 0.3s ease-out;
+}
