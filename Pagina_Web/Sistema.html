@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HuertoHogar - Frescura del campo a tu hogar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Sistema.css">
+</head>
+<body>
+    <!-- Navbar con logo y carrito según HH-010 -->
+<div class="header-top">
+    <div class="logo-titulo">
+        <div class="logo-fondo">
+            <img src="Imágenes/Huerto_Hogar.png" alt="Logotipo Huerto Hogar" class="logo">
+        </div>
+        <h1>Huerto<span>Hogar</span></h1>
+    </div>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#" class="nav-link active">Inicio</a></li>
+            <li><a href="Alvaro/Productos.html" class="nav-link">Productos</a></li>
+            <li><a href="#blogs" class="nav-link">Blogs</a></li>
+            <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <div class="header-actions">
+        <div class="search-bar-container">
+            <input type="text" placeholder="Buscar productos..." class="search-bar" aria-label="Buscar productos">
+            <button type="submit" class="search-btn">Buscar</button>
+        </div>
+
+        <div class="user-actions">
+            <a href="Usuarios/Login.html" class="btn-login-header">Iniciar Sesión</a>
+            <a href="Usuarios/Register.html" class="btn-register-header">Regístrate</a>
+        </div>
+
+        <div class="cart-container">
+            <button class="cart-btn" aria-label="Carrito de compras">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-badge" id="cart-count">0</span>
+            </button>
+        </div>
+    </div>
+
+    <button class="mobile-menu-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</div>
+</body>
+</html>
