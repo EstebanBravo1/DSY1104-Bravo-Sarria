@@ -1,0 +1,10 @@
+
+/*REQUERIMIENTO HH-001 PALETA DE COLORES*/
+:root {
+    --home-color:#F7F7F7;      /* Color base claro */
+    --home-color1: #2E8B57;    /* Verde principal */
+    --home-color2:#FFD700;     /* Dorado/amarillo */
+    --home-color3:#8B4513;     /* Marrón */
+    --home-color4:#333333;     /* Gris oscuro */
+    --home-color5:#666666;     /* Gris medio */
+}
