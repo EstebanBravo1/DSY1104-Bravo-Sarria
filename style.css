@@ -1,10 +1,30 @@
 
+/* Import en todos los CSS */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+
 /*REQUERIMIENTO HH-001 PALETA DE COLORES*/
+/*REQUERIMIENTO HH-002 TIPOGRAFIA MONTSERRAT + PLAYFAIR DISPLAY*/
 :root {
+    /* Paleta de colores */
     --home-color:#F7F7F7;      /* Color base claro */
     --home-color1: #2E8B57;    /* Verde principal */
     --home-color2:#FFD700;     /* Dorado/amarillo */
     --home-color3:#8B4513;     /* Marrón */
     --home-color4:#333333;     /* Gris oscuro */
     --home-color5:#666666;     /* Gris medio */
+    
+    /* Variables tipográficas */
+    --body-font: 'Montserrat', sans-serif;
+    --heading-font: 'Playfair Display', serif;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+}
+
+/* Jerarquía de encabezados */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--heading-font);
 }
