@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Frutas y Verduras</title>
+    <!-- Iconos -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contacto.css">
+</head>
+
+<body>
+    <!-- Navegación -->
+    <nav class="menu-principal">
+        <div class="menu-principal-container">
+            <a href="Inicio.html" class="logo-link">
+                <img src="imagenes/LogoHuertoHogar.png" alt="Logo de la tienda" class="nav__logo">
+            </a>
+            <ul>
+                <li><a href="Inicio.html">Inicio</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Blog.html">Blog</a></li>
+                <li><a href="Contacto.html" class="active">Contacto</a></li>
+                <li><a href="Carrito.html" class="cart-link">
+                    <i class="ri-shopping-cart-line"></i>
+                    Carrito
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header-contacto">
+        <div class="container">
+            <h1>Contáctanos</h1>
+            <p>Estamos aquí para ayudarte con tus consultas sobre nuestras frutas y verduras frescas</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-contacto">
+        <div class="container">
+            <!-- Sección de información de contacto -->
+            <section class="info-contacto">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="ri-map-pin-line"></i>
+                        </div>
+                        <h3>Dirección</h3>
+                        <p>Av. Providencia 1234<br>
+                        Santiago, Chile<br>
+                        Código Postal: 7500000</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="ri-phone-line"></i>
+                        </div>
+                        <h3>Teléfono</h3>
+                        <p>+56 9 1234 5678<br>
+                        +56 2 2234 5678<br>
+                        Lunes a Viernes: 8:00 - 18:00</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="ri-mail-line"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>info@frutasyverduras.cl<br>
+                        ventas@frutasyverduras.cl<br>
+                        soporte@frutasyverduras.cl</p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <i class="ri-time-line"></i>
+                        </div>
+                        <h3>Horarios</h3>
+                        <p>Lunes a Viernes: 8:00 - 20:00<br>
+                        Sábados: 9:00 - 18:00<br>
+                        Domingos: 10:00 - 16:00</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Formulario de contacto -->
+            <section class="formulario-contacto">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h2>Envíanos un mensaje</h2>
+                        <p>Completa el formulario y nos pondremos en contacto contigo lo antes posible</p>
+                    </div>
+
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre *</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellido">Apellido *</label>
+                                <input type="text" id="apellido" name="apellido" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="asunto">Asunto *</label>
+                            <select id="asunto" name="asunto" required>
+                                <option value="">Selecciona un asunto</option>
+                                <option value="consulta-productos">Consulta sobre productos</option>
+                                <option value="pedido-especial">Pedido especial</option>
+                                <option value="reclamo">Reclamo</option>
+                                <option value="sugerencia">Sugerencia</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje *</label>
+                            <textarea id="mensaje" name="mensaje" rows="6" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <span class="checkmark"></span>
+                                Quiero recibir ofertas y novedades por email
+                            </label>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="terminos" name="terminos" required>
+                                <span class="checkmark"></span>
+                                Acepto los <a href="#">términos y condiciones</a> *
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-enviar">
+                            <i class="ri-send-plane-line"></i>
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Mapa (placeholder) -->
+            <section class="mapa-section">
+                <div class="mapa-container">
+                    <h2>Nuestra Ubicación</h2>
+                    <div class="mapa-placeholder">
+                        <i class="ri-map-pin-fill"></i>
+                        <p>Mapa interactivo<br>
+                        <small>Av. Providencia 1234, Santiago</small></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección adicional: Preguntas frecuentes -->
+            <section class="faq-section">
+                <h2>Preguntas Frecuentes</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Hacen delivery?</h3>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sí, realizamos entregas a domicilio en Santiago y comunas aledañas. Los pedidos mínimos y costos de envío varían según la zona.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Cómo garantizan la frescura?</h3>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Trabajamos directamente con productores locales y recibimos mercadería fresca diariamente. Además, mantenemos cadena de frío en todos nuestros productos.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>¿Aceptan pedidos al por mayor?</h3>
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Absolutamente. Ofrecemos precios especiales para restaurantes, hoteles y otros negocios. Contáctanos para más información sobre nuestros planes corporativos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Frutas y Verduras</h3>
+                    <p>Tu tienda de confianza para productos frescos y naturales desde hace más de 20 años.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="ri-facebook-fill"></i></a>
+                        <a href="#"><i class="ri-instagram-line"></i></a>
+                        <a href="#"><i class="ri-twitter-fill"></i></a>
+                        <a href="#"><i class="ri-whatsapp-line"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="Inicio.html">Inicio</a></li>
+                        <li><a href="Productos.html">Productos</a></li>
+                        <li><a href="Blog.html">Blog</a></li>
+                        <li><a href="Carrito.html">Carrito</a></li>
+                        <li><a href="Contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto Rápido</h4>
+                    <p><i class="ri-phone-line"></i> +56 9 1234 5678</p>
+                    <p><i class="ri-mail-line"></i> info@frutasyverduras.cl</p>
+                    <p><i class="ri-map-pin-line"></i> Av. Providencia 1234, Santiago</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Frutas y Verduras. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Funcionalidad para FAQ
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Cerrar todas las preguntas
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Abrir la pregunta clickeada si no estaba activa
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Validación del formulario
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validación básica
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const mensaje = document.getElementById('mensaje').value;
+            const terminos = document.getElementById('terminos').checked;
+            
+            if (!nombre || !email || !mensaje || !terminos) {
+                alert('Por favor, completa todos los campos obligatorios y acepta los términos.');
+                return;
+            }
+            
+            // Simular envío
+            alert('¡Mensaje enviado correctamente! Nos pondremos en contacto contigo pronto.');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

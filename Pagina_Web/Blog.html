@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de Recetas - Verde & Natural</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contacto.css">
+    
+    <!-- Box Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="imagenes/favicon.png" type="image/x-icon">
+</head>
+<body>
+    <!-- Skip Links para accesibilidad HH-003 -->
+    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+    <a href="#menu-navegacion" class="skip-link">Saltar a navegación</a>
+    
+    <!-- ARIA Live Regions para HH-003 -->
+    <div aria-live="polite" aria-atomic="true" class="sr-only" id="announcements"></div>
+
+    <!--==================== HEADER ====================-->
+    <nav class="menu-principal" id="menu-navegacion">
+        <div class="menu-principal-container">
+            <a href="Inicio.html" class="logo-link">
+                <img src="imagenes/LogoHuertoHogar.png" alt="Verde & Natural Logo" class="nav__logo">
+            </a>
+            
+            <ul>
+                <li><a href="Inicio.html">Inicio</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Blog.html" aria-current="page">Blog</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+                <li><a href="Carrito.html">
+                    <i class='bx bx-cart'></i>
+                    Carrito (<span id="cart-count">0</span>)
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--==================== MAIN ====================-->
+    <main class="main" id="contenido-principal">
+        <!--==================== HERO SECTION ====================-->
+        <section class="blog-hero">
+            <div class="container">
+                <div class="blog-hero__content">
+                    <h1 class="blog-hero__title">
+                        <i class='bx bx-book-content'></i>
+                        Blog de Recetas
+                    </h1>
+                    <p class="blog-hero__description">
+                        Descubre deliciosas recetas preparadas con nuestros productos frescos y orgánicos. 
+                        Desde smoothies nutritivos hasta postres saludables, encuentra inspiración para 
+                        cocinar con ingredientes naturales.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== FILTROS ====================-->
+        <section class="blog-filters">
+            <div class="container">
+                <div class="filters">
+                    <button class="filter-btn active" data-categoria="todas">
+                        <i class='bx bx-grid-alt'></i>
+                        Todas las Recetas
+                    </button>
+                    <button class="filter-btn" data-categoria="FR">
+                        <i class='bx bx-apple'></i>
+                        Frutas
+                    </button>
+                    <button class="filter-btn" data-categoria="VE">
+                        <i class='bx bx-leaf'></i>
+                        Verduras
+                    </button>
+                    <button class="filter-btn" data-categoria="PO">
+                        <i class='bx bx-certification'></i>
+                        Orgánicos
+                    </button>
+                    <button class="filter-btn" data-categoria="PL">
+                        <i class='bx bx-milk'></i>
+                        Lácteos
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== RECETAS ====================-->
+        <section class="blog-recetas section">
+            <div class="container">
+                <div class="recetas-grid" id="recetas-container">
+                    <!-- Las recetas se cargarán dinámicamente con JavaScript -->
+                </div>
+                
+                <!-- Estado de carga -->
+                <div class="loading-state" id="loading-state" style="display: none;">
+                    <div class="loading-spinner">
+                        <i class='bx bx-loader-alt'></i>
+                    </div>
+                    <p>Cargando recetas deliciosas...</p>
+                </div>
+                
+                <!-- Estado vacío -->
+                <div class="empty-state" id="empty-state" style="display: none;">
+                    <div class="empty-state__icon">
+                        <i class='bx bx-search-alt'></i>
+                    </div>
+                    <h3>No se encontraron recetas</h3>
+                    <p>Intenta con otro filtro o explora todas las categorías.</p>
+                </div>
+            </div>
+        </section>
+
+        <!--==================== NEWSLETTER ====================-->
+        <section class="newsletter section">
+            <div class="container">
+                <div class="newsletter__content">
+                    <div class="newsletter__data">
+                        <h2 class="newsletter__title">
+                            ¿Te gustaron nuestras recetas?
+                        </h2>
+                        <p class="newsletter__description">
+                            Suscríbete a nuestro newsletter y recibe nuevas recetas 
+                            directamente en tu correo cada semana.
+                        </p>
+                    </div>
+                    
+                    <form class="newsletter__form" id="newsletter-form">
+                        <div class="newsletter__input-group">
+                            <input 
+                                type="email" 
+                                placeholder="Tu correo electrónico" 
+                                class="newsletter__input"
+                                id="newsletter-email"
+                                required
+                                autocomplete="email"
+                            >
+                            <button type="submit" class="newsletter__button button">
+                                <i class='bx bx-send'></i>
+                                Suscribirse
+                            </button>
+                        </div>
+                        <div class="newsletter__privacy">
+                            <label class="newsletter__checkbox">
+                                <input type="checkbox" required>
+                                <span class="checkmark"></span>
+                                Acepto recibir información sobre recetas y productos.
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer-contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Verde & Natural</h3>
+                    <p>Tu tienda de confianza para productos frescos y naturales desde hace más de 20 años.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class='bx bxl-facebook'></i></a>
+                        <a href="#" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+                        <a href="#" aria-label="Twitter"><i class='bx bxl-twitter'></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class='bx bxl-whatsapp'></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="Inicio.html">Inicio</a></li>
+                        <li><a href="Productos.html">Productos</a></li>
+                        <li><a href="Blog.html">Blog</a></li>
+                        <li><a href="Carrito.html">Carrito</a></li>
+                        <li><a href="Contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto Rápido</h4>
+                    <p><i class='bx bx-phone'></i> +56 9 1234 5678</p>
+                    <p><i class='bx bx-envelope'></i> info@verdenatural.cl</p>
+                    <p><i class='bx bx-map'></i> Av. Providencia 1234, Santiago</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Verde & Natural. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!--==================== SCROLL UP ====================-->
+    <a href="#" class="scrollup" id="scroll-up" aria-label="Volver arriba">
+        <i class='bx bx-up-arrow-alt'></i>
+    </a>
+
+    <!-- Modal para recetas detalladas -->
+    <div class="modal" id="receta-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-titulo">Título de la Receta</h3>
+                <button class="modal-close" id="modal-close" aria-label="Cerrar modal">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Contenido se carga dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!--==================== JAVASCRIPT ====================-->
+    <script type="module" src="js/blog.js"></script>
+</body>
+</html>

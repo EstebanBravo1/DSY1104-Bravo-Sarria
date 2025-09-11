@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contacto.css">
+</head>
+
+<body>
+    <!-- HH-003: Skip links para navegación por teclado -->
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+    <a href="#product-filters" class="skip-link">Ir a filtros</a>
+    <a href="#product-grid" class="skip-link">Ir a productos</a>
+    
+    <!-- Navegación -->
+    <nav class="menu-principal">
+        <div class="menu-principal-container">
+            <a href="Inicio.html" class="logo-link">
+                <img src="imagenes/LogoHuertoHogar.png" alt="Logo de la tienda" class="nav__logo">
+            </a>
+            <ul>
+                <li><a href="Inicio.html">Inicio</a></li>
+                <li><a href="Productos.html">Productos</a></li>
+                <li><a href="Blog.html">Blog</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+                <li>
+                    <a href="Carrito.html" class="cart-link">
+                        <i class="ri-shopping-cart-line"></i>
+                        Carrito 
+                        <span id="cart-badge" class="cart-badge">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- HH-003: ARIA live region para mensajes dinámicos -->
+    <div id="aria-live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+    <div id="aria-live-assertive" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
+    
+    <header>
+        <h1>Catálogo de Productos</h1>
+    </header>
+    <main class="main" id="main-content">
+        <section class="home section" id="home">
+            <div class="home__container container grid">
+                <div class="home__data">
+                    <h3 class="home__subtitle">
+                        Frutas y Verduras de calidad
+                    </h3>
+                    <h1 class="home__title">
+                        Es el momento de <br>
+                        Comer Saludable
+                        
+                    </h1>
+                    <p class="home__description">
+                        Cada fruta refleja la calidad de la tierra donde crece, y cada verdura es un testimonio del cuidado con el que se cultiva. Al elegir frutas y verduras frescas y de temporada, no solo estás nutriendo tu cuerpo, sino también apoyando prácticas agrícolas sostenibles que respetan el medio ambiente.
+                    </p>
+                    <a href="#" class="button">Comienza el cambio</a>
+                </div>
+                <img src="imagenes/cesta-llena-verduras.png" alt="Comer Saludable" class="home__img">
+
+            </div>
+        </section>
+   
+        <section id="productos">
+            <div class="filters" id="product-filters">
+                <button class="filter-btn active" data-categoria="all">Todos</button>
+                </div>
+            <div id="product-grid" class="product-grid"></div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer-contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Verde & Natural</h3>
+                    <p>Tu tienda de confianza para productos frescos y naturales desde hace más de 20 años.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="ri-twitter-fill"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="Inicio.html">Inicio</a></li>
+                        <li><a href="Productos.html">Productos</a></li>
+                        <li><a href="Blog.html">Blog</a></li>
+                        <li><a href="Carrito.html">Carrito</a></li>
+                        <li><a href="Contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto Rápido</h4>
+                    <p><i class="ri-phone-line"></i> +56 9 1234 5678</p>
+                    <p><i class="ri-mail-line"></i> info@verdenatural.cl</p>
+                    <p><i class="ri-map-pin-line"></i> Av. Providencia 1234, Santiago</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Verde & Natural. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script type="module" src="js/productos.js"></script>
+</body>
+
+</html>

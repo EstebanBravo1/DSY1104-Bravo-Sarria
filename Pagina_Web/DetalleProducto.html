@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto - Huerto Hogar</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/detalleproducto.css">
+    <link rel="stylesheet" href="css/contacto.css">
+</head>
+
+<body>
+    <!-- Navegación -->
+    <nav class="menu-principal">
+        <div class="menu-principal-container">
+            <a href="Inicio.html" class="logo-link">
+                <img src="imagenes/LogoHuertoHogar.png" alt="Logo de la tienda" class="nav__logo">
+            </a>
+            <ul>
+                <li><a href="Inicio.html">Inicio</a></li>
+                <li><a href="Productos.html">
+                    <i class="ri-arrow-left-line"></i>
+                    Productos
+                </a></li>
+                <li><a href="Blog.html">Blog</a></li>
+                <li><a href="Contacto.html">Contacto</a></li>
+                <li>
+                    <a href="Carrito.html" class="cart-link">
+                        <i class="ri-shopping-cart-line"></i>
+                        Carrito 
+                        <span id="cart-badge" class="cart-badge">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <img src="imagenes/LogoHuertoHogar.png" alt="Logo de la tienda" class="logo">
+        <div class="breadcrumb-container">
+            <a href="Productos.html">Productos</a>
+            <i class="ri-arrow-right-s-line"></i>
+            <span id="breadcrumb-category">Frutas Frescas</span>
+            <i class="ri-arrow-right-s-line"></i>
+            <span id="breadcrumb-product">Producto</span>
+        </div>
+    </nav>
+
+    <!-- HH-003: ARIA live region para mensajes dinámicos -->
+    <div id="aria-live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+    <div id="aria-live-assertive" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <section class="product-detail-section">
+            <div class="product-detail-container">
+                
+                <!-- Galería de Imágenes -->
+                <div class="product-gallery">
+                    <div class="main-image">
+                        <img id="main-product-image" src="" alt="Producto" class="main-img">
+                        <div class="image-zoom-overlay">
+                            <i class="ri-zoom-in-line"></i>
+                            <span>Hacer clic para ampliar</span>
+                        </div>
+                    </div>
+                    <div class="thumbnail-gallery">
+                        <!-- Las thumbnails se cargarán dinámicamente -->
+                    </div>
+                </div>
+
+                <!-- Información del Producto -->
+                <div class="product-info">
+                    <div class="product-header">
+                        <span id="product-category" class="product-category-badge">Categoría</span>
+                        <h1 id="product-name" class="product-title">Nombre del Producto</h1>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-half-line"></i>
+                            </div>
+                            <span class="rating-text">(4.5/5 - 23 reseñas)</span>
+                        </div>
+                    </div>
+
+                    <div class="product-pricing">
+                        <span id="product-price" class="current-price">$0</span>
+                        <span class="price-unit">por kg</span>
+                        <div class="discount-badge" style="display: none;">
+                            <span>15% OFF</span>
+                        </div>
+                    </div>
+
+                    <div class="product-description">
+                        <h3>Descripción</h3>
+                        <p id="product-description-text">Descripción del producto...</p>
+                    </div>
+
+                    <div class="product-details">
+                        <h3>Detalles del Producto</h3>
+                        <div class="details-grid">
+                            <div class="detail-item">
+                                <span class="detail-label">Origen:</span>
+                                <span id="product-origin" class="detail-value">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Stock disponible:</span>
+                                <span id="product-stock" class="detail-value">-</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Prácticas:</span>
+                                <div id="product-practices" class="practices-list">
+                                    <!-- Se cargarán dinámicamente -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Selector de Cantidad y Botón Agregar -->
+                    <div class="purchase-section">
+                        <div class="quantity-selector">
+                            <label for="quantity-input">Cantidad:</label>
+                            <div class="quantity-controls">
+                                <button id="decrease-qty" class="qty-btn">
+                                    <i class="ri-subtract-line"></i>
+                                </button>
+                                <input 
+                                    type="number" 
+                                    id="quantity-input" 
+                                    value="1" 
+                                    min="1" 
+                                    max="999"
+                                    class="qty-input">
+                                <button id="increase-qty" class="qty-btn">
+                                    <i class="ri-add-line"></i>
+                                </button>
+                            </div>
+                            <span class="quantity-unit">kg</span>
+                        </div>
+
+                        <div class="purchase-actions">
+                            <button id="add-to-cart-btn" class="product-card__btn">
+                                <i class="ri-shopping-cart-line"></i>
+                                Agregar al Carrito
+                            </button>
+                            <button class="btn-buy-now">
+                                <i class="ri-flashlight-line"></i>
+                                Comprar Ahora
+                            </button>
+                        </div>
+
+                        <div class="total-preview">
+                            <span class="total-label">Total:</span>
+                            <span id="total-price" class="total-amount">$0</span>
+                        </div>
+                    </div>
+
+                    <!-- Información Adicional -->
+                    <div class="additional-info">
+                        <div class="info-item">
+                            <i class="ri-truck-line"></i>
+                            <div class="info-content">
+                                <h4>Envío Gratis</h4>
+                                <p>En compras superiores a $15.000</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="ri-refresh-line"></i>
+                            <div class="info-content">
+                                <h4>Garantía de Frescura</h4>
+                                <p>Productos frescos o te devolvemos el dinero</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="ri-time-line"></i>
+                            <div class="info-content">
+                                <h4>Entrega Rápida</h4>
+                                <p>Recibe tu pedido en 24-48 horas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Recetas Sugeridas -->
+        <section class="recipes-section">
+            <div class="recipes-container">
+                <h2>Recetas Recomendadas</h2>
+                <div id="recipes-grid" class="recipes-grid">
+                    <!-- Las recetas se cargarán dinámicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Productos Relacionados -->
+        <section class="related-products-section">
+            <div class="related-container">
+                <h2>Productos Relacionados</h2>
+                <div id="related-products" class="related-products-grid">
+                    <!-- Los productos relacionados se cargarán dinámicamente -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Imagen Ampliada -->
+    <div id="image-modal" class="image-modal" style="display: none;">
+        <div class="image-modal-content">
+            <button class="image-modal-close">
+                <i class="ri-close-line"></i>
+            </button>
+            <img id="modal-image" src="" alt="Imagen ampliada">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-contacto">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Verde & Natural</h3>
+                    <p>Tu tienda de confianza para productos frescos y naturales desde hace más de 20 años.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="ri-twitter-fill"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="Inicio.html">Inicio</a></li>
+                        <li><a href="Productos.html">Productos</a></li>
+                        <li><a href="Blog.html">Blog</a></li>
+                        <li><a href="Carrito.html">Carrito</a></li>
+                        <li><a href="Contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto Rápido</h4>
+                    <p><i class="ri-phone-line"></i> +56 9 1234 5678</p>
+                    <p><i class="ri-mail-line"></i> info@verdenatural.cl</p>
+                    <p><i class="ri-map-pin-line"></i> Av. Providencia 1234, Santiago</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Verde & Natural. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="js/detalle-producto.js"></script>
+</body>
+
+</html>

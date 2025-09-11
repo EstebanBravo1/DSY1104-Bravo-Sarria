@@ -5,56 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HuertoHogar - Frescura del campo a tu hogar</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/Sistema.css">
+    <link rel="stylesheet" href="css/contacto.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <!-- Navbar con logo y carrito según HH-010 -->
-            <div class="header-top">
-                <div class="logo-titulo">
-                    <div class="logo-fondo">
-                        <img src="imagenes/LogoHuertoHogar.png" alt="Logotipo Huerto Hogar" class="logo">
-                    </div>
-                    <h1>Huerto<span>Hogar</span></h1>
-                </div>
-
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="Inicio.html" class="nav-link active">Inicio</a></li>
-                        <li><a href="Productos.html" class="nav-link">Productos</a></li>
-                        <li><a href="Blog.html" class="nav-link">Blog</a></li>
-                        <li><a href="Contacto.html" class="nav-link">Contacto</a></li>
-                        <li><a href="Carrito.html" class="nav-link">Carrito</a></li>
-                    </ul>
-                </nav>
-
+    <div class="container-full">
+        <!-- Menú igual a Productos.html, barra de búsqueda y acciones de usuario conservadas -->
+        <nav class="menu-principal">
+            <div class="menu-principal-container">
+                <a href="Inicio.html" class="logo-link">
+                    <img src="imagenes/LogoHuertoHogar.png" alt="Logo de la tienda" class="nav__logo">
+                </a>
+                <ul>
+                    <li><a href="Inicio.html" class="nav-link active">Inicio</a></li>
+                    <li><a href="Productos.html" class="nav-link">Productos</a></li>
+                    <li><a href="Blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="Contacto.html" class="nav-link">Contacto</a></li>
+                </ul>
                 <div class="header-actions">
-                    <div class="search-bar-container">
-                        <input type="text" placeholder="Buscar productos..." class="search-bar" aria-label="Buscar productos">
-                        <button type="submit" class="search-btn">Buscar</button>
-                    </div>
-
+                    <a href="Carrito.html" class="cart-link" style="margin-left:0.7rem;display:flex;align-items:center;">
+                        <i class="ri-shopping-cart-line"></i>
+                        <span id="cart-badge" class="cart-badge">0</span>
+                    </a>
                     <div class="user-actions">
-                        <a href="Usuarios/Login.html" class="btn-login-header">Iniciar Sesión</a>
-                        <a href="Usuarios/Register.html" class="btn-register-header">Regístrate</a>
-                    </div>
-
-                    <div class="cart-container">
-                        <button class="cart-btn" aria-label="Carrito de compras">
-                            <span class="cart-icon">🛒</span>
-                            <span class="cart-badge" id="cart-count">0</span>
-                        </button>
+                        <a href="Login.html" class="btn-login-header">Iniciar Sesión</a>
+                        <a href="Register.html" class="btn-register-header">Regístrate</a>
                     </div>
                 </div>
+        </div>
+    </nav>
 
-                <button class="mobile-menu-toggle" aria-label="Abrir menú">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+    <!-- Barra de búsqueda como bloque independiente -->
+    <div class="search-bar-block">
+        <form class="search-bar-container" style="max-width:420px;margin:1.2rem auto 1.7rem auto;display:flex;">
+            <input type="text" placeholder="Buscar productos..." class="search-bar" aria-label="Buscar productos">
+            <button type="submit" class="search-btn">Buscar</button>
+        </form>
+    </div>
             </div>
+        </nav>
 
             <!-- Hero section según HH-011 -->
             <section class="hero">
@@ -110,8 +101,44 @@
             </section>
         </main>
         
-        <footer>
-            <p>&copy; 2024 HuertoHogar - Frescura del campo a tu hogar. Todos los derechos reservados.</p>
+        <!-- Footer -->
+        <footer class="footer-contacto">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Verde & Natural</h3>
+                        <p>Tu tienda de confianza para productos frescos y naturales desde hace más de 20 años.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="ri-twitter-fill"></i></a>
+                            <a href="#" aria-label="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Enlaces Rápidos</h4>
+                        <ul>
+                            <li><a href="Inicio.html">Inicio</a></li>
+                            <li><a href="Productos.html">Productos</a></li>
+                            <li><a href="Blog.html">Blog</a></li>
+                            <li><a href="Carrito.html">Carrito</a></li>
+                            <li><a href="Contacto.html">Contacto</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Contacto Rápido</h4>
+                        <p><i class="ri-phone-line"></i> +56 9 1234 5678</p>
+                        <p><i class="ri-mail-line"></i> info@verdenatural.cl</p>
+                        <p><i class="ri-map-pin-line"></i> Av. Providencia 1234, Santiago</p>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Verde & Natural. Todos los derechos reservados.</p>
+                </div>
+            </div>
         </footer>
     </div>
 
