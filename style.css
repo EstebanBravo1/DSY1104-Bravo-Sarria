@@ -28,3 +28,87 @@
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--heading-font);
 }
+
+/*=============== ACCESSIBILITY & FOCUS PATTERNS ===============*/
+/* HH-003: Patrones de foco accesible y navegación por teclado */
+
+/* Focus visible mejorado - Solo se muestra con navegación por teclado */
+*:focus-visible {
+  outline: 2px solid var(--home-color1);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Foco para botones */
+button:focus-visible,
+.btn:focus-visible,
+.filter-btn:focus-visible {
+  outline: 2px solid var(--home-color1);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(46, 139, 87, 0.2);
+}
+
+/* Foco para enlaces */
+a:focus-visible {
+  outline: 2px solid var(--home-color1);
+  outline-offset: 2px;
+  text-decoration: underline;
+}
+
+/* Foco para formularios - Más visible */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--home-color1);
+  outline-offset: 2px;
+  border-color: var(--home-color1);
+  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+}
+
+/* Estados de error accesibles */
+.error {
+  color: #d32f2f;
+  border-color: #d32f2f !important;
+}
+
+.error:focus-visible {
+  outline-color: #d32f2f;
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
+}
+
+/* Elementos interactivos accesibles */
+.product-card:focus-within,
+.cart-item:focus-within {
+  outline: 2px solid var(--home-color1);
+  outline-offset: 2px;
+}
+
+/* Skip links para navegación por teclado */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--home-color1);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Indicadores de estado para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
