@@ -23,15 +23,12 @@ body {
     background-size: cover;
     background-position: center;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .container-login {
     max-width: 450px;
     width: 100%;
-    margin: 2rem;
+    margin: 3rem auto 2rem auto;
     padding: 2.5rem;
     background: white;
     border-radius: 10px;
