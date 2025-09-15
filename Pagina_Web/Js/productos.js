@@ -170,3 +170,19 @@ const renderFilters = ()=>{
 
 renderFilters();
 renderProducts(productos);
+
+// Hacer funciones y datos accesibles globalmente para el buscador
+// Esperamos un poco para asegurarnos de que todo esté cargado
+setTimeout(() => {
+    window.renderProducts = renderProducts;
+    window.allProducts = productos;
+    window.productos = productos;
+    window.categorias = categorias;
+    console.log('✅ Productos disponibles globalmente:', productos.length);
+    console.log('✅ Función renderProducts disponible:', typeof window.renderProducts);
+    
+    // Disparar evento personalizado para notificar que productos.js está listo
+    window.dispatchEvent(new CustomEvent('productosReady', {
+        detail: { productos, renderProducts, categorias }
+    }));
+}, 100);

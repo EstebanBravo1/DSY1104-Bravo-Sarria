@@ -7,6 +7,101 @@
   padding-bottom: 0.5rem;
   margin-bottom: 0.5rem;
 }
+
+.search-bar-container {
+  display: flex;
+  gap: 0;
+  border: 2px solid var(--home-color1);
+  border-radius: 25px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  max-width: 420px;
+  margin: 1.2rem auto 1.7rem auto;
+}
+
+.search-bar {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+}
+
+.search-bar::placeholder {
+  color: #999;
+}
+
+.search-btn {
+  padding: 12px 24px;
+  background: var(--home-color1);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.search-btn:hover {
+  background: var(--first-color-alt);
+}
+
+/* Estilos para las sugerencias de búsqueda */
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.suggestion-item:hover {
+  background: #f8f9fa;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.suggestion-item div {
+  flex: 1;
+}
+
+.suggestion-item div:first-of-type {
+  font-weight: 500;
+  color: #333;
+}
+
+.suggestion-item div:last-of-type {
+  font-size: 0.85rem;
+  color: #666;
+}
 .menu-principal .nav__logo {
   width: 210px;
   height: auto;
@@ -39,11 +134,12 @@
 }
 /* Ancho completo para páginas que lo requieran */
 .container-full {
-  width: 100vw;
-  min-width: 100vw;
+  width: 100%;
+  max-width: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 /*=============== GOOGLE FONTS ===============*/
 /*REQUERIMIENTO HH-002 */
@@ -58,6 +154,7 @@
 
     --home-color:#F7F7F7;
     --home-color1: #2E8B57;
+    --home-color1-rgb: 46, 139, 87;
     --home-color2:#FFD700;
     --home-color3:#8B4513;
     --home-color4:#333333;
@@ -2209,4 +2306,100 @@ footer p {
   .btn-producto {
     flex: 1;
   }
+}
+
+/* Estilos para la sección de productos destacados */
+.featured-products {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featured-products h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--title-color);
+  font-size: var(--h1-font-size);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Ajuste para que las product-card tengan la misma altura en el grid */
+.products-grid .product-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.products-grid .product-card__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.products-grid .product-card__btn {
+  margin-top: auto; /* Empuja el botón hacia abajo */
+}
+
+/* Responsive para productos destacados */
+@media screen and (min-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .featured-products {
+    padding: 3rem 2rem;
+  }
+}
+
+/* Estilos para resultados de búsqueda */
+.search-results-indicator {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #6c757d;
+}
+
+.search-results-indicator h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--title-color);
+  font-size: 1.1rem;
+}
+
+.search-results-indicator p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.clear-search-btn {
+  background: var(--home-color1);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.clear-search-btn:hover {
+  background: var(--home-color2);
 }

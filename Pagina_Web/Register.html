@@ -3,27 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HuertoHogar - Crear Cuenta</title>
+    <title>Crear Cuenta - HuertoHogar</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Sistema.css">
     <link rel="stylesheet" href="css/Register.css">
 </head>
 <body>
-    <!-- Navegación principal -->
-    <nav class="menu-principal">
-        <div class="menu-principal-container">
-            <a href="Inicio.html" class="logo-link">
-                <img src="imagenes/LogoHuertoHogar.png" alt="Logo de la tienda" class="nav__logo">
-            </a>
-            <ul>
-                <li><a href="Inicio.html">Inicio</a></li>
-                <li><a href="Productos.html">Productos</a></li>
-                <li><a href="Blog.html">Blog</a></li>
-                <li><a href="Contacto.html">Contacto</a></li>
-                <li><a href="Carrito.html" class="cart-link"><i class="ri-shopping-cart-line"></i> Carrito</a></li>
-            </ul>
+    <div class="container-full">
+        <!-- Menú igual a Inicio.html -->
+        <nav class="menu-principal">
+            <div class="menu-principal-container">
+                <a href="Inicio.html" class="logo-link">
+                    <img src="imagenes/LogoHuertoHogar.png" alt="Logo de la tienda" class="nav__logo">
+                </a>
+                <ul>
+                    <li><a href="Inicio.html" class="nav-link">Inicio</a></li>
+                    <li><a href="Productos.html" class="nav-link">Productos</a></li>
+                    <li><a href="Blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="Contacto.html" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="header-actions">
+                    <a href="Carrito.html" class="cart-link" style="margin-left:0.7rem;display:flex;align-items:center;">
+                        <i class="ri-shopping-cart-line"></i>
+                        <span>Carrito</span>
+                        <span id="cart-badge" class="cart-badge">0</span>
+                    </a>
+                    <div class="user-actions">
+                        <a href="Login.html" class="btn-login-header">Iniciar Sesión</a>
+                        <a href="Register.html" class="btn-register-header active">Regístrate</a>
+                    </div>
+                </div>
         </div>
     </nav>
+
+    <!-- Barra de búsqueda como bloque independiente -->
+    <div class="search-bar-block">
+        <form class="search-bar-container">
+            <input type="text" placeholder="Buscar productos..." class="search-bar" aria-label="Buscar productos">
+            <button type="submit" class="search-btn">Buscar</button>
+        </form>
+    </div>
+            </div>
+        </nav>
     <div class="container-registro">
         <div class="logo-titulo">
             <div class="logo-fondo">
@@ -132,5 +155,6 @@
         </div>
     </footer>
     <script src="js/UserRegister.js"></script>
+    <script src="js/search-simple.js"></script>
 </body>
 </html>

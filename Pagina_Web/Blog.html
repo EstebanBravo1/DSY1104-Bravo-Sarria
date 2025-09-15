@@ -3,45 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog de Recetas - Verde & Natural</title>
-    
-    <!-- CSS -->
+    <title>Blog - HuertoHogar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Sistema.css">
     <link rel="stylesheet" href="css/contacto.css">
-    
-    <!-- Box Icons -->
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="imagenes/favicon.png" type="image/x-icon">
 </head>
 <body>
-    <!-- Skip Links para accesibilidad HH-003 -->
-    <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
-    <a href="#menu-navegacion" class="skip-link">Saltar a navegación</a>
-    
-    <!-- ARIA Live Regions para HH-003 -->
-    <div aria-live="polite" aria-atomic="true" class="sr-only" id="announcements"></div>
-
-    <!--==================== HEADER ====================-->
-    <nav class="menu-principal" id="menu-navegacion">
-        <div class="menu-principal-container">
-            <a href="Inicio.html" class="logo-link">
-                <img src="imagenes/LogoHuertoHogar.png" alt="Verde & Natural Logo" class="nav__logo">
-            </a>
-            
-            <ul>
-                <li><a href="Inicio.html">Inicio</a></li>
-                <li><a href="Productos.html">Productos</a></li>
-                <li><a href="Blog.html" aria-current="page">Blog</a></li>
-                <li><a href="Contacto.html">Contacto</a></li>
-                <li><a href="Carrito.html">
-                    <i class='bx bx-cart'></i>
-                    Carrito (<span id="cart-count">0</span>)
-                </a></li>
-            </ul>
+    <div class="container-full">
+        <!-- Menú igual a Inicio.html -->
+        <nav class="menu-principal">
+            <div class="menu-principal-container">
+                <a href="Inicio.html" class="logo-link">
+                    <img src="imagenes/LogoHuertoHogar.png" alt="Logo de la tienda" class="nav__logo">
+                </a>
+                <ul>
+                    <li><a href="Inicio.html" class="nav-link">Inicio</a></li>
+                    <li><a href="Productos.html" class="nav-link">Productos</a></li>
+                    <li><a href="Blog.html" class="nav-link active">Blog</a></li>
+                    <li><a href="Contacto.html" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="header-actions">
+                    <a href="Carrito.html" class="cart-link" style="margin-left:0.7rem;display:flex;align-items:center;">
+                        <i class="ri-shopping-cart-line"></i>
+                        <span>Carrito</span>
+                        <span id="cart-badge" class="cart-badge">0</span>
+                    </a>
+                    <div class="user-actions">
+                        <a href="Login.html" class="btn-login-header">Iniciar Sesión</a>
+                        <a href="Register.html" class="btn-register-header">Regístrate</a>
+                    </div>
+                </div>
         </div>
     </nav>
+
+    <!-- Barra de búsqueda como bloque independiente -->
+    <div class="search-bar-block">
+        <form class="search-bar-container">
+            <input type="text" placeholder="Buscar productos..." class="search-bar" aria-label="Buscar productos">
+            <button type="submit" class="search-btn">Buscar</button>
+        </form>
+    </div>
+            </div>
+        </nav>
 
     <!--==================== MAIN ====================-->
     <main class="main" id="contenido-principal">
@@ -220,5 +225,6 @@
 
     <!--==================== JAVASCRIPT ====================-->
     <script type="module" src="js/blog.js"></script>
+    <script src="js/search-simple.js"></script>
 </body>
 </html>

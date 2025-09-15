@@ -1,51 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <title>Productos - HuertoHogar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Sistema.css">
     <link rel="stylesheet" href="css/contacto.css">
 </head>
-
 <body>
-    <!-- HH-003: Skip links para navegación por teclado -->
-    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
-    <a href="#product-filters" class="skip-link">Ir a filtros</a>
-    <a href="#product-grid" class="skip-link">Ir a productos</a>
-    
-    <!-- Navegación -->
-    <nav class="menu-principal">
-        <div class="menu-principal-container">
-            <a href="Inicio.html" class="logo-link">
-                <img src="imagenes/LogoHuertoHogar.png" alt="Logo de la tienda" class="nav__logo">
-            </a>
-            <ul>
-                <li><a href="Inicio.html">Inicio</a></li>
-                <li><a href="Productos.html">Productos</a></li>
-                <li><a href="Blog.html">Blog</a></li>
-                <li><a href="Contacto.html">Contacto</a></li>
-                <li>
-                    <a href="Carrito.html" class="cart-link">
+    <div class="container-full">
+        <!-- Menú igual a Inicio.html -->
+        <nav class="menu-principal">
+            <div class="menu-principal-container">
+                <a href="Inicio.html" class="logo-link">
+                    <img src="imagenes/LogoHuertoHogar.png" alt="Logo de la tienda" class="nav__logo">
+                </a>
+                <ul>
+                    <li><a href="Inicio.html" class="nav-link">Inicio</a></li>
+                    <li><a href="Productos.html" class="nav-link active">Productos</a></li>
+                    <li><a href="Blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="Contacto.html" class="nav-link">Contacto</a></li>
+                </ul>
+                <div class="header-actions">
+                    <a href="Carrito.html" class="cart-link" style="margin-left:0.7rem;display:flex;align-items:center;">
                         <i class="ri-shopping-cart-line"></i>
-                        Carrito 
+                        <span>Carrito</span>
                         <span id="cart-badge" class="cart-badge">0</span>
                     </a>
-                </li>
-            </ul>
+                    <div class="user-actions">
+                        <a href="Login.html" class="btn-login-header">Iniciar Sesión</a>
+                        <a href="Register.html" class="btn-register-header">Regístrate</a>
+                    </div>
+                </div>
         </div>
     </nav>
-    
-    <!-- HH-003: ARIA live region para mensajes dinámicos -->
-    <div id="aria-live-region" aria-live="polite" aria-atomic="true" class="sr-only"></div>
-    <div id="aria-live-assertive" aria-live="assertive" aria-atomic="true" class="sr-only"></div>
-    
-    <header>
-        <h1>Catálogo de Productos</h1>
-    </header>
+
+    <!-- Barra de búsqueda como bloque independiente -->
+    <div class="search-bar-block">
+        <form class="search-bar-container">
+            <input type="text" placeholder="Buscar productos..." class="search-bar" aria-label="Buscar productos">
+            <button type="submit" class="search-btn">Buscar</button>
+        </form>
+    </div>
+            </div>
+        </nav>
     <main class="main" id="main-content">
         <section class="home section" id="home">
             <div class="home__container container grid">
@@ -119,6 +120,14 @@
 
     <script src="js/script.js"></script>
     <script type="module" src="js/productos.js"></script>
+    <script>
+        // Cargar búsqueda después de que productos.js esté listo
+        setTimeout(() => {
+            const script = document.createElement('script');
+            script.src = 'js/search-simple.js';
+            document.head.appendChild(script);
+        }, 300);
+    </script>
 </body>
 
 </html>

@@ -27,6 +27,7 @@
                 <div class="header-actions">
                     <a href="Carrito.html" class="cart-link" style="margin-left:0.7rem;display:flex;align-items:center;">
                         <i class="ri-shopping-cart-line"></i>
+                        <span>Carrito</span>
                         <span id="cart-badge" class="cart-badge">0</span>
                     </a>
                     <div class="user-actions">
@@ -39,7 +40,7 @@
 
     <!-- Barra de búsqueda como bloque independiente -->
     <div class="search-bar-block">
-        <form class="search-bar-container" style="max-width:420px;margin:1.2rem auto 1.7rem auto;display:flex;">
+        <form class="search-bar-container">
             <input type="text" placeholder="Buscar productos..." class="search-bar" aria-label="Buscar productos">
             <button type="submit" class="search-btn">Buscar</button>
         </form>
@@ -52,10 +53,10 @@
                 <div class="hero-content">
                     <h2 class="hero-title">Frescura y naturalidad</h2>
                     <p class="hero-subtitle">Productos orgánicos directamente del campo a tu hogar</p>
-                    <a href="Alvaro/Productos.html" class="hero-cta">Ver catálogo</a>
+                    <a href="Productos.html" class="hero-cta">Ver catálogo</a>
                 </div>
                 <div class="hero-image">
-                    <img src="Imágenes/Imagen_Principal.png" alt="Imagen de presentación de HuertoHogar" class="presentacion">
+                    <img src="imagenes/Imagen_Principal.png" alt="Imagen de presentación de HuertoHogar" class="presentacion">
                 </div>
             </section>
         </header>
@@ -65,25 +66,37 @@
             <section class="featured-categories">
                 <h2>Categorías destacadas</h2>
                 <div class="categories-grid">
-                    <a href="#productos?cat=frutas" class="category-tile">
+                    <a href="Productos.html" class="category-tile">
+                        <div class="category-icon">
+                            <i class="ri-apple-line"></i>
+                        </div>
                         <div class="category-content">
                             <h3>Frutas Frescas</h3>
                             <p>Descubre nuestra selección de frutas de temporada</p>
                         </div>
                     </a>
-                    <a href="#productos?cat=verduras" class="category-tile">
+                    <a href="Productos.html" class="category-tile">
+                        <div class="category-icon">
+                            <i class="ri-plant-line"></i>
+                        </div>
                         <div class="category-content">
                             <h3>Verduras Orgánicas</h3>
                             <p>Verduras cultivadas sin pesticidas</p>
                         </div>
                     </a>
-                    <a href="#productos?cat=organicos" class="category-tile">
+                    <a href="Productos.html" class="category-tile">
+                        <div class="category-icon">
+                            <i class="ri-leaf-line"></i>
+                        </div>
                         <div class="category-content">
                             <h3>Productos Orgánicos</h3>
                             <p>Alimentos 100% naturales y ecológicos</p>
                         </div>
                     </a>
-                    <a href="#productos?cat=lacteos" class="category-tile">
+                    <a href="Productos.html" class="category-tile">
+                        <div class="category-icon">
+                            <i class="ri-drop-line"></i>
+                        </div>
                         <div class="category-content">
                             <h3>Lácteos</h3>
                             <p>Productos lácteos frescos y naturales</p>
@@ -142,156 +155,8 @@
         </footer>
     </div>
 
-    <script>
-        // Datos de ejemplo para productos destacados (según HH-101)
-        const featuredProducts = [
-            {
-                code: "FR001",
-                name: "Manzanas Fuji",
-                category: "Frutas Frescas",
-                price: 1990,
-                stock: 50,
-                image: "Imágenes/Manzanas_Fuji.jpg",
-                featured: true
-            },
-            {
-                code: "FR002",
-                name: "Naranjas Valencia",
-                category: "Frutas Frescas",
-                price: 1590,
-                stock: 40,
-                image: "Imágenes/Naranjas_Valencia.jpg",
-                featured: true
-            },
-            {
-                code: "FR003",
-                name: "Plátanos Cavendish",
-                category: "Frutas Frescas",
-                price: 1290,
-                stock: 60,
-                image: "Imágenes/Platanos_Cavendish.jpg",
-                featured: true
-            },
-            {
-                code: "VR001",
-                name: "Zanahorias Orgánicas",
-                category: "Verduras Orgánicas",
-                price: 990,
-                stock: 30,
-                image: "Imágenes/Zanahorias_Organicas.jpg",
-                featured: true
-            },
-            {
-                code: "VR002",
-                name: "Lechuga Romana",
-                category: "Verduras Orgánicas",
-                price: 890,
-                stock: 25,
-                image: "Imágenes/Lechuga_Romana.jpg",
-                featured: true
-            },
-            {
-                code: "OR001",
-                name: "Miel Orgánica",
-                category: "Productos Orgánicos",
-                price: 4990,
-                stock: 20,
-                image: "Imágenes/Miel_Organica.png",
-                featured: true
-            },
-            {
-                code: "LA001",
-                name: "Leche Entera",
-                category: "Lácteos",
-                price: 1190,
-                stock: 35,
-                image: "Imágenes/Leche_Entera.jpg",
-                featured: true
-            },
-            {
-                code: "LA002",
-                name: "Yogur Natural",
-                category: "Lácteos",
-                price: 990,
-                stock: 40,
-                image: "Imágenes/Yogur_Natural.jpg",
-                featured: true
-            }
-        ];
-
-        // Función para formatear precios en CLP
-        function formatPrice(price) {
-            return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(price);
-        }
-
-        // Función para renderizar productos destacados
-        function renderFeaturedProducts() {
-            const container = document.getElementById('featured-products-container');
-            container.innerHTML = '';
-            
-            featuredProducts.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                productCard.innerHTML = `
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}">
-                        <span class="product-badge">${product.category}</span>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-name">${product.name}</h3>
-                        <p class="product-code">${product.code}</p>
-                        <p class="product-price">${formatPrice(product.price)}</p>
-                        <button class="btn-add-cart" data-product='${JSON.stringify(product)}'>Añadir</button>
-                    </div>
-                `;
-                container.appendChild(productCard);
-            });
-            
-            // Agregar event listeners a los botones de añadir al carrito
-            document.querySelectorAll('.btn-add-cart').forEach(button => {
-                button.addEventListener('click', function() {
-                    const product = JSON.parse(this.getAttribute('data-product'));
-                    addToCart(product);
-                });
-            });
-        }
-
-        // Función para añadir productos al carrito (simulación)
-        function addToCart(product) {
-            // Simulación de añadir al carrito
-            const cartCount = document.getElementById('cart-count');
-            let count = parseInt(cartCount.textContent);
-            count++;
-            cartCount.textContent = count;
-            
-            // Mostrar feedback visual
-            const button = event.target;
-            button.textContent = '✓ Añadido';
-            button.disabled = true;
-            
-            setTimeout(() => {
-                button.textContent = 'Añadir';
-                button.disabled = false;
-            }, 1500);
-            
-            console.log('Producto añadido al carrito:', product);
-        }
-
-        // Inicializar cuando el DOM esté cargado
-        document.addEventListener('DOMContentLoaded', function() {
-            renderFeaturedProducts();
-            
-            // Manejar el menú móvil
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            const mainNav = document.querySelector('.main-nav');
-            
-            if (menuToggle && mainNav) {
-                menuToggle.addEventListener('click', function() {
-                    mainNav.classList.toggle('active');
-                    menuToggle.classList.toggle('active');
-                });
-            }
-        });
-    </script>
+    
+    <script src="js/search-simple.js"></script>
+    <script type="module" src="js/featured-products.js"></script>
 </body>
 </html>

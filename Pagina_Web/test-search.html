@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Búsqueda</title>
+    <style>
+        .search-bar-container {
+            position: relative;
+            margin: 50px auto;
+            width: 400px;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 0 0 8px 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 9999;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .suggestion-item {
+            padding: 10px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            background: white;
+        }
+        .suggestion-item:hover {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test de Búsqueda</h1>
+    
+    <div class="search-bar-container">
+        <input type="text" placeholder="Buscar productos... (escribe 'n')" class="search-bar">
+    </div>
+    
+    <div id="debug-info" style="margin: 20px auto; width: 400px; background: #f0f0f0; padding: 10px; border-radius: 5px;"></div>
+
+    <script>
+        console.log('🚀 Iniciando test de búsqueda...');
+        
+        // Productos de prueba
+        const productos = [
+            {codigo: 'FR001', nombre: 'Naranjas Valencia', precio: 1500, imagen: 'imagenes/Naranjas_Valencia.jpg'},
+            {codigo: 'FR002', nombre: 'Manzanas Fuji', precio: 1200, imagen: 'imagenes/Manzanas_Fuji.jpg'},
+            {codigo: 'VE001', nombre: 'Lechuga Romana', precio: 800, imagen: 'imagenes/Lechuga_Romana.jpg'}
+        ];
+        
+        const searchInput = document.querySelector('.search-bar');
+        const debugInfo = document.getElementById('debug-info');
+        const searchContainer = searchInput.closest('.search-bar-container');
+        
+        // Crear contenedor de sugerencias
+        const suggestionsContainer = document.createElement('div');
+        suggestionsContainer.className = 'search-suggestions';
+        searchContainer.appendChild(suggestionsContainer);
+        
+        function updateDebug(message) {
+            debugInfo.innerHTML += message + '<br>';
+            console.log(message);
+        }
+        
+        updateDebug('✅ Elementos encontrados y configurados');
+        updateDebug(`📦 ${productos.length} productos cargados`);
+        
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase().trim();
+            updateDebug(`🔍 Búsqueda: "${query}"`);
+            
+            if (query.length === 0) {
+                suggestionsContainer.style.display = 'none';
+                return;
+            }
+            
+            const matches = productos.filter(producto => 
+                producto.nombre.toLowerCase().includes(query)
+            );
+            
+            updateDebug(`📊 ${matches.length} productos encontrados`);
+            
+            if (matches.length === 0) {
+                suggestionsContainer.style.display = 'none';
+                return;
+            }
+            
+            const html = matches.map(producto => `
+                <div class="suggestion-item" onclick="alert('Seleccionaste: ${producto.nombre}')">
+                    <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px; margin-right: 10px;">
+                    <div>
+                        <div style="font-weight: 500;">${producto.nombre}</div>
+                        <div style="font-size: 0.85rem; color: #666;">$${producto.precio.toLocaleString('es-CL')}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            suggestionsContainer.innerHTML = html;
+            suggestionsContainer.style.display = 'block';
+            
+            updateDebug('✅ Sugerencias mostradas');
+        });
+        
+        updateDebug('🎯 Listo para probar! Escribe "n" en el campo de búsqueda');
+    </script>
+</body>
+</html>

@@ -1,5 +1,4 @@
 
-
 // HH-100 ACA DEFINIMOS LAS CATEGORIAS DE PRODUCTOS 
 export const categorias =[
     {id: 'FR', nombre:'Frutas Frescas', descripcion: 'Las mejores frutas de temporada, directo del campo'},
@@ -37,7 +36,7 @@ export const productos = [
         descripcion: 'Naranjas valencia dulces y jugosas, perfectas para zumos naturales.',
         practicas:['Comercio justo','Cultivo sostenible'],
         recetas: ['Batido de naranja', 'Mermelada'],
-    imagen: 'imagenes/Naranjas_Valencia.jpg'
+        imagen: 'imagenes/Naranjas_Valencias.png'
     },
     {
         codigo: 'FR003',
@@ -49,7 +48,7 @@ export const productos = [
     descripcion: 'Plátanos Cavendish frescos y dulces, perfectos para snacks y postres.',
     practicas: ['Cultivo sostenble', 'Bajo en pesticidas'],
     recetas: ['Smoothie de platano', 'Pan de platano'],
-    imagen: 'imagenes/Platanos_Cavendish.jpg'
+    imagen: 'imagenes/Platano_Cavendish.png'
     },
     {
         // VERDURAS
@@ -62,7 +61,7 @@ export const productos = [
         descripcion: 'Zanahorias organicas, crocantes y dulces, cultivadas sin pesticidad ni quimicos.',
         practicas: ['Cultivo sostenible', 'Bajo en pesticidas'],
         recetas: ['Crema de zanahoria', 'Zanahorias asadas'],
-    imagen: 'imagenes/Zanahorias_Organicas.jpg'
+    imagen: 'imagenes/Zanahorias_Organicas.png'
     },
     {
         codigo: 'VE002',
@@ -74,7 +73,7 @@ export const productos = [
         descripcion: 'Espinacas frescas y tiernas, ricas en hierro y vitaminas.',
         practicas: ['Cultivo sostenible', 'Bajo en pesticidas'],
         recetas: ['Ensalada de espinacas', 'Smoothie verde'],
-    imagen: 'imagenes/Espinacas_Frescas.jpg'
+    imagen: 'imagenes/Espinacas_Frescas.png'
     },
     {
         codigo: 'VE003',
@@ -86,7 +85,7 @@ export const productos = [
         descripcion: 'Pimientos rojos, verdes y amarillos, ideales para ensaladas y salteados.',
         practicas: ['Cultivo sostenible', 'Bajo en pesticidas'],
         recetas: ['Pimientos asados', 'Ensalada de pimientos'],
-    imagen: 'imagenes/Pimientos_Tricolores.jpg'
+    imagen: 'imagenes/Piminetos_Tricolores.png'
     },
     {
         // PRODUCTOS ORGANICOS
@@ -125,7 +124,7 @@ export const productos = [
         descripcion: 'Leche fresca entera, libre de pastoreo y aditivos',
         practicas: ['Libre de hormonas', 'Alimentacion natural'],
         recetas: ['Café con leche', 'Batido de frutas'],
-    imagen: 'imagenes/Leche_Entera.jpg'
+    imagen: 'imagenes/Leche_Entera.png'
     },
 
 ];
