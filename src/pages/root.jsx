@@ -1,16 +1,12 @@
-import { NavLink, Outlet, useNavigation } from "react-router"
-
-import "./root.css"
-import NavBarRoot from "../components/root/NavBarRoot"
+import { Outlet, useNavigation } from "react-router"
 
 export default function Root() {
   const navigation = useNavigation()
   const isLoading = navigation.state === "loading"
 
   return (
-    <div className="root-layout">
-      <NavBarRoot />
-      <main className="main-content">
+    <div >
+      <main>
         {isLoading ? (
           <div className="loading-container">
             <p>Cargando...</p>
@@ -19,9 +15,6 @@ export default function Root() {
           <Outlet />
         )}
       </main>
-      <footer>
-        Soy el footer
-      </footer>
     </div>
   )
 }
