@@ -1,12 +1,14 @@
 import { Outlet, useNavigation } from "react-router"
+import NavBarRoot from "../components/root/NavBarRoot"
 
 export default function Root() {
   const navigation = useNavigation()
   const isLoading = navigation.state === "loading"
 
   return (
-    <div >
+    <>
       <main>
+        <NavBarRoot />
         {isLoading ? (
           <div className="loading-container">
             <p>Cargando...</p>
@@ -15,6 +17,6 @@ export default function Root() {
           <Outlet />
         )}
       </main>
-    </div>
+    </>
   )
 }
