@@ -1,5 +1,5 @@
 import { Outlet, useNavigation } from "react-router"
-import NavBarRoot from "../components/root/NavBarRoot"
+import NavBarRoot from "../../components/root/NavBarRoot"
 
 export default function Root() {
   const navigation = useNavigation()
