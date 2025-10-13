@@ -1,5 +1,7 @@
+import React from "react"
 import { Outlet, useNavigation } from "react-router"
-import NavBarRoot from "../../components/root/NavBarRoot"
+import NavBarRoot from "../components/root/NavBarRoot"
+import Header from "../components/Header"
 
 export default function Root() {
   const navigation = useNavigation()
@@ -8,7 +10,7 @@ export default function Root() {
   return (
     <>
       <main>
-        <NavBarRoot />
+        <Header />
         {isLoading ? (
           <div className="loading-container">
             <p>Cargando...</p>
