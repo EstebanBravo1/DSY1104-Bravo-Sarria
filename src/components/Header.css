@@ -10,8 +10,8 @@
   z-index: 1000;
 }
 
-.logo h2 {
-  color: #333;
+.logo h1 {
+  color: #2E8B57;
   margin: 0;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .nav-list a:hover {
-  color: #667eea;
+  color: #333;
 }
 
 .login-btn {
@@ -104,8 +104,8 @@
   }
 
   .nav-list a.active {
-  color: #667eea;
+  color: #FFD700;
   font-weight: 600;
   }
-  
+
 }

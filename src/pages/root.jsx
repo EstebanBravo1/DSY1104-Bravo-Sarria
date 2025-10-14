@@ -1,6 +1,5 @@
 import React from "react"
 import { Outlet, useNavigation } from "react-router"
-import NavBarRoot from "../components/root/NavBarRoot"
 import Header from "../components/Header"
 
 export default function Root() {
