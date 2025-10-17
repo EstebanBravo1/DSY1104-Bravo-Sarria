@@ -1,55 +1,47 @@
-import React, { useState} from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+import logo from '../../public/assets/LogoHuertoHogar.png';
 import './Header.css';
 
 export default function Header() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const location = useLocation();
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    }
-
-    const isActive = (path) => {
-        return location.pathname === path ? 'active' : '';
-    }
-
-    return (
-        <header className="header">
-            <div className="logo">
-                <Link to="/">
-                    <h1>Huerto Hogar</h1>
-                </Link>
-            </div>
-
-            <nav className="nav">
-                <ul className="nav-list">
-                    <li><Link to="/" className={isActive('/')}>Inicio</Link></li>
-                    <li><Link to="/productos" className={isActive('/productos')}>Productos</Link></li>
-                    <li><Link to="/blog" className={isActive('/blog')}>Blog</Link></li>
-                    <li><Link to="/contacto" className={isActive('/contacto')}>Contacto</Link></li>
-                </ul>
-            </nav>
-
-            <button className="menu-toggle" onClick={toggleMenu}>
-                ☰
-            </button>
-
-
-            <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-                <ul className="mobile-nav-list">
-                    <li><Link to="/" className={isActive('/')} onClick={toggleMenu}>Inicio</Link></li>
-                    <li><Link to="/productos" className={isActive('/productos')} onClick={toggleMenu}>Productos</Link></li>
-                    <li><Link to="/blog" className={isActive('/blog')} onClick={toggleMenu}>Blog</Link></li>
-                    <li><Link to="/contacto" className={isActive('/contacto')} onClick={toggleMenu}>Contacto</Link></li>
-                </ul>
-            </div>
-
-            <div className='header-actions'>
-                <Link to="/login" className="login-button">Iniciar Sesión</Link>
-                <Link to="/register" className="register-button">Registrarse</Link>
-                <Link to="/cart" className="cart-button">🛒</Link>
-            </div>
-        </header>
-    )
+  return (
+    <header>
+      <Navbar bg="light" expand="md" fixed="top" className="custom-navbar">
+        <Container>
+          <Navbar.Brand href="/"><img src={logo} alt="Huerto Hogar Logo" className="logo"/></Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              <LinkContainer to="/productos">
+                <Nav.Link>Productos</Nav.Link>
+              </LinkContainer>
+              <NavDropdown title="Categorías" id="basic-nav-dropdown">
+                <LinkContainer to="/categoria/verduras">
+                  <NavDropdown.Item>Verduras</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to="/categoria/frutas">
+                  <NavDropdown.Item>Frutas</NavDropdown.Item>
+                </LinkContainer>
+              </NavDropdown>
+              <LinkContainer to="/contacto">
+                <Nav.Link>Contacto</Nav.Link>
+              </LinkContainer>
+            </Nav>
+            <Nav>
+              <LinkContainer to="/login">
+                <Nav.Link className="login-btn">Iniciar Sesión</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/register">
+                <Nav.Link className="register-btn">Registrarse</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/cart">
+                <Nav.Link className="cart-btn">🛒 Carrito</Nav.Link>
+              </LinkContainer>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </header>
+  );
 }
