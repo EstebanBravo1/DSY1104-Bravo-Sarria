@@ -1,35 +1,62 @@
 /* Header.css */
+.logo {
+  height: 80px;
+  cursor: pointer;
+}
 
 .custom-navbar {
-  background-color: #2a9d8f !important;  /* color de fondo verde azulado */
+  background-color: #2a9d8f !important;  
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 .custom-navbar .navbar-brand {
-  color: #e9c46a !important;  /* color dorado */
+  color: #e9c46a !important;  
   font-weight: 700;
   font-size: 1.8rem;
   letter-spacing: 2px;
 }
 
 .custom-navbar .nav-link {
-  color: #f4f1de !important; /* color crema claro */
+  color: #f4f1de !important; 
   font-weight: 500;
   margin-right: 1rem;
   transition: color 0.3s ease;
+  background-color: green;
+  border-radius: 24px;
 }
 
 .custom-navbar .nav-link:hover,
 .custom-navbar .nav-link:focus {
-  color: #e76f51 !important; /* color naranja en hover */
+  background-color: gold !important; 
 }
 
 .custom-navbar .navbar-toggler {
-  border-color: #e9c46a !important; /* borde dorado */
+  border-color: #e9c46a !important; 
 }
 
 .custom-navbar .navbar-toggler-icon {
-  filter: invert(75%) sepia(100%) saturate(500%) hue-rotate(80deg); /* cambia el color del icono hamburguesa */
+  filter: invert(75%) sepia(100%) saturate(500%) hue-rotate(80deg); 
+}
+
+.custom-navbar .login-btn {
+  background-color: darkgreen !important;
+  color: #f4f1de !important;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.custom-navbar .register-btn {
+  background-color: darkgreen !important;
+  color: #f4f1de !important;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.custom-navbar .cart-btn {
+  background-color: darkgreen !important;
+  color: #f4f1de !important;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
 }
 
 /* Dropdown */

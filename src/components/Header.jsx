@@ -9,7 +9,7 @@ export default function Header() {
     <header>
       <Navbar bg="light" expand="md" fixed="top" className="custom-navbar">
         <Container>
-          <Navbar.Brand href="/"><img src={logo} alt="Huerto Hogar Logo" style={{ height: '40px', cursor: 'pointer' }}/></Navbar.Brand>
+          <Navbar.Brand href="/"><img src={logo} alt="Huerto Hogar Logo" className="logo"/></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -30,13 +30,13 @@ export default function Header() {
             </Nav>
             <Nav>
               <LinkContainer to="/login">
-                <Nav.Link>Iniciar Sesión</Nav.Link>
+                <Nav.Link className="login-btn">Iniciar Sesión</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/register">
-                <Nav.Link>Registrarse</Nav.Link>
+                <Nav.Link className="register-btn">Registrarse</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/cart">
-                <Nav.Link>🛒 Carrito</Nav.Link>
+                <Nav.Link className="cart-btn">🛒 Carrito</Nav.Link>
               </LinkContainer>
             </Nav>
           </Navbar.Collapse>
