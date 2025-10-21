@@ -9,7 +9,6 @@ export default function Root() {
   return (
     <>
       <main>
-        <Header />
         {isLoading ? (
           <div className="loading-container">
             <p>Cargando...</p>

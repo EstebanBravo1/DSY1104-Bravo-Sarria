@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import logo from '../../public/assets/LogoHuertoHogar.png';
+import logo from '/assets/LogoHuertoHogar.png';
 import './Header.css';
 
 export default function Header() {
