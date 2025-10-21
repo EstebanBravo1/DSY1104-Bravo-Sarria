@@ -1,10 +1,18 @@
-import React from 'react';
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import React, { use } from 'react';
+import { Navbar, Nav, Container, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import logo from '/assets/LogoHuertoHogar.png';
 import './Header.css';
 
 export default function Header() {
+
+  const [query, setQuery] = React.useState('');
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    console.log('Buscando:', query);
+  };
+
   return (
     <header>
       <Navbar bg="light" expand="md" fixed="top" className="custom-navbar">
@@ -27,6 +35,20 @@ export default function Header() {
               <LinkContainer to="/contacto">
                 <Nav.Link>Contacto</Nav.Link>
               </LinkContainer>
+            </Nav>
+            <Nav className="search-container">
+              <Form className="d-flex" onSubmit={handleSearch}>
+                <FormControl
+                  type="search"
+                  placeholder="Buscar productos..."
+                  className="search-input"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                />
+                <Button variant="outline-success" type="submit" className="search-btn">
+                  Buscar
+                </Button>
+              </Form>
             </Nav>
             <Nav>
               <LinkContainer to="/login">
