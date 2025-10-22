@@ -1,0 +1,320 @@
+/* Home.css - Agrega estos estilos */
+.hero-section {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.9) 0%, rgba(56, 142, 60, 0.9) 100%), 
+              url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80') no-repeat center center;
+  background-size: cover;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-content {
+  padding: 2rem 0;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+  line-height: 1.4;
+  max-width: 90%;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hero-button {
+  background-color: #fff;
+  color: #4CAF50;
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 2.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-button:hover {
+  background-color: #f8f9fa;
+  color: #388E3C;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Sección de Categorías */
+.categories-section {
+    padding: 5rem 0;
+    background-color: #f8f9fa;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c5530;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+}
+
+.category-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: white;
+    overflow: hidden;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.category-icon {
+    font-size: 3rem;
+    color: #4CAF50;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c5530;
+    margin-bottom: 1rem;
+}
+
+.category-description {
+    color: #6c757d;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Responsive para categorías */
+@media (max-width: 768px) {
+    .categories-section {
+        padding: 3rem 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .category-title {
+        font-size: 1.2rem;
+    }
+    
+    .category-icon {
+        font-size: 2.5rem;
+        height: 60px;
+    }
+}
+
+/* Sección de Productos Destacados */
+.products-section {
+    padding: 5rem 0;
+    background-color: #ffffff;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+}
+
+.product-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    background: white;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+    font-size: 3.5rem;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.product-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c5530;
+    margin-bottom: 1rem;
+    min-height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-details {
+    margin-bottom: 1rem;
+}
+
+.product-code {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+    font-family: 'Courier New', monospace;
+}
+
+.product-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #4CAF50;
+    margin-bottom: 0;
+}
+
+.product-category {
+    margin-bottom: 1rem;
+}
+
+.category-badge {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.product-button {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    border: none;
+    border-radius: 25px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.product-button:hover {
+    background: linear-gradient(135deg, #45a049, #1b5e20);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.view-all-button {
+    background: transparent;
+    color: #4CAF50;
+    border: 2px solid #4CAF50;
+    border-radius: 50px;
+    padding: 0.75rem 2.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.view-all-button:hover {
+    background: #4CAF50;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+
+
+/* Responsive para productos */
+@media (max-width: 992px) {
+    .products-section {
+        padding: 3rem 0;
+    }
+    
+    .product-image {
+        font-size: 3rem;
+        height: 80px;
+    }
+    
+    .product-name {
+        font-size: 1.1rem;
+    }
+    
+    .product-price {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-section {
+        padding: 2rem 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1rem;
+    }
+    
+    .product-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .product-image {
+        font-size: 2.5rem;
+        height: 70px;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 2.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .hero-button {
+    padding: 0.6rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+/* Estilos para el resto del contenido */
+.other-content {
+  padding: 4rem 0;
+  /* Agrega aquí los estilos para el resto de tu contenido */
+}

@@ -1,6 +1,7 @@
 import React from "react"
 import { Outlet, useNavigation } from "react-router"
 import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 export default function Root() {
   const navigation = useNavigation()
@@ -9,7 +10,6 @@ export default function Root() {
   return (
     <>
       <main>
-        <Header />
         {isLoading ? (
           <div className="loading-container">
             <p>Cargando...</p>
@@ -17,6 +17,7 @@ export default function Root() {
         ) : (
           <Outlet />
         )}
+        <Footer />
       </main>
     </>
   )

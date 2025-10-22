@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router'
 import Root from './pages/root'
-import Home from './pages/home/Home'
+import Home from './pages/home/home'
 
 export const router = createBrowserRouter([
   {
