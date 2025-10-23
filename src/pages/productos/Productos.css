@@ -1,0 +1,246 @@
+/*=============== ESTILOS PÁGINA DE PRODUCTOS ===============*/
+/* HH-201: Estilos para filtrado por categorías */
+/* HH-202: Estilos para tarjetas de producto */
+
+/*=============== CONTENEDOR PRINCIPAL ===============*/
+#productos {
+  padding: 4rem 1rem;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/*=============== PRODUCTOS INDIVIDUALES ===============*/
+.producto {
+  background-color: var(--white-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px hsla(12, 32%, 12%, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.producto:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px hsla(12, 32%, 12%, 0.15);
+}
+
+.producto img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.producto h2 {
+  color: var(--title-color);
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-semi-bold);
+  margin-bottom: 0.5rem;
+}
+
+.producto p {
+  color: var(--text-color);
+  font-size: var(--normal-font-size);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/*=============== PRECIO Y STOCK ===============*/
+.precio {
+  color: var(--first-color);
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-semi-bold);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.stock {
+  background-color: hsla(120, 60%, 50%, 0.1);
+  color: hsl(120, 60%, 30%);
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.stock-info {
+  margin-bottom: 1rem;
+}
+
+.stock-cantidad {
+  color: var(--text-color-light);
+  font-size: var(--small-font-size);
+}
+
+/*=============== BOTÓN AGREGAR AL CARRITO ===============*/
+.agregar-carrito {
+  background: linear-gradient(180deg, var(--first-color) 0%, var(--first-color-alt) 100%);
+  color: var(--white-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 100%;
+}
+
+.agregar-carrito:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px hsla(12, 32%, 12%, 0.2);
+}
+
+/*=============== GRID DE PRODUCTOS ===============*/
+.products__content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.products__name,
+.products__price {
+  font-size: var(--h3-font-size);
+}
+
+/*=============== PRODUCTOS DESTACADOS ===============*/
+.featured-products {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featured-products h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--title-color);
+  font-size: var(--h1-font-size);
+}
+
+/*=============== FILTROS DE CATEGORÍAS ===============*/
+.category-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 2px solid var(--home-color1);
+  color: var(--home-color1);
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: var(--font-medium);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--home-color1);
+  color: var(--white-color);
+}
+
+/*=============== RESULTADOS DE BÚSQUEDA ===============*/
+.search-results-indicator {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #6c757d;
+}
+
+.search-results-indicator h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--title-color);
+  font-size: 1.1rem;
+}
+
+.search-results-indicator p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.clear-search-btn {
+  background: var(--home-color1);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background 0.3s ease;
+}
+
+.clear-search-btn:hover {
+  background: var(--home-color2);
+}
+
+/*=============== RESPONSIVE DESIGN ===============*/
+
+/* Para tablets */
+@media screen and (max-width: 768px) {
+  .products__content {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .category-filters {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .filter-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Para móviles */
+@media screen and (max-width: 480px) {
+  #productos {
+    padding: 2rem 0.5rem;
+  }
+  
+  .products__content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .producto {
+    padding: 1rem;
+  }
+  
+  .featured-products {
+    padding: 1rem 0.5rem;
+  }
+}
+
+/* Para pantallas grandes */
+@media screen and (min-width: 1024px) {
+  .products__content {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+  
+  .featured-products {
+    padding: 3rem 2rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .products__content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
