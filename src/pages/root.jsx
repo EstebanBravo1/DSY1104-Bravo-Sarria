@@ -1,14 +1,17 @@
+import React from "react"
 import { Outlet, useNavigation } from "react-router"
-import NavBarRoot from "../components/root/NavBarRoot"
+import Footer from "../components/Footer"
+import Header from "../components/Header"
+import { CartProvider } from "../context/CartContext"
 
 export default function Root() {
   const navigation = useNavigation()
   const isLoading = navigation.state === "loading"
 
   return (
-    <>
+    <CartProvider>
+      <Header />
       <main>
-        <NavBarRoot />
         {isLoading ? (
           <div className="loading-container">
             <p>Cargando...</p>
@@ -16,7 +19,8 @@ export default function Root() {
         ) : (
           <Outlet />
         )}
+        <Footer />
       </main>
-    </>
+    </CartProvider>
   )
 }
