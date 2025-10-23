@@ -1,0 +1,1 @@
+export { productos, categorias, formatCLP, recetas } from './product.js';
