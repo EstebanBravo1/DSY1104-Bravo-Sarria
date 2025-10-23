@@ -1,0 +1,262 @@
+/* Header.css */
+.logo {
+  height: auto;
+  max-height: 110px;
+  cursor: pointer;
+  background: none;
+  box-shadow: none;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.custom-navbar {
+  background-color: whitesmoke !important;  
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 1025;
+  padding: 15px 0; /* Más padding vertical */
+}
+
+.custom-navbar .container-fluid {
+  padding-left: 30px; /* Más espacio a los lados */
+  padding-right: 30px;
+}
+
+/* Ajuste para el contenido principal */
+body {
+  padding-top: 100px !important; /* Aumentamos el padding para el header más alto */
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-top: 120px !important; /* Altura menor para móviles */
+  }
+}
+
+.custom-navbar .navbar-brand {
+  color: #e9c46a !important;  
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+
+.custom-navbar .nav-link {
+  color: green !important; 
+  font-weight: 700;
+  transition: color 0.3s ease;
+  border-radius: 24px;
+  margin-left: 1.5rem; /* Más espacio entre elementos */
+  margin-right: 1.5rem;
+  padding: 12px 35px; /* Aumentamos el padding horizontal para hacer los botones más largos */
+  min-width: 120px; /* Ancho mínimo para consistencia */
+  text-align: center; /* Centrar el texto */
+}
+
+.custom-navbar .nav-link:hover,
+.custom-navbar .nav-link:focus {
+  background-color: gold !important; 
+}
+
+.custom-navbar .navbar-toggler {
+  border-color: #e9c46a !important; 
+}
+
+.custom-navbar .navbar-toggler-icon {
+  filter: invert(75%) sepia(100%) saturate(500%) hue-rotate(80deg); 
+}
+
+.custom-navbar .login-btn,
+.custom-navbar .register-btn {
+  background-color: darkgreen !important;
+  color: #f4f1de !important;
+  padding: 12px 35px; /* Mismo padding que los otros botones */
+  border-radius: 24px; /* Mismo border-radius */
+  min-width: 120px; /* Mismo ancho mínimo */
+  text-align: center; /* Centrar el texto */
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.custom-navbar .cart-btn {
+  background-color: darkgreen !important;
+  color: #f4f1de !important;
+  padding: 12px 35px; /* Mismo padding que los otros botones */
+  border-radius: 24px; /* Mismo border-radius */
+  min-width: 120px; /* Mismo ancho mínimo */
+  text-align: center; /* Centrar el texto */
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+/* Dropdown */
+.custom-navbar .dropdown-menu {
+  background-color: #264653;
+}
+
+.custom-navbar .dropdown-item {
+  color: #f4f1de;
+}
+
+.custom-navbar .dropdown-item:hover,
+.custom-navbar .dropdown-item:focus {
+  background-color: #2a9d8f;
+  color: #e9c46a;
+}
+
+/* Barra de búsqueda */
+.search-container {
+  margin-left: auto;  
+  margin-right: 2rem; /* Más espacio a la derecha */
+  flex-grow: 1; /* Permite que se expanda */
+  max-width: 400px; /* Máximo ancho */
+  justify-content: center; /* Centra el contenido */
+}
+
+.search-input {
+  background-color: #ffffff; 
+  color: #264653; 
+  border: 1px solid #264653; 
+  border-radius: 24px;
+  padding: 12px 20px; /* Más padding */
+  width: 100%; /* Usa todo el ancho disponible */
+  max-width: 300px;
+  margin-right: 1rem;
+  transition: width 0.3s ease-in-out;
+}
+
+.search-input:focus {
+  border-color: #e9c46a;
+  outline: none;
+}
+
+.search-btn {
+  background-color: #5ba746;
+  color: #f4f1de; 
+  border-radius: 24px;
+  margin-left: 0px;
+  padding: 12px 20px; /* Más padding para que coincida con el input */
+  border: none;
+  white-space: nowrap;
+}
+
+.search-btn:hover {
+  background-color: #e9c46a; 
+  color: #264653;
+}
+
+/* Ajustes responsivos para móviles y tablets */
+@media (max-width: 991px) {
+  .custom-navbar .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .custom-navbar .nav-link {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 8px 20px;
+    min-width: 100px;
+    font-size: 0.9rem;
+  }
+  
+  .search-container {
+    margin-right: 1rem;
+    max-width: 300px;
+  }
+  
+  .search-input {
+    max-width: 200px;
+    padding: 10px 15px;
+  }
+  
+  .search-btn {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .custom-navbar {
+    padding: 10px 0;
+  }
+  
+  .custom-navbar .container-fluid {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  .logo {
+    max-height: 80px;
+  }
+  
+  .custom-navbar .navbar-brand {
+    font-size: 1.4rem;
+  }
+  
+  .custom-navbar .nav-link {
+    margin: 0.2rem 0;
+    padding: 10px 15px;
+    min-width: auto;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+  }
+  
+  .custom-navbar .login-btn,
+  .custom-navbar .register-btn,
+  .custom-navbar .cart-btn {
+    margin: 0.2rem 0;
+    padding: 10px 15px;
+    min-width: auto;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .search-container {
+    margin: 1rem 0;
+    max-width: 100%;
+    justify-content: center;
+  }
+  
+  .search-input {
+    width: 100%;
+    max-width: 250px;
+    margin-right: 0.5rem;
+    padding: 10px 15px;
+  }
+
+  .search-btn {
+    padding: 10px 15px;
+    white-space: nowrap;
+  }
+  
+  body {
+    padding-top: 140px; /* Más espacio para el navbar colapsado */
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-navbar .navbar-brand {
+    font-size: 1.2rem;
+  }
+  
+  .logo {
+    max-height: 60px;
+  }
+  
+  .search-input {
+    max-width: 180px;
+    font-size: 0.9rem;
+  }
+  
+  .search-btn {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+  
+  body {
+    padding-top: 120px;
+  }
+}
