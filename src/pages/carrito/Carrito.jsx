@@ -1,10 +1,34 @@
+import React, { useState } from 'react';
 import { useCart } from '../../hooks';
 import { formatCLP } from '../../data';
+import CheckoutModal from '../../components/checkout/CheckoutModal';
 import "../carrito/carrito.css"
+
 
 
 function Carrito() {
     const { cartItems, removeFromCart, updateQuantity, clearCart, getTotal, getItemCount } = useCart();
+    const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+
+    // Manejar click en "Proceder al Pago"
+    const handleCheckout = () => {
+        if (cartItems.length > 0) {
+            setShowCheckoutModal(true);
+        }
+    };
+
+    // Manejar finalización del pago (éxito o cierre)
+    const handlePaymentComplete = (data) => {
+        // Si hay data, el pago fue exitoso
+        if (data) {
+            clearCart(); // Vaciar carrito después del pago exitoso
+        }
+    };
+
+    // Cerrar modal
+    const handleCloseModal = () => {
+        setShowCheckoutModal(false);
+    };
 
     return (
         <div className="container-full">
@@ -31,6 +55,7 @@ function Carrito() {
                             id="checkout-btn" 
                             className="btn-primary"
                             disabled={cartItems.length === 0}
+                            onClick={handleCheckout}
                         >
                             <i className="ri-shopping-cart-line"></i>
                             Proceder al Pago
@@ -102,52 +127,13 @@ function Carrito() {
             </div>
         </section>
 
-        <div id="checkout-modal" className="modal" style={{ display: 'none' }}>
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h3>Finalizar Compra</h3>
-                    <button className="modal-close" id="close-modal">
-                        <i className="ri-close-line"></i>
-                    </button>
-                </div>
-                <div className="modal-body">
-                    <div className="checkout-summary">
-                        <h4>Resumen del Pedido</h4>
-                        <div id="checkout-items"></div>
-                        <div className="checkout-total">
-                            <strong>Total a Pagar: <span id="checkout-total">$0</span></strong>
-                        </div>
-                    </div>
-                    
-                    <form id="checkout-form" className="checkout-form">
-                        <h4>Datos de Entrega</h4>
-                        <div className="form-group">
-                            <label htmlFor="customer-name">Nombre Completo:</label>
-                            <input type="text" id="customer-name" required />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="customer-email">Email:</label>
-                            <input type="email" id="customer-email" required />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="customer-phone">Teléfono:</label>
-                            <input type="tel" id="customer-phone" required />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="customer-address">Dirección de Entrega:</label>
-                            <textarea id="customer-address" rows="3" required></textarea>
-                        </div>
-                        <div className="form-actions">
-                            <button type="button" className="btn-secondary" id="cancel-checkout">Cancelar</button>
-                            <button type="submit" className="btn-primary">
-                                <i className="ri-check-line"></i>
-                                Confirmar Pedido
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        {/* MODAL UNIFICADO DE CHECKOUT */}
+        <CheckoutModal 
+            isOpen={showCheckoutModal}
+            onClose={handleCloseModal}
+            onPaymentComplete={handlePaymentComplete}
+        />
+
         </main>
         </div>
     )

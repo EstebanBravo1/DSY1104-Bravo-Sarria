@@ -9,6 +9,7 @@ import Producto from './pages/productos/Productos'
 import DetalleProducto from './pages/detalleproducto/DetalleProducto'
 import Carrito from './pages/carrito/Carrito'
 import Contacto from './pages/contacto/Contacto'
+import TransbankSucces from './pages/productos/TransbankSuccess'
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "carrito",
         Component: Carrito,
+      },
+      {
+        path:"checkout-success",
+        Component:TransbankSucces,
       },
       {
         path: "contacto",

@@ -1,0 +1,455 @@
+/* ============================================ */
+/* 💳 ESTILOS PASARELA DE PAGO - CHECKOUT     */
+/* ============================================ */
+
+/* Overlay principal */
+.checkout-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+/* Contenedor principal */
+.checkout-container {
+  background: white;
+  border-radius: 1rem;
+  max-width: 1200px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Header */
+.checkout-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  border-bottom: 1px solid #e9ecef;
+  background: linear-gradient(135deg, var(--home-color1) 0%, #1e5631 100%);
+  color: white;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.checkout-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: white;
+}
+
+.checkout-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Contenido principal */
+.checkout-content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+/* ============================================ */
+/* 📋 RESUMEN DEL PEDIDO                       */
+/* ============================================ */
+
+.order-summary {
+  background: #f8f9fa;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+}
+
+.order-summary h3 {
+  color: var(--home-color1);
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--home-color1);
+  padding-bottom: 0.5rem;
+}
+
+.order-items {
+  margin-bottom: 2rem;
+}
+
+.order-item {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.order-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.order-item-details h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.95rem;
+  color: var(--home-color4);
+  font-weight: 500;
+}
+
+.order-item-details p {
+  margin: 0;
+  color: var(--home-color5);
+  font-size: 0.85rem;
+}
+
+.discount-badge {
+  background: var(--home-color2);
+  color: var(--home-color4);
+  padding: 0.15rem 0.5rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  display: inline-block;
+}
+
+.order-item-price {
+  text-align: right;
+}
+
+.original-price {
+  display: block;
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.final-price {
+  display: block;
+  color: var(--home-color1);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Totales */
+.order-totals {
+  border-top: 2px solid #e9ecef;
+  padding-top: 1rem;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  color: var(--home-color4);
+}
+
+.total-line.discount {
+  color: #28a745;
+  font-weight: 500;
+}
+
+.total-line.final-total {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--home-color1);
+  border-top: 1px solid #dee2e6;
+  padding-top: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* ============================================ */
+/* 📝 FORMULARIO                               */
+/* ============================================ */
+
+.checkout-form {
+  background: white;
+}
+
+.form-section {
+  margin-bottom: 2.5rem;
+}
+
+.form-section h3 {
+  color: var(--home-color1);
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-row .flex-2 {
+  grid-column: span 2;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: var(--home-color4);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.875rem;
+  border: 2px solid #e9ecef;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--home-color1);
+  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+}
+
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* ============================================ */
+/* 🛒 BOTÓN DE PAGO                            */
+/* ============================================ */
+
+.checkout-submit {
+  width: 100%;
+  background: linear-gradient(135deg, var(--home-color1) 0%, #1e5631 100%);
+  color: white;
+  border: none;
+  padding: 1.25rem 2rem;
+  border-radius: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.checkout-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(46, 139, 87, 0.3);
+}
+
+.checkout-submit:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Spinner de carga */
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ============================================ */
+/* 📱 RESPONSIVE DESIGN                        */
+/* ============================================ */
+
+@media (max-width: 768px) {
+  .checkout-overlay {
+    padding: 0.5rem;
+  }
+  
+  .checkout-container {
+    max-height: 95vh;
+  }
+  
+  .checkout-header {
+    padding: 1.5rem;
+  }
+  
+  .checkout-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .checkout-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .order-summary {
+    order: -1;
+    position: relative;
+    top: auto;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .form-row .flex-2 {
+    grid-column: span 1;
+  }
+  
+  .order-item {
+    grid-template-columns: 50px 1fr auto;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+  
+  .order-item-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .order-item-details h4 {
+    font-size: 0.9rem;
+  }
+  
+  .checkout-submit {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-header {
+    padding: 1rem;
+  }
+  
+  .checkout-content {
+    padding: 1rem;
+  }
+  
+  .order-summary {
+    padding: 1rem;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.75rem;
+  }
+}
+
+/* ============================================ */
+/* ✨ ANIMACIONES Y EFECTOS                    */
+/* ============================================ */
+
+.order-item {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-section {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Estados de validación visual */
+.form-group input:valid:not(:placeholder-shown) {
+  border-color: #28a745;
+}
+
+.form-group input:invalid:not(:placeholder-shown):not(.error) {
+  border-color: #ffc107;
+}
