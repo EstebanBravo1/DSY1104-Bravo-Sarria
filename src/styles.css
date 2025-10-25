@@ -407,6 +407,7 @@ select:focus-visible {
     font-weight: var(--font-medium);
     margin-bottom: 0.75rem;
     text-transform: uppercase;
+    margin-right: 2rem;
   }
   
   .home__title,
@@ -431,6 +432,8 @@ select:focus-visible {
   
   .home__description {
     margin-bottom: 2rem;
+    margin-right: 2.5rem;
+    margin-top: 2rem;
   }
   .home__img {
     width: 320px;
@@ -633,7 +636,7 @@ select:focus-visible {
 /* For small devices */
 @media screen and (max-width: 300px) {
     .container {
-      margin-inline: 1rem; /* margin right and left */
+      margin-inline: 1.5rem; /* margin right and left */
     }
   
     .nav__menu {
@@ -641,8 +644,9 @@ select:focus-visible {
     }
   
     .home__title {
-      width: 220px;
+      width: 120px;
       text-align: center;
+      font-size: large;
     }
   
     .home__title img {
@@ -832,9 +836,6 @@ select:focus-visible {
     .home__img {
       width: 550px;
     }
-    h1.home__title {
-    margin-right: 30px;
-}
   
     .products__container {
       column-gap: 9rem;
@@ -1292,6 +1293,18 @@ footer p {
   
   .cart-item-image {
     justify-self: center;
+  }
+  
+  /* Centrar título en tablets */
+  h1.home__title {
+    text-align: center;
+    width: 100%;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+  
+  .home__data {
+    text-align: center;
   }
   
   .cart-item-controls {

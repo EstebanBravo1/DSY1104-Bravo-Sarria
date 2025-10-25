@@ -5,11 +5,31 @@
 /*=============== CONTENEDOR PRINCIPAL ===============*/
 #productos {
   padding: 4rem 1rem;
-  max-width: 1120px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+/*=============== CONTENEDOR DE PRODUCTOS BOOTSTRAP ===============*/
+#productos .container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#productos .row {
+  justify-content: center;
+  gap: 1rem;
+}
+
+#productos .col-12,
+#productos .col-sm-6,
+#productos .col-md-4,
+#productos .col-lg-3 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
 /*=============== PRODUCTOS INDIVIDUALES ===============*/
@@ -102,6 +122,8 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   padding: 2rem 0;
+  justify-content: center;
+  place-items: center;
 }
 
 .products__name,
@@ -127,6 +149,10 @@
 .filters-responsive {
   width: 100%;
   max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .filter-btn-bootstrap {
@@ -151,6 +177,7 @@
   margin-left: auto;
   margin-right: auto;
   transition: all 0.3s ease;
+  display: block;
 }
 
 .filter-btn-mobile:hover {
@@ -180,6 +207,8 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: none;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .product-card:hover {
@@ -258,6 +287,8 @@
   .products__content {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
+    justify-content: center;
+    place-items: center;
   }
   
   .category-filters {
@@ -278,6 +309,20 @@
   
   .filters-responsive {
     padding: 0 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+  }
+  
+  /* Centrado mejorado para tablets */
+  #productos .row {
+    justify-content: center;
+  }
+  
+  .product-card {
+    max-width: 300px;
+    margin: 0 auto;
   }
 }
 
@@ -290,6 +335,8 @@
   .products__content {
     grid-template-columns: 1fr;
     gap: 1rem;
+    justify-content: center;
+    place-items: center;
   }
   
   .producto {
@@ -309,11 +356,28 @@
   
   .filters-responsive {
     padding: 0 0.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
   
   /* Ajuste para las cards en móvil */
   .product-card {
-    margin-bottom: 1rem;
+    margin: 0 auto 1rem auto;
+    max-width: 320px;
+    width: 100%;
+  }
+  
+  /* Centrado perfecto en móviles */
+  #productos .row {
+    justify-content: center;
+    margin: 0;
+  }
+  
+  #productos .col-12 {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
   }
 }
 
@@ -327,6 +391,9 @@
   
   .filters-responsive {
     padding: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 }
 
@@ -335,6 +402,8 @@
   .products__content {
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
+    justify-content: center;
+    place-items: center;
   }
   
   .featured-products {
@@ -347,15 +416,66 @@
     font-size: 1rem;
     padding: 10px 20px;
   }
+  
+  /* Centrado mejorado para desktop */
+  #productos .row {
+    justify-content: center;
+  }
+  
+  .product-card {
+    max-width: 350px;
+    margin: 0 auto;
+  }
 }
 
 @media screen and (min-width: 1200px) {
   .products__content {
     grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    place-items: center;
   }
   
   .filter-btn-bootstrap {
     min-width: 150px;
     padding: 12px 24px;
+  }
+  
+  /* Centrado perfecto en pantallas muy grandes */
+  #productos .row {
+    justify-content: center;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  
+  .product-card {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
+/* Para pantallas extra grandes (monitores grandes) */
+@media screen and (min-width: 1440px) {
+  #productos {
+    max-width: 1800px;
+    padding: 4rem 2rem;
+  }
+  
+  #productos .container {
+    max-width: 1700px;
+  }
+  
+  #productos .row {
+    max-width: 1800px;
+    gap: 2rem;
+  }
+  
+  .product-card {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  
+  .products__content {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4rem;
   }
 }
