@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Auth.css';
 
 const Login = () => {
@@ -9,7 +10,11 @@ const Login = () => {
         password: ''
     });
     const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [alertType, setAlertType] = useState('success');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleChange = (e) => {
         setFormData({
@@ -18,16 +23,36 @@ const Login = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aquí iría la lógica de autenticación
-        console.log('Login attempt:', formData);
-        
-        // Simulación de login exitoso
-        setShowAlert(true);
-        setTimeout(() => {
-            navigate('/');
-        }, 2000);
+        setLoading(true);
+        setShowAlert(false);
+
+        try {
+            const resultado = login(formData.email, formData.password);
+            
+            if (resultado.success) {
+                setAlertType('success');
+                setAlertMessage(`¡Bienvenido ${resultado.usuario.nombres}! Redirigiendo...`);
+                setShowAlert(true);
+                
+                // Redirigir después de 2 segundos
+                setTimeout(() => {
+                    navigate('/');
+                }, 2000);
+            } else {
+                setAlertType('danger');
+                setAlertMessage(resultado.error || 'Error al iniciar sesión');
+                setShowAlert(true);
+            }
+        } catch (error) {
+            console.error('Error en login:', error);
+            setAlertType('danger');
+            setAlertMessage('Error del sistema. Intenta nuevamente.');
+            setShowAlert(true);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -43,8 +68,8 @@ const Login = () => {
                                 </div>
 
                                 {showAlert && (
-                                    <Alert variant="success" className="text-center">
-                                        ¡Inicio de sesión exitoso! Redirigiendo...
+                                    <Alert variant={alertType} className="text-center">
+                                        {alertMessage}
                                     </Alert>
                                 )}
 
@@ -90,8 +115,9 @@ const Login = () => {
                                         type="submit" 
                                         className="auth-button w-100 mb-3"
                                         size="lg"
+                                        disabled={loading}
                                     >
-                                        Iniciar Sesión
+                                        {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
                                     </Button>
 
                                     <div className="text-center">

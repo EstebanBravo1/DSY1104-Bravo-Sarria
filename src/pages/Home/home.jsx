@@ -1,8 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './Home.css';
-import Header from "../../components/Header";
+import './home.css';
 
 export default function Home() {
     // Datos de productos destacados
@@ -75,7 +74,6 @@ export default function Home() {
 
     return (
         <>
-            <Header />
             <div className="home-page">
                 {/* Hero Section */}
                 <section className="hero-section">
@@ -89,7 +87,7 @@ export default function Home() {
                                     </p>
                                     <Button 
                                         as={Link} 
-                                        to="/catalogo" 
+                                        to="/productos" 
                                         className="hero-button"
                                         size="lg"
                                     >
@@ -217,7 +215,7 @@ export default function Home() {
                             <Col>
                                 <Button 
                                     as={Link} 
-                                    to="/catalogo" 
+                                    to="/productos" 
                                     className="view-all-button"
                                     size="lg"
                                 >
