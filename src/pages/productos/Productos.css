@@ -123,6 +123,70 @@
   font-size: var(--h1-font-size);
 }
 
+/*=============== FILTROS CON REACT BOOTSTRAP ===============*/
+.filters-responsive {
+  width: 100%;
+  max-width: 800px;
+}
+
+.filter-btn-bootstrap {
+  margin: 0.25rem;
+  border-radius: 25px !important;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.filter-btn-bootstrap:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.filter-btn-mobile {
+  border-radius: 25px !important;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.3s ease;
+}
+
+.filter-btn-mobile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Personalización de botones Bootstrap */
+.btn-outline-primary {
+  border-color: #28a745 !important; /* Color del borde */
+  color: #28a745 !important; /* Color del texto */
+}
+
+.btn-outline-primary:hover {
+  background-color: #28a745 !important; /* Color de fondo al hover */
+  border-color: #28a745 !important; /* Color del borde al hover */
+  color: white !important; /* Color del texto al hover */
+}
+
+.btn-primary {
+  background-color: #28a745 !important; /* Color de fondo del botón activo */
+  border-color: #28a745 !important; /* Color del borde del botón activo */
+}
+
+/* Mejorar las cards de producto */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
 /*=============== FILTROS DE CATEGORÍAS ===============*/
 .category-filters {
   display: flex;
@@ -205,6 +269,16 @@
     width: 100%;
     max-width: 200px;
   }
+  
+  /* Ajustes para filtros Bootstrap en tablets */
+  .filter-btn-bootstrap {
+    min-width: 100px;
+    font-size: 0.9rem;
+  }
+  
+  .filters-responsive {
+    padding: 0 1rem;
+  }
 }
 
 /* Para móviles */
@@ -225,6 +299,35 @@
   .featured-products {
     padding: 1rem 0.5rem;
   }
+  
+  /* Filtros móviles mejorados */
+  .filter-btn-mobile {
+    font-size: 1rem;
+    padding: 12px 24px;
+    margin-bottom: 0.75rem;
+  }
+  
+  .filters-responsive {
+    padding: 0 0.5rem;
+  }
+  
+  /* Ajuste para las cards en móvil */
+  .product-card {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media screen and (max-width: 360px) {
+  .filter-btn-mobile {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    max-width: 280px;
+  }
+  
+  .filters-responsive {
+    padding: 0;
+  }
 }
 
 /* Para pantallas grandes */
@@ -237,10 +340,22 @@
   .featured-products {
     padding: 3rem 2rem;
   }
+  
+  /* Filtros en pantallas grandes */
+  .filter-btn-bootstrap {
+    min-width: 140px;
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
   .products__content {
     grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .filter-btn-bootstrap {
+    min-width: 150px;
+    padding: 12px 24px;
   }
 }

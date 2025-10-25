@@ -1,5 +1,6 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Container, Row, Col, Button, ButtonGroup, Card } from 'react-bootstrap';
 import { useCart } from '../../hooks';
 import '../../styles.css';
 import './Productos.css';
@@ -46,47 +47,110 @@ function Productos() {
                 </section>
        
                 <section id="productos">
-                    <div className="filters" id="product-filters">
-                        <button 
-                            className={filtroActivo === 'all' ? 'filter-btn active' : 'filter-btn'}
-                            onClick={() => setFiltroActivo('all')}
-                        >
-                            Todos
-                        </button>
-                        <button 
-                            className={filtroActivo === 'FR' ? 'filter-btn active' : 'filter-btn'}
-                            onClick={() => setFiltroActivo('FR')}
-                        >
-                            Frutas Frescas
-                        </button>
-                        <button 
-                            className={filtroActivo === 'VR' ? 'filter-btn active' : 'filter-btn'}
-                            onClick={() => setFiltroActivo('VR')}
-                        >
-                            Verduras Orgánicas
-                        </button>
-                        <button 
-                            className={filtroActivo === 'PO' ? 'filter-btn active' : 'filter-btn'}
-                            onClick={() => setFiltroActivo('PO')}
-                        >
-                            Productos Orgánicos
-                        </button>
-                        <button 
-                            className={filtroActivo === 'PL' ? 'filter-btn active' : 'filter-btn'}
-                            onClick={() => setFiltroActivo('PL')}
-                        >
-                            Lácteos
-                        </button>
-                    </div>
-                    <div className="container">
-                        <div className="row">
+                    <Container>
+                        {/* Filtros con React Bootstrap */}
+                        <Row className="mb-4">
+                            <Col xs={12}>
+                                <div className="d-flex justify-content-center">
+                                    <div className="filters-responsive">
+                                        {/* Filtros horizontales en desktop, dropdown en móvil */}
+                                        <div className="d-none d-md-flex flex-wrap justify-content-center gap-2">
+                                            <Button 
+                                                variant={filtroActivo === 'all' ? 'primary' : 'outline-primary'}
+                                                onClick={() => setFiltroActivo('all')}
+                                                className="filter-btn-bootstrap"
+                                            >
+                                                Todos
+                                            </Button>
+                                            <Button 
+                                                variant={filtroActivo === 'FR' ? 'primary' : 'outline-primary'}
+                                                onClick={() => setFiltroActivo('FR')}
+                                                className="filter-btn-bootstrap"
+                                            >
+                                                Frutas Frescas
+                                            </Button>
+                                            <Button 
+                                                variant={filtroActivo === 'VR' ? 'primary' : 'outline-primary'}
+                                                onClick={() => setFiltroActivo('VR')}
+                                                className="filter-btn-bootstrap"
+                                            >
+                                                Verduras Orgánicas
+                                            </Button>
+                                            <Button 
+                                                variant={filtroActivo === 'PO' ? 'primary' : 'outline-primary'}
+                                                onClick={() => setFiltroActivo('PO')}
+                                                className="filter-btn-bootstrap"
+                                            >
+                                                Productos Orgánicos
+                                            </Button>
+                                            <Button 
+                                                variant={filtroActivo === 'PL' ? 'primary' : 'outline-primary'}
+                                                onClick={() => setFiltroActivo('PL')}
+                                                className="filter-btn-bootstrap"
+                                            >
+                                                Lácteos
+                                            </Button>
+                                        </div>
+                                        
+                                        {/* Filtros verticales en móvil */}
+                                        <div className="d-block d-md-none">
+                                            <ButtonGroup vertical className="w-100 gap-2">
+                                                <Button 
+                                                    variant={filtroActivo === 'all' ? 'primary' : 'outline-primary'}
+                                                    onClick={() => setFiltroActivo('all')}
+                                                    className="filter-btn-mobile"
+                                                    size="lg"
+                                                >
+                                                    Todos
+                                                </Button>
+                                                <Button 
+                                                    variant={filtroActivo === 'FR' ? 'primary' : 'outline-primary'}
+                                                    onClick={() => setFiltroActivo('FR')}
+                                                    className="filter-btn-mobile"
+                                                    size="lg"
+                                                >
+                                                    Frutas Frescas
+                                                </Button>
+                                                <Button 
+                                                    variant={filtroActivo === 'VR' ? 'primary' : 'outline-primary'}
+                                                    onClick={() => setFiltroActivo('VR')}
+                                                    className="filter-btn-mobile"
+                                                    size="lg"
+                                                >
+                                                    Verduras Orgánicas
+                                                </Button>
+                                                <Button 
+                                                    variant={filtroActivo === 'PO' ? 'primary' : 'outline-primary'}
+                                                    onClick={() => setFiltroActivo('PO')}
+                                                    className="filter-btn-mobile"
+                                                    size="lg"
+                                                >
+                                                    Productos Orgánicos
+                                                </Button>
+                                                <Button 
+                                                    variant={filtroActivo === 'PL' ? 'primary' : 'outline-primary'}
+                                                    onClick={() => setFiltroActivo('PL')}
+                                                    className="filter-btn-mobile"
+                                                    size="lg"
+                                                >
+                                                    Lácteos
+                                                </Button>
+                                            </ButtonGroup>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Col>
+                        </Row>
+                        
+                        {/* Grid de productos */}
+                        <Row>
                             {productosFiltrados.map(producto => (
-                                <div key={producto.codigo} className="col-md-4 mb-4">
-                                    <div className="card" style={{width: '18rem'}}>
+                                <Col key={producto.codigo} xs={12} sm={6} md={4} lg={3} className="mb-4">
+                                    <Card className="h-100 product-card">
                                         <div className="product-card-container">
-                                            <img 
+                                            <Card.Img 
+                                                variant="top"
                                                 src={`/assets/${producto.imagen.replace('imagenes/', '')}`} 
-                                                className="card-img-top" 
                                                 alt={producto.nombre}
                                                 style={{height: '200px', objectFit: 'cover'}}
                                             />
@@ -99,32 +163,31 @@ function Productos() {
                                                 <span className="overlay-text">Ver detalle del producto</span>
                                             </Link>
                                         </div>
-                                        <div className="card-body">
-                                            <h5 className="card-title">{producto.nombre}</h5>
-                                            <p className="card-text">
+                                        <Card.Body className="d-flex flex-column">
+                                            <Card.Title>{producto.nombre}</Card.Title>
+                                            <Card.Text className="flex-grow-1">
                                                 {producto.descripcion}
-                                            </p>
-                                            <p className="card-text">
+                                            </Card.Text>
+                                            <Card.Text>
                                                 <small className="text-muted">Origen: {producto.origen}</small>
-                                            </p>
-                                            <p className="card-text">
+                                            </Card.Text>
+                                            <Card.Text>
                                                 <strong className="text-success">${producto.precio}</strong>
-                                            </p>
-                                            <div className="d-flex gap-2">
-            
-                                                <button 
-                                                    className="btn btn-primary btn-sm"
-                                                    onClick={() => addToCart(producto)}
-                                                >
-                                                    Agregar al carrito
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                            </Card.Text>
+                                            <Button 
+                                                variant="primary"
+                                                size="sm"
+                                                onClick={() => addToCart(producto)}
+                                                className="mt-auto"
+                                            >
+                                                Agregar al carrito
+                                            </Button>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
                             ))}
-                        </div>
-                    </div>
+                        </Row>
+                    </Container>
                 </section>
         </div>
     );

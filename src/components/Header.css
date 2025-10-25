@@ -24,6 +24,51 @@
   padding-right: 30px;
 }
 
+/* Distribución más compacta del navbar - Solo en desktop */
+@media (min-width: 768px) {
+  .custom-navbar .navbar-collapse {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-start; /* Alinear desde el inicio */
+    align-items: center;
+    width: 100%;
+    gap: 2rem; /* Espacio entre las 3 secciones */
+  }
+}
+
+/* Navegación izquierda - Menú principal */
+.left-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem; /* Más espacio entre botones del menú */
+  margin-left: 2rem; /* Separación del logo */
+}
+
+/* Barra de búsqueda centrada */
+.center-search {
+  display: flex;
+  justify-content: center;
+  flex: 1; /* Ocupa el espacio central disponible */
+  max-width: 500px; /* Aumentamos el ancho máximo */
+  margin: 0 auto;
+}
+
+/* Navegación carrito - Al lado del search */
+.cart-nav {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem; /* Separación del search */
+}
+
+/* Navegación derecha - Login/Register */
+.right-nav {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  margin-left: auto; /* Empuja hacia la derecha */
+  justify-content: flex-end; /* Alinea contenido a la derecha */
+}
+
 /* Ajuste para el contenido principal */
 body {
   padding-top: 100px !important; /* Aumentamos el padding para el header más alto */
@@ -47,11 +92,12 @@ body {
   font-weight: 700;
   transition: color 0.3s ease;
   border-radius: 24px;
-  margin-left: 1.5rem; /* Más espacio entre elementos */
-  margin-right: 1.5rem;
-  padding: 12px 35px; /* Aumentamos el padding horizontal para hacer los botones más largos */
-  min-width: 120px; /* Ancho mínimo para consistencia */
+  margin-left: 0.4rem; /* Más espacio entre elementos */
+  margin-right: 0.4rem;
+  padding: 12px 18px; /* Padding ligeramente mayor */
+  min-width: 90px; /* Ancho mínimo un poco mayor */
   text-align: center; /* Centrar el texto */
+  font-size: large;
 }
 
 .custom-navbar .nav-link:hover,
@@ -71,23 +117,37 @@ body {
 .custom-navbar .register-btn {
   background-color: darkgreen !important;
   color: #f4f1de !important;
-  padding: 12px 35px; /* Mismo padding que los otros botones */
+  padding: 12px 18px; /* Padding consistente */
   border-radius: 24px; /* Mismo border-radius */
-  min-width: 120px; /* Mismo ancho mínimo */
+  min-width: 90px; /* Ancho mínimo consistente */
   text-align: center; /* Centrar el texto */
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
+  margin-left: 0.4rem; /* Márgenes consistentes */
+  margin-right: 0.4rem;
 }
 
 .custom-navbar .cart-btn {
-  background-color: darkgreen !important;
-  color: #f4f1de !important;
-  padding: 12px 35px; /* Mismo padding que los otros botones */
-  border-radius: 24px; /* Mismo border-radius */
-  min-width: 120px; /* Mismo ancho mínimo */
-  text-align: center; /* Centrar el texto */
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
+  
+    background-color: #198754 !important;
+    color: #f4f1de !important;
+    padding: 12px 84px;
+    border-radius: 24px;
+    min-width: 180px;
+    text-align: center;
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+    font-weight: 700;
+    font-size: 1.3rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s 
+ease;
+}
+
+
+
+.custom-navbar .cart-btn:hover {
+  background-color: #228B22 !important; /* Verde más brillante */
+  transform: translateY(-2px); /* Efecto de elevación */
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
 }
 
 /* Dropdown */
@@ -105,13 +165,10 @@ body {
   color: #e9c46a;
 }
 
-/* Barra de búsqueda */
-.search-container {
-  margin-left: auto;  
-  margin-right: 2rem; /* Más espacio a la derecha */
-  flex-grow: 1; /* Permite que se expanda */
-  max-width: 400px; /* Máximo ancho */
-  justify-content: center; /* Centra el contenido */
+/* Barra de búsqueda centrada */
+.center-search .d-flex {
+  width: 100%;
+  justify-content: center;
 }
 
 .search-input {
@@ -121,7 +178,7 @@ body {
   border-radius: 24px;
   padding: 12px 20px; /* Más padding */
   width: 100%; /* Usa todo el ancho disponible */
-  max-width: 300px;
+  max-width: 400px; /* Aumentamos el ancho máximo */
   margin-right: 1rem;
   transition: width 0.3s ease-in-out;
 }
@@ -154,21 +211,34 @@ body {
   }
   
   .custom-navbar .nav-link {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    padding: 8px 20px;
-    min-width: 100px;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    padding: 8px 15px;
+    min-width: 75px;
     font-size: 0.9rem;
   }
+
+  .left-nav {
+    gap: 0.6rem; /* Espaciado reducido para tablets */
+    margin-left: 1.5rem; /* Menos margen del logo en tablets */
+  }
+
+  .custom-navbar .cart-btn {
+    padding: 12px 20px; /* Padding ligeramente reducido para tablets */
+    min-width: 100px;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
   
-  .search-container {
-    margin-right: 1rem;
-    max-width: 300px;
+  .center-search {
+    max-width: 320px; /* Aumentamos para tablets */
+    margin: 0 0.5rem;
   }
   
   .search-input {
-    max-width: 200px;
-    padding: 10px 15px;
+    max-width: 250px; /* Aumentamos el ancho en tablets */
+    padding: 8px 15px; /* Más padding horizontal */
   }
   
   .search-btn {
@@ -194,10 +264,47 @@ body {
   .custom-navbar .navbar-brand {
     font-size: 1.4rem;
   }
+
+  /* Layout vertical en móvil */
+  .custom-navbar .navbar-collapse {
+    flex-direction: column !important;
+    gap: 0.5rem;
+  }
+
+  /* Asegurar que el menú se comporte correctamente en móvil */
+  .custom-navbar .navbar-collapse:not(.show) {
+    display: none !important;
+  }
+
+  .custom-navbar .navbar-collapse.show {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .left-nav {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.3rem; /* Espaciado entre botones en móvil */
+    margin-left: 0; /* Sin margen del logo en móvil */
+  }
+
+  .cart-nav {
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .right-nav {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.3rem;
+    margin-left: 0;
+    align-items: center;
+  }
   
   .custom-navbar .nav-link {
-    margin: 0.2rem 0;
-    padding: 10px 15px;
+    margin: 0.1rem 0;
+    padding: 10px 15px; /* Más padding vertical */
     min-width: auto;
     width: 100%;
     text-align: center;
@@ -205,26 +312,36 @@ body {
   }
   
   .custom-navbar .login-btn,
-  .custom-navbar .register-btn,
-  .custom-navbar .cart-btn {
+  .custom-navbar .register-btn {
     margin: 0.2rem 0;
     padding: 10px 15px;
     min-width: auto;
     width: 100%;
     text-align: center;
   }
+
+  .custom-navbar .cart-btn {
+    margin: 0.3rem 0; /* Más margen vertical en móvil */
+    padding: 14px 20px; /* Mantener padding generoso */
+    min-width: auto;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1rem; /* Mantener tamaño de fuente grande */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Sombra también en móvil */
+  }
   
-  .search-container {
-    margin: 1rem 0;
+  .center-search {
+    margin: 0.5rem 0;
     max-width: 100%;
     justify-content: center;
   }
   
   .search-input {
     width: 100%;
-    max-width: 250px;
+    max-width: 300px; /* Aumentamos aún más para móviles */
     margin-right: 0.5rem;
-    padding: 10px 15px;
+    padding: 12px 18px; /* Más padding para mejor usabilidad */
   }
 
   .search-btn {
@@ -247,8 +364,9 @@ body {
   }
   
   .search-input {
-    max-width: 180px;
+    max-width: 250px; /* Aumentamos en móviles también */
     font-size: 0.9rem;
+    padding: 10px 15px; /* Más padding */
   }
   
   .search-btn {
@@ -258,5 +376,104 @@ body {
   
   body {
     padding-top: 120px;
+  }
+}
+
+/* ========================================
+   ESTILOS PARA DROPDOWN DE USUARIO
+   ======================================== */
+
+.user-dropdown .dropdown-toggle {
+  color: #2d6a4f !important;
+  font-weight: 600;
+  font-size: 1rem;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.user-dropdown .dropdown-toggle:hover {
+  color: #1b4332 !important;
+  background-color: rgba(45, 106, 79, 0.1) !important;
+  border-radius: 5px;
+}
+
+.user-dropdown .dropdown-toggle::after {
+  margin-left: 0.5rem;
+  border-top-color: #2d6a4f;
+}
+
+.user-dropdown .dropdown-menu {
+  min-width: 250px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  margin-top: 0.5rem;
+}
+
+.user-dropdown .dropdown-item {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  color: #333;
+  transition: background-color 0.2s ease;
+}
+
+.user-dropdown .dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #2d6a4f;
+}
+
+.user-dropdown .dropdown-item:first-child {
+  color: #2d6a4f;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+}
+
+.user-dropdown .dropdown-item:nth-child(2) {
+  color: #666;
+  font-size: 0.85rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.75rem;
+}
+
+.user-dropdown .dropdown-divider {
+  margin: 0.5rem 0;
+  border-color: #e9ecef;
+}
+
+.user-dropdown .dropdown-item:last-child {
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.user-dropdown .dropdown-item:last-child:hover {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Responsivo para dropdown de usuario */
+@media (max-width: 991px) {
+  .user-dropdown .dropdown-menu {
+    min-width: 200px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .user-dropdown .dropdown-toggle {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .user-dropdown .dropdown-menu {
+    min-width: 180px;
+    font-size: 0.85rem;
+  }
+  
+  .user-dropdown .dropdown-item {
+    padding: 0.6rem 1rem;
   }
 }

@@ -3,14 +3,16 @@
 // ============================================
 // Formulario completo de pago con validación
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../../hooks';
 import { formatCLP } from '../../data';
 import { createTransactionAndRedirect, validarRutChileno, formatearRut } from '../../services/transbank';
+import { useAuth } from '../../context/AuthContext';
 import '../../pages/productos/checkout.css';
 
 const CheckoutForm = ({ isOpen, onClose,}) => {
   const { cartItems, getTotal } = useCart();
+  const { isLoggedIn, getDatosCheckout } = useAuth();
   
   // Verificación de seguridad para cartItems
   const validCartItems = cartItems ? cartItems.filter(item => item && item.nombre && item.precio) : [];
@@ -35,6 +37,30 @@ const CheckoutForm = ({ isOpen, onClose,}) => {
 
   const [errors, setErrors] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // useEffect para autocompletar datos si el usuario está logueado
+  useEffect(() => {
+    if (isLoggedIn) {
+      const datosUsuario = getDatosCheckout();
+      if (datosUsuario) {
+        setFormData(prev => ({
+          ...prev,
+          nombre: datosUsuario.nombres || '',
+          apellidos: datosUsuario.apellidos || '',
+          rut: datosUsuario.rut || '',
+          telefono: datosUsuario.telefono || '',
+          email: datosUsuario.email || '',
+          calle: datosUsuario.calle || '',
+          numero: datosUsuario.numero || '',
+          departamento: datosUsuario.departamento || '',
+          comuna: datosUsuario.comuna || '',
+          region: datosUsuario.region || 'Región Metropolitana de Santiago',
+          codigoPostal: datosUsuario.codigoPostal || '',
+          indicaciones: datosUsuario.indicaciones || ''
+        }));
+      }
+    }
+  }, [isLoggedIn, getDatosCheckout]);
 
   // Calcular totales
   const subtotal = getTotal();
@@ -244,7 +270,14 @@ const CheckoutForm = ({ isOpen, onClose,}) => {
           <form className="checkout-form" onSubmit={handleSubmit}>
             {/* INFORMACIÓN DEL CLIENTE */}
             <div className="form-section">
-              <h3>Información del Cliente</h3>
+              <h3>
+                Información del Cliente
+                {isLoggedIn && (
+                  <span className="auto-fill-badge">
+                    ✅ Datos autocompletados
+                  </span>
+                )}
+              </h3>
               <div className="form-row">
                 <div className="form-group">
                   <label>Nombre *</label>
