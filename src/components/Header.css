@@ -203,6 +203,101 @@ ease;
   color: #264653;
 }
 
+/* Contenedor y sugerencias de búsqueda */
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 2000;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-top: 4px;
+}
+
+.search-suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.search-suggestion-item:hover {
+  background-color: #f8f9fa;
+}
+
+.search-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.suggestion-info {
+  flex: 1;
+}
+
+.suggestion-name {
+  font-weight: 600;
+  color: #264653;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.suggestion-price {
+  color: #5ba746;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.suggestion-category {
+  color: #6c757d;
+  font-size: 12px;
+  background: #e9ecef;
+  padding: 2px 6px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.search-suggestion-all {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+  color: #5ba746;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.search-suggestion-all:hover {
+  background-color: #e9ecef;
+}
+
+.search-suggestion-all i {
+  font-size: 16px;
+}
+
 /* Ajustes responsivos para móviles y tablets */
 @media (max-width: 991px) {
   .custom-navbar .container-fluid {
@@ -476,5 +571,40 @@ ease;
   
   .user-dropdown .dropdown-item {
     padding: 0.6rem 1rem;
+  }
+
+  /* Ajustes para sugerencias en móvil */
+  .search-suggestions {
+    left: -16px;
+    right: -16px;
+    margin-top: 2px;
+    max-height: 300px;
+  }
+
+  .search-suggestion-item {
+    padding: 10px 12px;
+  }
+
+  .suggestion-image {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .suggestion-name {
+    font-size: 13px;
+  }
+
+  .suggestion-price {
+    font-size: 12px;
+  }
+
+  .suggestion-category {
+    font-size: 11px;
+  }
+
+  .search-suggestion-all {
+    padding: 10px 12px;
+    font-size: 13px;
   }
 }

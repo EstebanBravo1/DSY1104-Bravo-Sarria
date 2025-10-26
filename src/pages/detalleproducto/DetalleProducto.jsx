@@ -1,7 +1,8 @@
 import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "../../hooks";
-import { formatCLP } from "../../data";
+import { formatCLP, productos } from "../../data";
+import { Link } from "react-router-dom";
 import './DetalleProducto.css'
 
 
@@ -9,6 +10,21 @@ function DetailProduct() {
     const { producto } = useLoaderData();
     const { addToCart } = useCart();
     const [cantidad, setCantidad] = useState(1);
+    const [productosRelacionados, setProductosRelacionados] = useState([]);
+
+    // Obtener productos relacionados por categoría
+    useEffect(() => {
+        const obtenerProductosRelacionados = () => {
+            // Filtrar productos de la misma categoría, excluyendo el producto actual
+            const relacionados = productos.filter(p => 
+                p.categoria === producto.categoria && p.codigo !== producto.codigo
+            );
+            // Limitar a máximo 4 productos relacionados
+            setProductosRelacionados(relacionados.slice(0, 4));
+        };
+
+        obtenerProductosRelacionados();
+    }, [producto.categoria, producto.codigo]);
 
     const calcularTotal = () => producto.precio * cantidad;
 
@@ -217,6 +233,59 @@ function DetailProduct() {
                     <div className="related-container">
                         <h2>Productos Relacionados</h2>
                         <div id="related-products" className="related-products-grid">
+                            {productosRelacionados.length > 0 ? (
+                                productosRelacionados.map((productoRelacionado) => (
+                                    <div key={productoRelacionado.codigo} className="related-product-card">
+                                        <Link to={`/productos/${productoRelacionado.codigo}`} className="product-link">
+                                            <div className="related-product-image">
+                                                <img 
+                                                    src={`/src/assets/${productoRelacionado.imagen}`} 
+                                                    alt={productoRelacionado.nombre}
+                                                    className="related-img"
+                                                />
+                                            </div>
+                                            <div className="related-product-info">
+                                                <span className="related-product-category">
+                                                    {productoRelacionado.categoria}
+                                                </span>
+                                                <h3 className="related-product-name">
+                                                    {productoRelacionado.nombre}
+                                                </h3>
+                                                <p className="related-product-description">
+                                                    {productoRelacionado.descripcion.substring(0, 60)}...
+                                                </p>
+                                                <div className="related-product-price">
+                                                    <span className="price">{formatCLP(productoRelacionado.precio)}</span>
+                                                    <span className="unit">por kg</span>
+                                                </div>
+                                                <div className="related-product-stock">
+                                                    <span className={`stock-status ${productoRelacionado.stock > 10 ? 'in-stock' : 'low-stock'}`}>
+                                                        {productoRelacionado.stock > 0 ? `Stock: ${productoRelacionado.stock}` : 'Sin stock'}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                        <div className="related-product-actions">
+                                            <button 
+                                                className="btn-add-related"
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    addToCart(productoRelacionado, 1);
+                                                    alert(`${productoRelacionado.nombre} agregado al carrito`);
+                                                }}
+                                                disabled={productoRelacionado.stock === 0}
+                                            >
+                                                <i className="ri-shopping-cart-line"></i>
+                                                {productoRelacionado.stock > 0 ? 'Agregar' : 'Sin stock'}
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="no-related-products">
+                                    No hay productos relacionados disponibles en esta categoría.
+                                </p>
+                            )}
                         </div>
                     </div>
                 </section>
