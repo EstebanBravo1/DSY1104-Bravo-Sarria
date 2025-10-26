@@ -152,7 +152,7 @@ ease;
 
 /* Dropdown */
 .custom-navbar .dropdown-menu {
-  background-color: #264653;
+  background-color: #ffffff;
 }
 
 .custom-navbar .dropdown-item {
@@ -392,6 +392,7 @@ ease;
   box-shadow: none !important;
   padding: 0.5rem 1rem;
   transition: all 0.3s ease;
+  margin-left: 7rem;
 }
 
 .user-dropdown .dropdown-toggle:hover {
