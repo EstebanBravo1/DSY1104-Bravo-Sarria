@@ -1,15 +1,15 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { productsLoader, productDetailLoader } from './loaders'
 import Root from './pages/root';
-import Home from './pages/home/Home.jsx';
-import Login from './pages/auth/Login.jsx';
-import Register from './pages/auth/Register.jsx';
-import ForgotPassword from './pages/auth/ForgotPassword.jsx';
-import Producto from './pages/productos/Productos.jsx'
-import DetalleProducto from './pages/detalleproducto/DetalleProducto.jsx'
-import Carrito from './pages/carrito/Carrito.jsx'
-import Contacto from './pages/contacto/Contacto.jsx'
-import TransbankSucces from './pages/productos/TransbankSuccess.jsx'
+import Home from './pages/home/Home';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import Producto from './pages/productos/Productos'
+import DetalleProducto from './pages/detalleproducto/DetalleProducto'
+import Carrito from './pages/carrito/Carrito'
+import Contacto from './pages/contacto/Contacto'
+import TransbankSucces from './pages/productos/TransbankSuccess'
 
 export const router = createBrowserRouter([
   {
