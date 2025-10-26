@@ -1,19 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Container, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { productos } from '../data';
 import logo from '/assets/LogoHuertoHogar.png';
 import './Header.css';
 
 export default function Header() {
   const [query, setQuery] = useState('');
   const [expanded, setExpanded] = useState(false);
+  const [searchSuggestions, setSearchSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const { isLoggedIn, usuario, logout } = useAuth();
+  const navigate = useNavigate();
+
+  // Buscar sugerencias en tiempo real
+  useEffect(() => {
+    if (query.length > 0) {
+      const filteredProducts = productos.filter(producto =>
+        producto.nombre.toLowerCase().includes(query.toLowerCase()) ||
+        producto.descripcion.toLowerCase().includes(query.toLowerCase()) ||
+        producto.origen.toLowerCase().includes(query.toLowerCase())
+      );
+      setSearchSuggestions(filteredProducts.slice(0, 5)); // Máximo 5 sugerencias
+      setShowSuggestions(true);
+    } else {
+      setSearchSuggestions([]);
+      setShowSuggestions(false);
+    }
+  }, [query]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log('Buscando:', query);
-    setExpanded(false); // Cerrar el menú al buscar
+    if (query.trim()) {
+      navigate(`/productos?search=${encodeURIComponent(query.trim())}`);
+      setShowSuggestions(false);
+      setExpanded(false); // Cerrar el menú al buscar
+    }
+  };
+
+  const handleSuggestionClick = (producto) => {
+    navigate(`/productos/${producto.codigo}`);
+    setQuery('');
+    setShowSuggestions(false);
+    setExpanded(false);
+  };
+
+  const handleInputBlur = () => {
+    // Delay para permitir clicks en sugerencias
+    setTimeout(() => setShowSuggestions(false), 200);
   };
 
   const handleLogout = () => {
@@ -49,18 +85,55 @@ export default function Header() {
               </LinkContainer>
             </Nav>
             <Nav className="center-search">
-              <Form className="d-flex" onSubmit={handleSearch}>
-                <FormControl
-                  type="search"
-                  placeholder="Buscar productos..."
-                  className="search-input"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                />
-                <Button variant="outline-success" type="submit" className="search-btn">
-                  Buscar
-                </Button>
-              </Form>
+              <div className="search-container position-relative">
+                <Form className="d-flex" onSubmit={handleSearch}>
+                  <FormControl
+                    type="search"
+                    placeholder="Buscar productos..."
+                    className="search-input"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onBlur={handleInputBlur}
+                    onFocus={() => query.length > 0 && setShowSuggestions(true)}
+                  />
+                  <Button variant="outline-success" type="submit" className="search-btn">
+                    Buscar
+                  </Button>
+                </Form>
+                
+                {/* Sugerencias de búsqueda */}
+                {showSuggestions && searchSuggestions.length > 0 && (
+                  <div className="search-suggestions">
+                    {searchSuggestions.map((producto) => (
+                      <div 
+                        key={producto.codigo}
+                        className="search-suggestion-item"
+                        onClick={() => handleSuggestionClick(producto)}
+                      >
+                        <img 
+                          src={`/src/assets/${producto.imagen}`} 
+                          alt={producto.nombre}
+                          className="suggestion-image"
+                        />
+                        <div className="suggestion-info">
+                          <div className="suggestion-name">{producto.nombre}</div>
+                          <div className="suggestion-price">${producto.precio}</div>
+                          <div className="suggestion-category">{producto.categoria}</div>
+                        </div>
+                      </div>
+                    ))}
+                    {query.length > 0 && (
+                      <div 
+                        className="search-suggestion-all"
+                        onClick={() => handleSearch({ preventDefault: () => {} })}
+                      >
+                        <i className="ri-search-line"></i>
+                        Ver todos los resultados para "{query}"
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </Nav>
             <Nav className="cart-nav">
               <LinkContainer to="/carrito">
