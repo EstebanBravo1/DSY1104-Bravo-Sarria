@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Index.css'
+import './index.css'
 import { router } from './routes'
 import { AuthProvider } from './context/AuthContext'
 
