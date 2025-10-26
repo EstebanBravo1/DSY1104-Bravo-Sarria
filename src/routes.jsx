@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { productsLoader, productDetailLoader } from './loaders'
 import Root from './pages/root';
-import Home from './pages/home/home';
+import Home from './pages/home/Home';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
