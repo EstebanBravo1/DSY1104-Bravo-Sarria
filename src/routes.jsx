@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { productsLoader, productDetailLoader } from './loaders'
 import Root from './pages/root';
-import Home from './pages/home/home';
-import Login from './pages/auth/login';
-import Register from './pages/auth/register';
-import ForgotPassword from './pages/auth/forgotPassword';
+import Home from './pages/home/Home';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import ForgotPassword from './pages/auth/ForgotPassword';
 import Producto from './pages/productos/Productos'
 import DetalleProducto from './pages/detalleproducto/DetalleProducto'
 import Carrito from './pages/carrito/Carrito'
