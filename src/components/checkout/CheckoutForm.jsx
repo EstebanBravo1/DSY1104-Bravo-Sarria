@@ -1,128 +1,96 @@
-// ============================================
-// PASARELA DE PAGO - CHECKOUT COMPONENT
-// ============================================
-// Formulario completo de pago con validación
-
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../../hooks';
 import { formatCLP } from '../../data';
-import { createTransactionAndRedirect, validarRutChileno, formatearRut } from '../../services/transbank';
 import { useAuth } from '../../context/AuthContext';
+// Importamos solo las utilidades de validación, ya no la transacción
+import { validarRutChileno, formatearRut } from '../../services/transbank';
+import { SALES_API_URL } from '../../config/api';
 import '../../pages/productos/checkout.css';
 
-const CheckoutForm = ({ isOpen, onClose,}) => {
+const CheckoutForm = ({ isOpen, onClose }) => {
   const { cartItems, getTotal } = useCart();
   const { isLoggedIn, getDatosCheckout } = useAuth();
   
-  // Verificación de seguridad para cartItems
   const validCartItems = cartItems ? cartItems.filter(item => item && item.nombre && item.precio) : [];
   
   const [formData, setFormData] = useState({
-    // Información del cliente
-    nombre: '',
-    apellidos: '',
-    rut: '',
-    telefono: '',
-    email: '',
-    
-    // Dirección de entrega
-    calle: '',
-    numero: '',
-    departamento: '',
-    comuna: '',
-    region: 'Región Metropolitana de Santiago',
-    codigoPostal: '',
-    indicaciones: ''
+    nombre: '', apellidos: '', rut: '', telefono: '', email: '',
+    calle: '', numero: '', departamento: '', comuna: '', region: 'Región Metropolitana de Santiago', codigoPostal: '', indicaciones: ''
   });
 
   const [errors, setErrors] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // useEffect para autocompletar datos si el usuario está logueado
+  // Autocompletar datos cuando se abre el modal
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isOpen && isLoggedIn) {
       const datosUsuario = getDatosCheckout();
+      console.log('Datos del usuario para checkout:', datosUsuario);
       if (datosUsuario) {
-        setFormData(prev => ({
-          ...prev,
-          nombre: datosUsuario.nombres || '',
-          apellidos: datosUsuario.apellidos || '',
-          rut: datosUsuario.rut || '',
-          telefono: datosUsuario.telefono || '',
-          email: datosUsuario.email || '',
-          calle: datosUsuario.calle || '',
-          numero: datosUsuario.numero || '',
-          departamento: datosUsuario.departamento || '',
-          comuna: datosUsuario.comuna || '',
-          region: datosUsuario.region || 'Región Metropolitana de Santiago',
-          codigoPostal: datosUsuario.codigoPostal || '',
-          indicaciones: datosUsuario.indicaciones || ''
-        }));
+        setFormData(prev => ({ ...prev, ...datosUsuario }));
       }
     }
-  }, [isLoggedIn, getDatosCheckout]);
+  }, [isOpen, isLoggedIn, getDatosCheckout]);
 
-  // Calcular totales
+  // Cerrar con tecla ESC
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape' && isOpen && !isProcessing) {
+        onClose();
+      }
+    };
+    
+    if (isOpen) {
+      document.addEventListener('keydown', handleEsc);
+      return () => document.removeEventListener('keydown', handleEsc);
+    }
+  }, [isOpen, isProcessing, onClose]);
+
+  // Totales
   const subtotal = getTotal();
   const descuentos = validCartItems.reduce((total, item) => {
-    // Validar que el item exista y tenga las propiedades necesarias
-    if (!item || !item.precio || !item.cantidad) {
-      return total;
-    }
+    if (!item || !item.precio || !item.cantidad) return total;
     const descuento = item.descuento || 0;
     return total + (item.precio * item.cantidad * (descuento / 100));
   }, 0);
-  const envio = subtotal > 50000 ? 0 : 5000; // Envío gratis sobre $50.000
+  const envio = subtotal > 50000 ? 0 : 5000;
   const totalFinal = subtotal - descuentos + envio;
 
-  // Manejar cambios en el formulario
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    
-    // Formatear RUT automáticamente
     let formattedValue = value;
+    
     if (name === 'rut') {
       formattedValue = formatearRut(value);
     }
     
-    setFormData(prev => ({
-      ...prev,
-      [name]: formattedValue
-    }));
+    setFormData(prev => ({ ...prev, [name]: formattedValue }));
     
-    // Limpiar error del campo al escribir
     if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
-  // Validar formulario
+  // ✅ AQUÍ ESTÁ LA VALIDACIÓN QUE FALTABA
   const validateForm = () => {
     const newErrors = {};
 
-    // Campos obligatorios
     if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es obligatorio';
     if (!formData.apellidos.trim()) newErrors.apellidos = 'Los apellidos son obligatorios';
     if (!formData.rut.trim()) newErrors.rut = 'El RUT es obligatorio';
     else if (!validarRutChileno(formData.rut)) newErrors.rut = 'RUT inválido';
     if (!formData.telefono.trim()) newErrors.telefono = 'El teléfono es obligatorio';
     if (!formData.email.trim()) newErrors.email = 'El email es obligatorio';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email inválido';
     
-    // Dirección
     if (!formData.calle.trim()) newErrors.calle = 'La calle es obligatoria';
     if (!formData.numero.trim()) newErrors.numero = 'El número es obligatorio';
     if (!formData.comuna.trim()) newErrors.comuna = 'La comuna es obligatoria';
-    if (!formData.codigoPostal.trim()) newErrors.codigoPostal = 'El código postal es obligatorio';
 
-    setErrors(newErrors);
+    setErrors(newErrors); // Ahora sí usamos setErrors
     return Object.keys(newErrors).length === 0;
   };
 
-  // Procesar pago con Transbank (redirección inmediata)
+  // ✅ ENVÍO AL BACKEND (Microservicio de Ventas)
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -131,108 +99,94 @@ const CheckoutForm = ({ isOpen, onClose,}) => {
     setIsProcessing(true);
     
     try {
-      // Preparar datos de la orden para Transbank
-      const orderData = {
+      // 1. Preparar datos para el backend
+      const saleRequest = {
+        clienteNombre: `${formData.nombre} ${formData.apellidos}`,
+        clienteEmail: formData.email,
         total: totalFinal,
-        cliente: formData,
         productos: validCartItems.map(item => ({
           codigo: item.codigo,
-          nombre: item.nombre,
-          precio: item.precio,
           cantidad: item.cantidad,
-          descuento: item.descuento || 0
+          precio: item.precio
         }))
       };
 
-      console.log('🏦 Procesando pago con Transbank - Redirección inmediata');
+      console.log('📤 Enviando venta al Microservicio (8081)...');
 
-      // Crear transacción y redirigir inmediatamente a página de éxito
-      const result = await createTransactionAndRedirect(orderData);
-      
-      if (!result.success) {
-        throw new Error(result.error || 'Error al crear la transacción');
+      // 2. Llamada a tu API Java
+      const response = await fetch(`${SALES_API_URL}/init`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(saleRequest)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || 'Error en el servidor de ventas');
       }
 
-      // Si llegamos aquí, significa que la redirección falló
-      console.log('⚠️ La redirección no se completó correctamente');
+      const data = await response.json();
+      console.log('✅ Token recibido, redirigiendo a Transbank...');
+
+      // 3. Redirección Automática a Transbank
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = data.url;
       
+      const tokenInput = document.createElement("input");
+      tokenInput.type = "hidden";
+      tokenInput.name = "token_ws";
+      tokenInput.value = data.token;
+      
+      form.appendChild(tokenInput);
+      document.body.appendChild(form);
+      form.submit();
+
     } catch (error) {
-      console.error('❌ Error procesando pago:', error);
-      
-      // Mostrar error específico al usuario
-      const errorMessage = error.message || 'Error al procesar el pago. Intente nuevamente.';
-      alert(`Error en el pago: ${errorMessage}`);
-      
+      console.error('❌ Error:', error);
+      alert(`Error al iniciar el pago: ${error.message}`);
       setIsProcessing(false);
     }
   };
 
   if (!isOpen) return null;
+  if (validCartItems.length === 0) return null;
 
-  // Verificar si hay items válidos en el carrito
-  if (validCartItems.length === 0) {
-    return (
-      <div className="checkout-overlay">
-        <div className="checkout-container">
-          <div className="checkout-header">
-            <h2>Carrito Vacío</h2>
-            <button className="checkout-close" onClick={onClose}>×</button>
-          </div>
-          <div className="checkout-content">
-            <p>No hay productos válidos en tu carrito.</p>
-            <button onClick={onClose} className="checkout-submit">
-              Volver a la tienda
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // Cerrar al hacer clic en el overlay (fondo oscuro)
+  const handleOverlayClick = (e) => {
+    if (e.target.classList.contains('checkout-overlay') && !isProcessing) {
+      onClose();
+    }
+  };
 
   return (
-    <div className="checkout-overlay">
+    <div className="checkout-overlay" onClick={handleOverlayClick}>
       <div className="checkout-container">
         <div className="checkout-header">
           <h2>Finalizar Compra</h2>
-          <button className="checkout-close" onClick={onClose}>×</button>
+          <button className="checkout-close" onClick={onClose} disabled={isProcessing}>×</button>
         </div>
 
         <div className="checkout-content">
-          {/* RESUMEN DEL PEDIDO */}
+          {/* RESUMEN */}
           <div className="order-summary">
             <h3>Resumen del Pedido</h3>
+            
+            {/* Lista de productos */}
             <div className="order-items">
-              {validCartItems.map(item => (
-                <div key={item.codigo} className="order-item">
-                  <img 
-                    src={`/src/assets/${item.imagen}`} 
-                    alt={item.nombre}
-                    className="order-item-image"
-                  />
-                  <div className="order-item-details">
-                    <h4>{item.nombre}</h4>
-                    <p>Cantidad: {item.cantidad}</p>
-                    {(item.descuento || 0) > 0 && (
-                      <span className="discount-badge">
-                        -{item.descuento || 0}% OFF
-                      </span>
-                    )}
+              {validCartItems.map((item, index) => (
+                <div key={index} className="order-item">
+                  <img src={`/src/assets/${item.imagen}`} alt={item.nombre} className="order-item-image" />
+                  <div className="item-info">
+                    <span className="item-name">{item.nombre}</span>
+                    <span className="item-quantity">x{item.cantidad}</span>
                   </div>
-                  <div className="order-item-price">
-                    {(item.descuento || 0) > 0 && (
-                      <span className="original-price">
-                        {formatCLP(item.precio * item.cantidad)}
-                      </span>
-                    )}
-                    <span className="final-price">
-                      {formatCLP(item.precio * item.cantidad * (1 - (item.descuento || 0) / 100))}
-                    </span>
-                  </div>
+                  <span className="item-price">{formatCLP(item.precio * item.cantidad)}</span>
                 </div>
               ))}
             </div>
 
-            {/* TOTALES */}
+            {/* Totales */}
             <div className="order-totals">
               <div className="total-line">
                 <span>Subtotal:</span>
@@ -246,61 +200,31 @@ const CheckoutForm = ({ isOpen, onClose,}) => {
               )}
               <div className="total-line">
                 <span>Envío:</span>
-                <span>{envio === 0 ? 'GRATIS' : formatCLP(envio)}</span>
+                <span>{envio === 0 ? 'Gratis' : formatCLP(envio)}</span>
               </div>
               <div className="total-line final-total">
                 <span>Total a pagar:</span>
                 <span>{formatCLP(totalFinal)}</span>
               </div>
             </div>
-            
-            {/* INFORMACIÓN DE TRANSBANK */}
-            <div className="payment-info">
-              <div className="transbank-info">
-                <span className="transbank-logo">🏦</span>
-                <div className="transbank-text">
-                  <strong>Pago seguro con Transbank</strong>
-                  <p>Tu pago será procesado de forma segura a través de WebPay Plus. Aceptamos tarjetas de débito y crédito.</p>
-                </div>
-              </div>
+            <div className="payment-info mt-3">
+                <small>Serás redirigido a Webpay para completar el pago de forma segura.</small>
             </div>
           </div>
 
-          {/* FORMULARIO */}
+          {/* FORMULARIO COMPLETO */}
           <form className="checkout-form" onSubmit={handleSubmit}>
-            {/* INFORMACIÓN DEL CLIENTE */}
             <div className="form-section">
-              <h3>
-                Información del Cliente
-                {isLoggedIn && (
-                  <span className="auto-fill-badge">
-                    ✅ Datos autocompletados
-                  </span>
-                )}
-              </h3>
+              <h3>Información del Cliente</h3>
               <div className="form-row">
                 <div className="form-group">
                   <label>Nombre *</label>
-                  <input
-                    type="text"
-                    name="nombre"
-                    value={formData.nombre}
-                    onChange={handleInputChange}
-                    className={errors.nombre ? 'error' : ''}
-                    placeholder="Ingresa tu nombre"
-                  />
+                  <input type="text" name="nombre" value={formData.nombre} onChange={handleInputChange} className={errors.nombre ? 'error' : ''} />
                   {errors.nombre && <span className="error-message">{errors.nombre}</span>}
                 </div>
                 <div className="form-group">
                   <label>Apellidos *</label>
-                  <input
-                    type="text"
-                    name="apellidos"
-                    value={formData.apellidos}
-                    onChange={handleInputChange}
-                    className={errors.apellidos ? 'error' : ''}
-                    placeholder="Ingresa tus apellidos"
-                  />
+                  <input type="text" name="apellidos" value={formData.apellidos} onChange={handleInputChange} className={errors.apellidos ? 'error' : ''} />
                   {errors.apellidos && <span className="error-message">{errors.apellidos}</span>}
                 </div>
               </div>
@@ -308,152 +232,49 @@ const CheckoutForm = ({ isOpen, onClose,}) => {
               <div className="form-row">
                 <div className="form-group">
                   <label>RUT *</label>
-                  <input
-                    type="text"
-                    name="rut"
-                    value={formData.rut}
-                    onChange={handleInputChange}
-                    className={errors.rut ? 'error' : ''}
-                    placeholder="12.345.678-9"
-                  />
+                  <input type="text" name="rut" value={formData.rut} onChange={handleInputChange} className={errors.rut ? 'error' : ''} placeholder="12.345.678-9" />
                   {errors.rut && <span className="error-message">{errors.rut}</span>}
                 </div>
                 <div className="form-group">
-                  <label>Teléfono *</label>
-                  <input
-                    type="tel"
-                    name="telefono"
-                    value={formData.telefono}
-                    onChange={handleInputChange}
-                    className={errors.telefono ? 'error' : ''}
-                    placeholder="+56 9 1234 5678"
-                  />
-                  {errors.telefono && <span className="error-message">{errors.telefono}</span>}
+                  <label>Email *</label>
+                  <input type="email" name="email" value={formData.email} onChange={handleInputChange} className={errors.email ? 'error' : ''} />
+                  {errors.email && <span className="error-message">{errors.email}</span>}
                 </div>
               </div>
-
-              <div className="form-group">
-                <label>Email *</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className={errors.email ? 'error' : ''}
-                  placeholder="tu@email.com"
-                />
-                {errors.email && <span className="error-message">{errors.email}</span>}
-              </div>
+               
+               <div className="form-group">
+                  <label>Teléfono *</label>
+                  <input type="tel" name="telefono" value={formData.telefono} onChange={handleInputChange} className={errors.telefono ? 'error' : ''} />
+                  {errors.telefono && <span className="error-message">{errors.telefono}</span>}
+               </div>
             </div>
 
-            {/* DIRECCIÓN DE ENTREGA */}
             <div className="form-section">
               <h3>Dirección de Entrega</h3>
               <div className="form-row">
                 <div className="form-group flex-2">
                   <label>Calle *</label>
-                  <input
-                    type="text"
-                    name="calle"
-                    value={formData.calle}
-                    onChange={handleInputChange}
-                    className={errors.calle ? 'error' : ''}
-                    placeholder="Nombre de la calle"
-                  />
+                  <input type="text" name="calle" value={formData.calle} onChange={handleInputChange} className={errors.calle ? 'error' : ''} />
                   {errors.calle && <span className="error-message">{errors.calle}</span>}
                 </div>
                 <div className="form-group">
                   <label>Número *</label>
-                  <input
-                    type="text"
-                    name="numero"
-                    value={formData.numero}
-                    onChange={handleInputChange}
-                    className={errors.numero ? 'error' : ''}
-                    placeholder="123"
-                  />
+                  <input type="text" name="numero" value={formData.numero} onChange={handleInputChange} className={errors.numero ? 'error' : ''} />
                   {errors.numero && <span className="error-message">{errors.numero}</span>}
                 </div>
-                <div className="form-group">
-                  <label>Depto (opcional)</label>
-                  <input
-                    type="text"
-                    name="departamento"
-                    value={formData.departamento}
-                    onChange={handleInputChange}
-                    placeholder="Ej: 603"
-                  />
-                </div>
               </div>
-
+              
               <div className="form-row">
-                <div className="form-group">
-                  <label>Región *</label>
-                  <select
-                    name="region"
-                    value={formData.region}
-                    onChange={handleInputChange}
-                  >
-                    <option value="Región Metropolitana de Santiago">Región Metropolitana de Santiago</option>
-                    <option value="Región de Valparaíso">Región de Valparaíso</option>
-                    <option value="Región del Biobío">Región del Biobío</option>
-                    <option value="Región de la Araucanía">Región de la Araucanía</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>Comuna *</label>
-                  <input
-                    type="text"
-                    name="comuna"
-                    value={formData.comuna}
-                    onChange={handleInputChange}
-                    className={errors.comuna ? 'error' : ''}
-                    placeholder="Comuna"
-                  />
-                  {errors.comuna && <span className="error-message">{errors.comuna}</span>}
-                </div>
-                <div className="form-group">
-                  <label>Código Postal *</label>
-                  <input
-                    type="text"
-                    name="codigoPostal"
-                    value={formData.codigoPostal}
-                    onChange={handleInputChange}
-                    className={errors.codigoPostal ? 'error' : ''}
-                    placeholder="7500000"
-                  />
-                  {errors.codigoPostal && <span className="error-message">{errors.codigoPostal}</span>}
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label>Indicaciones para la entrega (opcional)</label>
-                <textarea
-                  name="indicaciones"
-                  value={formData.indicaciones}
-                  onChange={handleInputChange}
-                  rows="3"
-                  placeholder="Ej: Entre calles, color del edificio, no tiene timbre..."
-                ></textarea>
+                 <div className="form-group">
+                    <label>Comuna *</label>
+                    <input type="text" name="comuna" value={formData.comuna} onChange={handleInputChange} className={errors.comuna ? 'error' : ''} />
+                    {errors.comuna && <span className="error-message">{errors.comuna}</span>}
+                 </div>
               </div>
             </div>
 
-            {/* BOTÓN DE PAGO */}
-            <button 
-              type="submit" 
-              className="checkout-submit"
-              disabled={isProcessing || validCartItems.length === 0}
-            >
-              {isProcessing ? (
-                <>
-                  <span className="loading-spinner"></span>
-                  Procesando con Transbank...
-                </>
-              ) : (
-                <>
-                  🏦 Pagar con WebPay Plus {formatCLP(totalFinal)}
-                </>
-              )}
+            <button type="submit" className="checkout-submit" disabled={isProcessing}>
+              {isProcessing ? 'Conectando con el Banco...' : `Pagar ${formatCLP(totalFinal)}`}
             </button>
           </form>
         </div>

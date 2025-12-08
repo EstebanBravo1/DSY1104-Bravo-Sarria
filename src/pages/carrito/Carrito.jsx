@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks';
+import { useAuth } from '../../context/AuthContext';
 import { formatCLP } from '../../data';
 import CheckoutModal from '../../components/checkout/CheckoutModal';
 import "../carrito/carrito.css"
@@ -8,13 +10,25 @@ import "../carrito/carrito.css"
 
 function Carrito() {
     const { cartItems, removeFromCart, updateQuantity, clearCart, getTotal, getItemCount } = useCart();
+    const { isLoggedIn } = useAuth();
+    const navigate = useNavigate();
     const [showCheckoutModal, setShowCheckoutModal] = useState(false);
+    const [showLoginAlert, setShowLoginAlert] = useState(false);
 
     // Manejar click en "Proceder al Pago"
     const handleCheckout = () => {
-        if (cartItems.length > 0) {
-            setShowCheckoutModal(true);
+        if (cartItems.length === 0) return;
+        
+        // Verificar si el usuario está logueado
+        if (!isLoggedIn) {
+            setShowLoginAlert(true);
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);
+            return;
         }
+        
+        setShowCheckoutModal(true);
     };
 
     // Manejar finalización del pago (éxito o cierre)
@@ -35,6 +49,11 @@ function Carrito() {
             <main className="main">
         <section className="cart-section">
             <div className="cart-container">
+                {showLoginAlert && (
+                    <div className="alert alert-warning" style={{ marginBottom: '1rem' }}>
+                        ⚠️ Debes iniciar sesión para continuar con la compra. Redirigiendo...
+                    </div>
+                )}
                 <div className="cart-summary">
                     <h2>Resumen del Pedido</h2>
                     <div className="cart-stats">

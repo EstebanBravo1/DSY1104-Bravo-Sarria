@@ -107,6 +107,7 @@
 .btn-primary {
   background: linear-gradient(180deg, var(--home-color1) 0%, #247a50 100%);
   color: var(--white-color);
+  font-size: 1.3rem;
 }
 
 .btn-primary:hover {
