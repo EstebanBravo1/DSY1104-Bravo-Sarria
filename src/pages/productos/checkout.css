@@ -114,15 +114,47 @@
 }
 
 .order-item {
-  display: grid;
-  grid-template-columns: 60px 1fr auto;
-  gap: 1rem;
+  display: flex;
   align-items: center;
+  gap: 1rem;
   padding: 1rem;
   background: white;
   border-radius: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.order-item-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.item-name {
+  font-size: 1rem;
+  color: var(--home-color4);
+  font-weight: 500;
+}
+
+.item-quantity {
+  color: var(--home-color5);
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+.item-price {
+  color: var(--home-color1);
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .order-item-image {

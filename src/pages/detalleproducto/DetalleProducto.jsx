@@ -1,10 +1,9 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useCart } from "../../hooks";
-import { formatCLP, productos } from "../../data";
-import { Link } from "react-router-dom";
-import './DetalleProducto.css'
-
+import { formatCLP } from "../../data"; // Ya no importamos 'productos' aquí
+import { PRODUCTS_API_URL } from "../../config/api";
+import './DetalleProducto.css';
 
 function DetailProduct() {
     const { producto } = useLoaderData();
@@ -12,19 +11,38 @@ function DetailProduct() {
     const [cantidad, setCantidad] = useState(1);
     const [productosRelacionados, setProductosRelacionados] = useState([]);
 
-    // Obtener productos relacionados por categoría
+    // Efecto para cargar productos relacionados desde la API
     useEffect(() => {
-        const obtenerProductosRelacionados = () => {
-            // Filtrar productos de la misma categoría, excluyendo el producto actual
-            const relacionados = productos.filter(p => 
-                p.categoria === producto.categoria && p.codigo !== producto.codigo
-            );
-            // Limitar a máximo 4 productos relacionados
-            setProductosRelacionados(relacionados.slice(0, 4));
+        const obtenerRelacionados = async () => {
+            if (!producto?.categoria) return;
+
+            try {
+                // Pedimos a la API todos los productos de la misma categoría
+                const response = await fetch(`${PRODUCTS_API_URL}?categoria=${producto.categoria}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log("🔗 Productos relacionados recibidos:", data);
+                    
+                    // El backend devuelve un objeto Page, extraemos el contenido
+                    const todosProductos = data.content || data;
+                    
+                    // Filtramos para no mostrar el mismo producto que ya estamos viendo
+                    // y tomamos máximo 4 para mostrar
+                    const relacionados = todosProductos
+                        .filter(p => p.codigo !== producto.codigo)
+                        .slice(0, 4);
+                    
+                    console.log("✅ Productos relacionados filtrados:", relacionados);
+                    setProductosRelacionados(relacionados);
+                }
+            } catch (error) {
+                console.error("❌ Error cargando productos relacionados:", error);
+            }
         };
 
-        obtenerProductosRelacionados();
-    }, [producto.categoria, producto.codigo]);
+        obtenerRelacionados();
+    }, [producto]); // Se ejecuta cada vez que cambia el producto principal
 
     const calcularTotal = () => producto.precio * cantidad;
 
@@ -36,7 +54,6 @@ function DetailProduct() {
 
     const incrementar = () => setCantidad(prev => prev + 1);
     const decrementar = () => setCantidad(prev => prev > 1 ? prev - 1 : 1);
-     // Obtener datos del loader
 
     return (
         <div className="container-full">
@@ -48,16 +65,27 @@ function DetailProduct() {
 
                         <div className="product-gallery">
                             <div className="main-image">
-                                <img id="main-product-image" src={`/src/assets/${producto.imagen}`} alt={producto.nombre} className="main-img"/>
-                                    <div className="image-zoom-overlay">
-                                        <i className="ri-zoom-in-line"></i>
-                                        <span>Hacer clic para ampliar</span>
-                                    </div>
+                                {/* Ajuste de ruta para que coincida con tus assets públicos */}
+                                <img 
+                                    id="main-product-image" 
+                                    src={`/assets/${producto.imagen.replace('imagenes/', '')}`} 
+                                    alt={producto.nombre} 
+                                    className="main-img"
+                                    onError={(e) => {
+                                        // Fallback por si la ruta con/sin 'imagenes/' falla
+                                        e.target.src = `/assets/imagenes/${producto.imagen.split('/').pop()}`;
+                                    }}
+                                />
+                                <div className="image-zoom-overlay">
+                                    <i className="ri-zoom-in-line"></i>
+                                    <span>Hacer clic para ampliar</span>
+                                </div>
                             </div>
                             <div className="thumbnail-gallery">
-
+                                {/* Aquí podrías agregar miniaturas si tuvieras más imágenes */}
                             </div>
                         </div>
+                        
                         <div className="product-info">
                             <div className="product-header">
                                 <span id="product-category" className="product-category-badge">{producto.categoria}</span>
@@ -75,7 +103,7 @@ function DetailProduct() {
                             </div>
 
                             <div className="product-pricing">
-                                <span id="product-price" className="current-price">${producto.precio}</span>
+                                <span id="product-price" className="current-price">{formatCLP(producto.precio)}</span>
                                 <span className="price-unit">por kg</span>
                                 <div className="discount-badge" style={{display: 'none'}}>
                                     <span>15% OFF</span>
@@ -83,9 +111,7 @@ function DetailProduct() {
                             </div>
 
                             <div className="product-description">
-                                            <span id="product-stock" className="detail-value">{producto.stock}</span>
-                                <p id="product-description-text">Descripción del producto...</p>
-                                <span id="producto-description-text" className="detail-value">{producto.descripcion}</span>
+                                <p id="product-description-text">{producto.descripcion}</p>
                             </div>
 
                             <div className="product-details">
@@ -99,18 +125,12 @@ function DetailProduct() {
                                         <span className="detail-label">Stock disponible:</span>
                                         <span id="product-stock" className="detail-value">{producto.stock}</span>
                                     </div>
-                                    <div className="detail-item">
-                                        <span className="detail-label">Prácticas:</span>
-                                        <span id="product-stock" className="detail-value">{producto.practicas}</span>
-                                        <div id="product-practices" className="practices-list">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
+
                             <div className="purchase-section">
                                 <div className="quantity-selector">
                                     <label htmlFor="quantity-input">Cantidad:</label>
-                                    <span>{cantidad}</span>
                                     <div className="quantity-controls">
                                         <button onClick={decrementar} id="decrease-qty" className="qty-btn">
                                             <i className="ri-subtract-line"></i>
@@ -122,11 +142,11 @@ function DetailProduct() {
                                             onChange={(e) => setCantidad(parseInt(e.target.value) || 1)}
                                             min="1"
                                             max="999"
-                                            className="qty-input"/>
-                                            <button onClick={incrementar} id="increase-qty" className="qty-btn">
-                                                <i className="ri-add-line"></i>
-                                           </button>
-                                    
+                                            className="qty-input"
+                                        />
+                                        <button onClick={incrementar} id="increase-qty" className="qty-btn">
+                                            <i className="ri-add-line"></i>
+                                        </button>
                                     </div>
                                     <span className="quantity-unit">kg</span>
                                 </div>
@@ -134,20 +154,17 @@ function DetailProduct() {
                                 <div className="purchase-actions">
                                     <button 
                                         id="btn-add-cart" 
-                                        className="btn-buy-now"
+                                        className="btn-add-cart"
                                         onClick={handleAgregarCarrito}
+                                        disabled={producto.stock <= 0}
                                     >
-                                        <i className="ri-flashlight-line"></i>
-                                        Agregar al Carrito
-                                    </button>
-                                    <button className="btn-buy-now">
-                                        <i className="ri-flashlight-line"></i>
-                                        Comprar Ahora
+                                        <i className="ri-shopping-cart-line"></i>
+                                        {producto.stock > 0 ? 'Agregar al Carrito' : 'Sin Stock'}
                                     </button>
                                 </div>
 
                                 <div className="total-preview">
-                                    <span className="total-label">Total:</span>
+                                    <span className="total-label">Total estimado:</span>
                                     <span id="total-price" className="total-amount">{formatCLP(calcularTotal())}</span>
                                 </div>
                             </div>
@@ -167,68 +184,12 @@ function DetailProduct() {
                                         <p>Productos frescos o te devolvemos el dinero</p>
                                     </div>
                                 </div>
-                                <div className="info-item">
-                                    <i className="ri-time-line"></i>
-                                    <div className="info-content">
-                                        <h4>Entrega Rápida</h4>
-                                        <p>Recibe tu pedido en 24-48 horas</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <section className="recipes-section">
-                    <div className="recipes-container">
-                        
-                        <h2 className="recipes-title">Recetas Recomendadas</h2>
-                        
-                        <div id="recipes-grid" className="recipes-grid">
-                            {producto.recetas && producto.recetas.length > 0 ? (
-                                producto.recetas.map((receta, index) => (
-                                    <div key={index} className="recipe-card">
-                                        <div className="recipe-header">
-                                            <h3 className="recipe-name">{receta.nombre}</h3>
-                                            <div className="recipe-meta">
-                                                <span className="recipe-time">
-                                                    <i className="ri-time-line"></i> {receta.tiempo}
-                                                </span>
-                                                <span className="recipe-difficulty">
-                                                    <i className="ri-fire-line"></i> {receta.dificultad}
-                                                </span>
-                                                <span className="recipe-servings">
-                                                    <i className="ri-user-line"></i> {receta.porciones} porciones
-                                                </span>
-                                            </div>
-                                        </div>
 
-                                        <div className="recipe-content">
-                                            <div className="recipe-ingredients">
-                                                <h4><i className="ri-list-check"></i> Ingredientes:</h4>
-                                                <ul>
-                                                    {receta.ingredientes.map((ingrediente, idx) => (
-                                                        <li key={idx}>{ingrediente}</li>
-                                                    ))}
-                                                </ul>
-                                            </div>
-
-                                            <div className="recipe-steps">
-                                                <h4><i className="ri-file-list-line"></i> Preparación:</h4>
-                                                <ol>
-                                                    {receta.pasos.map((paso, idx) => (
-                                                        <li key={idx}>{paso}</li>
-                                                    ))}
-                                                </ol>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No hay recetas disponibles para este producto.</p>
-                            )}
-                        </div>
-                    </div>
-                </section>
+                {/* Sección de Productos Relacionados */}
                 <section className="related-products-section">
                     <div className="related-container">
                         <h2>Productos Relacionados</h2>
@@ -239,9 +200,12 @@ function DetailProduct() {
                                         <Link to={`/productos/${productoRelacionado.codigo}`} className="product-link">
                                             <div className="related-product-image">
                                                 <img 
-                                                    src={`/src/assets/${productoRelacionado.imagen}`} 
+                                                    src={`/assets/${productoRelacionado.imagen.replace('imagenes/', '')}`} 
                                                     alt={productoRelacionado.nombre}
                                                     className="related-img"
+                                                    onError={(e) => {
+                                                        e.target.src = `/assets/imagenes/${productoRelacionado.imagen.split('/').pop()}`;
+                                                    }}
                                                 />
                                             </div>
                                             <div className="related-product-info">
@@ -252,7 +216,7 @@ function DetailProduct() {
                                                     {productoRelacionado.nombre}
                                                 </h3>
                                                 <p className="related-product-description">
-                                                    {productoRelacionado.descripcion.substring(0, 60)}...
+                                                    {productoRelacionado.descripcion ? productoRelacionado.descripcion.substring(0, 50) + '...' : ''}
                                                 </p>
                                                 <div className="related-product-price">
                                                     <span className="price">{formatCLP(productoRelacionado.precio)}</span>
@@ -273,33 +237,25 @@ function DetailProduct() {
                                                     addToCart(productoRelacionado, 1);
                                                     alert(`${productoRelacionado.nombre} agregado al carrito`);
                                                 }}
-                                                disabled={productoRelacionado.stock === 0}
+                                                disabled={productoRelacionado.stock <= 0}
                                             >
                                                 <i className="ri-shopping-cart-line"></i>
-                                                {productoRelacionado.stock > 0 ? 'Agregar' : 'Sin stock'}
+                                                {productoRelacionado.stock > 0 ? 'Agregar' : 'Agotado'}
                                             </button>
                                         </div>
                                     </div>
                                 ))
                             ) : (
                                 <p className="no-related-products">
-                                    No hay productos relacionados disponibles en esta categoría.
+                                    No hay más productos relacionados en esta categoría.
                                 </p>
                             )}
                         </div>
                     </div>
                 </section>
             </main>
-            
-            <div id="image-modal" className="image-modal" style={{display: 'none'}}>
-                <div className="image-modal-content">
-                    <button className="image-modal-close">
-                        <i className="ri-close-line"></i>
-                    </button>
-                    <img id="modal-image" src="" alt="Imagen ampliada"/>
-                </div>
-            </div>
         </div>
     );
 }
+
 export default DetailProduct;

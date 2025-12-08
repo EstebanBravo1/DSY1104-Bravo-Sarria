@@ -158,9 +158,11 @@
 .filter-btn-bootstrap {
   margin: 0.25rem;
   border-radius: 25px !important;
-  font-weight: 500;
+  font-weight: 900;
   transition: all 0.3s ease;
   min-width: 120px;
+  font-size: 1.5rem !important;
+  padding: 0.6rem 1.2rem;
 }
 
 .filter-btn-bootstrap:hover {
@@ -178,6 +180,8 @@
   margin-right: auto;
   transition: all 0.3s ease;
   display: block;
+  font-size: 1.1rem;
+  padding: 0.6rem 1.2rem;
 }
 
 .filter-btn-mobile:hover {
@@ -200,6 +204,7 @@
 .btn-primary {
   background-color: #28a745 !important; /* Color de fondo del botón activo */
   border-color: #28a745 !important; /* Color del borde del botón activo */
+  font-size: 1.3rem;
 }
 
 /* Mejorar las cards de producto */
@@ -234,6 +239,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: var(--font-medium);
+  font-size: 1.1rem;
 }
 
 .filter-btn:hover,
