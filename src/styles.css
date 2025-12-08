@@ -1839,6 +1839,7 @@ footer p {
 .btn-primary {
   background: var(--home-color1);
   color: var(--white-color);
+  font-size: 1.3rem;
 }
 
 .btn-primary:hover {

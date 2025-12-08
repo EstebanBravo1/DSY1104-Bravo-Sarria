@@ -185,7 +185,7 @@
   color: var(--title-color);
   font-weight: var(--font-medium);
   margin-bottom: 0.5rem;
-  font-size: var(--normal-font-size);
+  font-size: 1.5rem;
 }
 
 .form-group input,

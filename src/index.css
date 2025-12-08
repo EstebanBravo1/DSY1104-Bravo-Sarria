@@ -101,6 +101,20 @@ html, body {
   overflow-x: hidden; 
 }
 
+/* Estilos personalizados para títulos de cards de Bootstrap */
+.card-title {
+  margin-bottom: var(--bs-card-title-spacer-y);
+  color: var(--bs-card-title-color);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Estilos para texto en negrita */
+b, strong {
+  font-weight: bolder;
+  font-size: 2rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
