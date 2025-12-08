@@ -12,7 +12,7 @@ export default function Home() {
             name: "Manzanas Fuji",
             price: "$1.990",
             category: "Frutas",
-            image: "🍎"
+            image: "/assets/imagenes/Manzana-Fuji-granel.png"
         },
         {
             id: 2,
@@ -20,7 +20,7 @@ export default function Home() {
             name: "Naranjas Valencia",
             price: "$1.590",
             category: "Frutas",
-            image: "🍊"
+            image: "/assets/imagenes/Naranjas_Valencias.png"
         },
         {
             id: 3,
@@ -28,7 +28,7 @@ export default function Home() {
             name: "Plátanos Cavendish",
             price: "$1.290",
             category: "Frutas",
-            image: "🍌"
+            image: "/assets/imagenes/Platano_Cavendish.png"
         },
         {
             id: 4,
@@ -36,7 +36,7 @@ export default function Home() {
             name: "Zanahorias Orgánicas",
             price: "$990",
             category: "Verduras",
-            image: "🥕"
+            image: "/assets/imagenes/Zanahorias_Organicas.png"
         },
         {
             id: 5,
@@ -44,7 +44,7 @@ export default function Home() {
             name: "Lechuga Romana",
             price: "$990",
             category: "Verduras",
-            image: "🥬"
+            image: "/assets/imagenes/Lechuga_Romana.png"
         },
         {
             id: 6,
@@ -52,7 +52,7 @@ export default function Home() {
             name: "Miel Orgánica",
             price: "$4.990",
             category: "Orgánicos",
-            image: "🍯"
+            image: "/assets/imagenes/Miel_Organica.png"
         },
         {
             id: 7,
@@ -60,7 +60,7 @@ export default function Home() {
             name: "Leche Entera",
             price: "$1.190",
             category: "Lácteos",
-            image: "🥛"
+            image: "/assets/imagenes/Leche_Entera.png"
         },
         {
             id: 8,
@@ -68,7 +68,7 @@ export default function Home() {
             name: "Yogur Natural",
             price: "$990",
             category: "Lácteos",
-            image: "🥄"
+            image: "/assets/imagenes/Yogur_Natural.png"
         }
     ];
 
@@ -77,22 +77,52 @@ export default function Home() {
             <div className="home-page">
                 {/* Hero Section */}
                 <section className="hero-section">
-                    <Container fluid>
+                    <div className="hero-overlay"></div>
+                    <Container fluid className="hero-container">
                         <Row className="align-items-center min-vh-100">
-                            <Col lg={6}>
+                            <Col lg={7}>
                                 <div className="hero-content">
-                                    <h1 className="hero-title">Frescura y naturalidad</h1>
+                                    <div className="hero-badge">🌱 100% Orgánico & Natural</div>
+                                    <h1 className="hero-title">
+                                        Del Campo<br />
+                                        a tu <span className="hero-highlight">Mesa</span>
+                                    </h1>
                                     <p className="hero-subtitle">
-                                        Productos orgánicos directamente del campo a tu hogar
+                                        Descubre la frescura auténtica con productos cosechados con amor y cuidado. 
+                                        Sin químicos, solo naturaleza pura.
                                     </p>
-                                    <Button 
-                                        as={Link} 
-                                        to="/productos" 
-                                        className="hero-button"
-                                        size="lg"
-                                    >
-                                        Ver catálogo
-                                    </Button>
+                                    <div className="hero-buttons">
+                                        <Button 
+                                            as={Link} 
+                                            to="/productos" 
+                                            className="hero-button-primary"
+                                            size="lg"
+                                        >
+                                            🛒 Explorar Productos
+                                        </Button>
+                                        <Button 
+                                            as={Link} 
+                                            to="/contacto" 
+                                            className="hero-button-secondary"
+                                            size="lg"
+                                        >
+                                            📞 Contáctanos
+                                        </Button>
+                                    </div>
+                                    <div className="hero-stats">
+                                        <div className="stat-item">
+                                            <span className="stat-number">500+</span>
+                                            <span className="stat-label">Productos Frescos</span>
+                                        </div>
+                                        <div className="stat-item">
+                                            <span className="stat-number">100%</span>
+                                            <span className="stat-label">Orgánico</span>
+                                        </div>
+                                        <div className="stat-item">
+                                            <span className="stat-number">24/7</span>
+                                            <span className="stat-label">Atención</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </Col>
                         </Row>
@@ -173,7 +203,7 @@ export default function Home() {
 
                 {/* Sección de Productos Destacados */}
                 <section className="products-section">
-                    <Container>
+                    <Container fluid className="px-5">
                         <Row className="text-center mb-5">
                             <Col>
                                 <h2 className="section-title">Productos destacados</h2>
@@ -182,14 +212,18 @@ export default function Home() {
                                 </p>
                             </Col>
                         </Row>
-                        <Row>
+                        <Row className="g-4">
                             {featuredProducts.map((product) => (
-                                <Col lg={3} md={6} className="mb-4" key={product.id}>
+                                <Col xl={3} lg={4} md={6} className="mb-3" key={product.id}>
                                     <Card className="product-card h-100">
+                                        <div className="product-image">
+                                            <img 
+                                                src={product.image} 
+                                                alt={product.name}
+                                                className="img-fluid"
+                                            />
+                                        </div>
                                         <Card.Body className="text-center">
-                                            <div className="product-image mb-3">
-                                                {product.image}
-                                            </div>
                                             <Card.Title className="product-name">
                                                 {product.name}
                                             </Card.Title>
