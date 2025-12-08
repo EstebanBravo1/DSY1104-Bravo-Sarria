@@ -1,10 +1,10 @@
 // ============================================
 // CONTEXTO DE AUTENTICACIÓN
 // ============================================
-// Manejo global del estado de autenticación
+// Manejo global del estado de autenticación con backend AWS
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { validarCredenciales } from '../data/usuarios';
+import { USERS_API_URL } from '../config/api';
 
 // Crear el contexto
 const AuthContext = createContext();
@@ -26,42 +26,93 @@ export const AuthProvider = ({ children }) => {
 
   // Cargar usuario desde localStorage al iniciar
   useEffect(() => {
-    const usuarioGuardado = localStorage.getItem('usuarioLogueado');
-    if (usuarioGuardado) {
+    const token = localStorage.getItem('token');
+    const usuarioGuardado = localStorage.getItem('usuario');
+    
+    if (token && usuarioGuardado) {
       try {
         const usuarioData = JSON.parse(usuarioGuardado);
         setUsuario(usuarioData);
         setIsLoggedIn(true);
       } catch (error) {
         console.error('Error al cargar usuario guardado:', error);
-        localStorage.removeItem('usuarioLogueado');
+        localStorage.removeItem('token');
+        localStorage.removeItem('usuario');
       }
     }
     setLoading(false);
   }, []);
 
-  // Función para iniciar sesión
-  const login = (email, password) => {
-    const usuarioValidado = validarCredenciales(email, password);
-    
-    if (usuarioValidado) {
-      // Actualizar último login
-      const usuarioConLogin = {
-        ...usuarioValidado,
-        ultimoLogin: new Date().toISOString()
-      };
+  // Función para registrar nuevo usuario
+  const register = async (datosRegistro) => {
+    try {
+      const response = await fetch(`${USERS_API_URL}/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(datosRegistro)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(errorData || 'Error al registrar usuario');
+      }
+
+      const data = await response.json();
       
-      setUsuario(usuarioConLogin);
+      console.log('📥 Datos recibidos del backend (register):', data);
+      
+      // Guardar token y usuario
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('usuario', JSON.stringify(data));
+      
+      setUsuario(data);
       setIsLoggedIn(true);
       
-      // Guardar en localStorage
-      localStorage.setItem('usuarioLogueado', JSON.stringify(usuarioConLogin));
-      
-      return { success: true, usuario: usuarioConLogin };
-    } else {
+      return { success: true, usuario: data };
+    } catch (error) {
+      console.error('Error en register:', error);
       return { 
         success: false, 
-        error: 'Email o contraseña incorrectos' 
+        error: error.message || 'Error al registrar usuario'
+      };
+    }
+  };
+
+  // Función para iniciar sesión
+  const login = async (email, password) => {
+    try {
+      const response = await fetch(`${USERS_API_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(errorData || 'Credenciales incorrectas');
+      }
+
+      const data = await response.json();
+      
+      console.log('📥 Datos recibidos del backend (login):', data);
+      
+      // Guardar token y usuario
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('usuario', JSON.stringify(data));
+      
+      setUsuario(data);
+      setIsLoggedIn(true);
+      
+      return { success: true, usuario: data };
+    } catch (error) {
+      console.error('Error en login:', error);
+      return { 
+        success: false, 
+        error: error.message || 'Error al iniciar sesión'
       };
     }
   };
@@ -70,14 +121,42 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUsuario(null);
     setIsLoggedIn(false);
-    localStorage.removeItem('usuarioLogueado');
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
   };
 
-  // Función para actualizar datos del usuario
-  const actualizarUsuario = (nuevosData) => {
-    const usuarioActualizado = { ...usuario, ...nuevosData };
-    setUsuario(usuarioActualizado);
-    localStorage.setItem('usuarioLogueado', JSON.stringify(usuarioActualizado));
+  // Función para actualizar perfil
+  const actualizarPerfil = async (id, nuevosData) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${USERS_API_URL}/profile/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(nuevosData)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        throw new Error(errorData || 'Error al actualizar perfil');
+      }
+
+      const data = await response.json();
+      
+      // Actualizar usuario en estado y localStorage
+      localStorage.setItem('usuario', JSON.stringify(data));
+      setUsuario(data);
+      
+      return { success: true, usuario: data };
+    } catch (error) {
+      console.error('Error en actualizarPerfil:', error);
+      return { 
+        success: false, 
+        error: error.message || 'Error al actualizar perfil'
+      };
+    }
   };
 
   // Función para verificar si está logueado
@@ -85,31 +164,28 @@ export const AuthProvider = ({ children }) => {
     return isLoggedIn && usuario;
   };
 
+  // Función para obtener el token
+  const getToken = () => {
+    return localStorage.getItem('token');
+  };
+
   // Función para obtener datos para autocompletar checkout
   const getDatosCheckout = () => {
     if (!usuario) return null;
     
-    return {
-      // Datos personales
-      nombres: usuario.nombres || '',
-      apellidos: usuario.apellidos || '',
+    console.log('🔍 Usuario completo en getDatosCheckout:', usuario);
+    
+    const datos = {
+      nombre: usuario.nombre || '',
+      apellidos: usuario.apellido || '',
       rut: usuario.rut || '',
       email: usuario.email || '',
-      telefono: usuario.telefono || '',
-      fechaNacimiento: usuario.fechaNacimiento || '',
-      
-      // Dirección de entrega
-      calle: usuario.calle || '',
-      numero: usuario.numero || '',
-      departamento: usuario.departamento || '',
-      comuna: usuario.comuna || '',
-      region: usuario.region || '',
-      codigoPostal: usuario.codigoPostal || '',
-      indicaciones: usuario.indicaciones || '',
-      
-      // Configuración
-      recibirPromociones: usuario.recibirPromociones || false
+      telefono: usuario.telefono || ''
     };
+    
+    console.log('📋 Datos para checkout:', datos);
+    
+    return datos;
   };
 
   const value = {
@@ -119,10 +195,12 @@ export const AuthProvider = ({ children }) => {
     loading,
     
     // Funciones
+    register,
     login,
     logout,
-    actualizarUsuario,
+    actualizarPerfil,
     verificarAutenticacion,
+    getToken,
     getDatosCheckout
   };
 

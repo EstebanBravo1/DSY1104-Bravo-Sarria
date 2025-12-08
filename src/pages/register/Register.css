@@ -1,0 +1,253 @@
+/* ============================================
+   ESTILOS - PÁGINA DE REGISTRO
+   ============================================ */
+
+.register-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: 
+    linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.7) 100%),
+    url('https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=1920&q=80') center/cover;
+  background-attachment: fixed;
+}
+
+/* Lado izquierdo - Welcome */
+.register-welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  color: white;
+}
+
+.register-welcome h1 {
+  font-size: 5rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.register-welcome p {
+  font-size: 1.3rem;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.register-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.benefit-item i {
+  font-size: 1.8rem;
+  color: #4CAF50;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  padding: 0.3rem;
+}
+
+.register-card {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 4.5rem;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-card h1 {
+  color: #2d5016;
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+  font-weight: 800;
+}
+
+.register-subtitle {
+  color: #718096;
+  margin-bottom: 2.5rem;
+  font-size: 1.3rem;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.form-group input {
+  padding: 1.25rem 1.5rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  min-height: 56px;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+}
+
+.form-group input.input-error {
+  border-color: #f56565;
+}
+
+.error-message {
+  color: #f56565;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.alert-error {
+  background-color: #fed7d7;
+  color: #c53030;
+  border: 1px solid #fc8181;
+}
+
+.btn-register {
+  width: 100%;
+  padding: 1.5rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  min-height: 60px;
+  transition: all 0.3s ease;
+}
+
+.btn-register:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.btn-register:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.register-footer {
+  margin-top: 2rem;
+  text-align: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.register-footer p {
+  color: #718096;
+  font-size: 1.15rem;
+}
+
+.register-footer a {
+  color: #4caf50;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.register-footer a:hover {
+  color: #388e3c;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .register-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .register-welcome {
+    display: none;
+  }
+  
+  .register-card {
+    padding: 3rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .register-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .register-card h1 {
+    font-size: 2rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .register-welcome h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .register-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .register-card h1 {
+    font-size: 1.75rem;
+  }
+  
+  .form-group label {
+    font-size: 1.1rem;
+  }
+  
+  .form-group input {
+    font-size: 1.1rem;
+  }
+}
