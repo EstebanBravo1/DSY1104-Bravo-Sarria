@@ -97,7 +97,7 @@ body {
   padding: 12px 18px; /* Padding ligeramente mayor */
   min-width: 90px; /* Ancho mínimo un poco mayor */
   text-align: center; /* Centrar el texto */
-  font-size: large;
+  font-size: 1.3rem;
 }
 
 .custom-navbar .nav-link:hover,
@@ -148,6 +148,38 @@ ease;
   background-color: #228B22 !important; /* Verde más brillante */
   transform: translateY(-2px); /* Efecto de elevación */
   box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+}
+
+/* Badge flotante del carrito */
+.cart-badge {
+  position: absolute !important;
+  top: -8px !important;
+  right: -8px !important;
+  background-color: #dc3545 !important;
+  color: white !important;
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  padding: 4px 8px !important;
+  border-radius: 50% !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4) !important;
+  border: 2px solid white !important;
+  z-index: 10 !important;
+  animation: pulse 2s infinite;
+  line-height: 1 !important;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
 }
 
 /* Dropdown */
@@ -481,7 +513,7 @@ ease;
 .user-dropdown .dropdown-toggle {
   color: #2d6a4f !important;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.3rem;
   background: none !important;
   border: none !important;
   box-shadow: none !important;

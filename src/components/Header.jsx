@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Container, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useAuth } from '../context/AuthContext';
+import { useCart } from '../hooks';
 import { useNavigate } from 'react-router-dom';
 import { productos } from '../data';
-import logo from '/assets/LogoHuertoHogar.png';
+import logo from '../assets/imagenes/Huerto_Hogar.png'
 import './Header.css';
 
 export default function Header() {
@@ -13,7 +14,11 @@ export default function Header() {
   const [searchSuggestions, setSearchSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const { isLoggedIn, usuario, logout } = useAuth();
+  const { cartItems } = useCart();
   const navigate = useNavigate();
+
+  // Calcular cantidad total de productos en el carrito
+  const totalItems = cartItems ? cartItems.reduce((total, item) => total + (item.cantidad || 0), 0) : 0;
 
   // Buscar sugerencias en tiempo real
   useEffect(() => {
@@ -80,6 +85,9 @@ export default function Header() {
               <LinkContainer to="/productos">
                 <Nav.Link onClick={closeNavbar}>Productos</Nav.Link>
               </LinkContainer>
+              <LinkContainer to="/blog">
+                <Nav.Link onClick={closeNavbar}>Blog</Nav.Link>
+              </LinkContainer>
               <LinkContainer to="/contacto">
                 <Nav.Link onClick={closeNavbar}>Contacto</Nav.Link>
               </LinkContainer>
@@ -137,30 +145,26 @@ export default function Header() {
             </Nav>
             <Nav className="cart-nav">
               <LinkContainer to="/carrito">
-                <Nav.Link className="cart-btn" onClick={closeNavbar}>🛒 Carrito</Nav.Link>
+                <Nav.Link className="cart-btn position-relative" onClick={closeNavbar}>
+                  🛒 Carrito
+                  <span className="cart-badge">{totalItems}</span>
+                </Nav.Link>
               </LinkContainer>
             </Nav>
             <Nav className="right-nav">
               {isLoggedIn ? (
                 // Usuario logueado - Mostrar dropdown con opciones
                 <NavDropdown 
-                  title={`👋 ${usuario?.nombres || 'Usuario'}`} 
+                  title={`👋 ${usuario?.nombre || 'Usuario'}`} 
                   id="user-dropdown" 
                   className="user-dropdown"
                 >
                   <NavDropdown.Item>
-                    <strong>{usuario?.nombres} {usuario?.apellidos}</strong>
+                    <strong>{usuario?.nombre} {usuario?.apellido}</strong>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
                     📧 {usuario?.email}
                   </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <LinkContainer to="/perfil">
-                    <NavDropdown.Item onClick={closeNavbar}>👤 Mi Perfil</NavDropdown.Item>
-                  </LinkContainer>
-                  <LinkContainer to="/mis-pedidos">
-                    <NavDropdown.Item onClick={closeNavbar}>📦 Mis Pedidos</NavDropdown.Item>
-                  </LinkContainer>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={handleLogout}>
                     🚪 Cerrar Sesión
