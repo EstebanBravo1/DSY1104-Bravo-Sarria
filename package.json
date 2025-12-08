@@ -14,6 +14,7 @@
     "test:coverage": "karma start --coverage"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.77.0",
     "bootstrap": "^5.3.8",
     "react": "^19.1.1",
     "react-bootstrap": "^2.10.10",
