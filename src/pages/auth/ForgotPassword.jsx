@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './Auth.css';
+import './auth.css';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
